@@ -49,7 +49,7 @@ const Experience = () => {
     },
     {
       company: "Accenture",
-      position: "Technology Consultant",
+      position: "AI Research Assistant",
       duration: "2020 - 2022",
       location: "Bangalore, India",
       description: "Delivered enterprise AI solutions and consulted on digital transformation projects. Specialized in machine learning implementation for large-scale business applications.",
