@@ -18,8 +18,22 @@ const TypewriterText = ({
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  // Start typing immediately on mount
+  useEffect(() => {
+    if (!started) {
+      setStarted(true);
+      const timeout = setTimeout(() => {
+        setDisplayText(text.slice(0, 1));
+      }, 500); // Initial delay
+      return () => clearTimeout(timeout);
+    }
+  }, [started, text]);
 
   useEffect(() => {
+    if (!started) return;
+    
     let timeout: NodeJS.Timeout;
 
     if (isPaused) {
@@ -46,7 +60,7 @@ const TypewriterText = ({
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration]);
+  }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration, started]);
 
   return (
     <span className={className}>
