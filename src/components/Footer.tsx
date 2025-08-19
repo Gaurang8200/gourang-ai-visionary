@@ -44,9 +44,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-border/50 text-center">
           <p className="text-muted-foreground flex items-center justify-center">
-            © {currentYear} Gourangkumar Monashara. Built with
-            <Heart className="h-4 w-4 mx-1 text-red-500" />
-            and cutting-edge tech.
+            © {currentYear} Gourangkumar Monashara.
           </p>
         </div>
       </div>
