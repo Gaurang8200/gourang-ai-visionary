@@ -70,8 +70,8 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Phone",
-      value: "+49 XXX XXX XXXX",
-      href: "tel:+49XXXXXXXXX"
+      value: "+49 17657713152",
+      href: "tel:+4917657713152"
     },
     {
       icon: MapPin,
@@ -201,17 +201,7 @@ const Contact = () => {
                         {info.href !== "#" ? (
                           <a
                             href={info.href}
-                            onClick={(e) => {
-                              if (
-                                info.href &&
-                                (info.href.startsWith("mailto:") || info.href.startsWith("tel:"))
-                              ) {
-                                e.preventDefault();
-                                window.location.href = info.href;
-                              }
-                            }}
-                            className="text-foreground hover:text-primary transition-smooth underline underline-offset-4"
-                            aria-label={`${info.label}: ${info.value}`}
+                            className="text-foreground hover:text-primary transition-smooth"
                           >
                             {info.value}
                           </a>
