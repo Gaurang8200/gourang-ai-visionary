@@ -16,8 +16,6 @@ const TypewriterText = ({
   pauseDuration = 1000 
 }: TypewriterTextProps) => {
   const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const [started, setStarted] = useState(false);
   const normalizedText = useMemo(() => text.replace(/\\n/g, '\n'), [text]);
 
@@ -37,31 +35,20 @@ const TypewriterText = ({
     
     let timeout: NodeJS.Timeout;
 
-    if (isPaused) {
+    // Only type forward, no deleting
+    if (displayText.length < normalizedText.length) {
       timeout = setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(!isDeleting);
-      }, pauseDuration);
-    } else if (isDeleting) {
-      if (displayText.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, deletingSpeed);
-      } else {
-        setIsPaused(true);
-      }
+        setDisplayText(normalizedText.slice(0, displayText.length + 1));
+      }, typingSpeed);
     } else {
-      if (displayText.length < normalizedText.length) {
-        timeout = setTimeout(() => {
-          setDisplayText(normalizedText.slice(0, displayText.length + 1));
-        }, typingSpeed);
-      } else {
-        setIsPaused(true);
-      }
+      // When finished, restart from beginning after pause
+      timeout = setTimeout(() => {
+        setDisplayText("");
+      }, pauseDuration);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, isPaused, normalizedText, typingSpeed, deletingSpeed, pauseDuration, started]);
+  }, [displayText, normalizedText, typingSpeed, pauseDuration, started]);
 
   const [line1Full, line2Full = ""] = normalizedText.split('\n');
   const idx = displayText.length;
