@@ -25,20 +25,9 @@ const Hero = () => {
           loop 
           className="absolute inset-0 w-full h-full object-cover opacity-80"
           style={{ filter: 'brightness(0.7) contrast(1.1)' }}
-          key={theme} // Force re-render when theme changes
         >
-          {theme === "light" ? (
-            <>
-              <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-            </>
-          ) : (
-            <>
-              <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/8721342/8721342-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-            </>
-          )}
+          {/* Replace with your own video file - place it in the public folder */}
+          <source src="/your-video.mp4" type="video/mp4" />
           {/* Fallback gradient for when video doesn't load */}
         </video>
         {/* Dark overlay for better text readability */}
