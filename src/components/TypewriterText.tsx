@@ -62,17 +62,24 @@ const TypewriterText = ({
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration, started]);
 
+  const lines = displayText.split('\n');
+  
   return (
-    <span>
-      {displayText.split('\n').map((line, index) => (
-        <span key={index} className={`block ${className}`}>
+    <div>
+      {lines.map((line, index) => (
+        <div key={index} className={`${className} ${index === 0 ? 'block' : 'block'}`}>
           {line}
-          {index === displayText.split('\n').length - 1 && (
+          {index === lines.length - 1 && line.length > 0 && (
             <span className="animate-pulse">|</span>
           )}
-        </span>
+        </div>
       ))}
-    </span>
+      {lines.length === 1 && displayText.length > 0 && (
+        <div className={className}>
+          <span className="animate-pulse">|</span>
+        </div>
+      )}
+    </div>
   );
 };
 
