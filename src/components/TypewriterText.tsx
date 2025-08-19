@@ -58,11 +58,11 @@ const TypewriterText = ({
 
   return (
     <div>
-      <div className={className}>
+      <div className={className} style={{ lineHeight: '1.2', marginBottom: '0.5rem' }}>
         {line1Full.slice(0, line1Count)}
         {!hasNewlineTyped && <span className="animate-pulse">|</span>}
       </div>
-      <div className={className}>
+      <div className={className} style={{ lineHeight: '1.2' }}>
         {line2Full.slice(0, line2Count)}
         {hasNewlineTyped && <span className="animate-pulse">|</span>}
       </div>
