@@ -27,7 +27,7 @@ const Hero = () => {
           style={{ filter: 'brightness(0.7) contrast(1.1)' }}
         >
           {/* Replace with your own video file - place it in the public folder */}
-          <source src="/your-video.mp4" type="video/mp4" />
+          <source src="/hero-bg.mp4" type="video/mp4" />
           {/* Fallback gradient for when video doesn't load */}
         </video>
         {/* Dark overlay for better text readability */}
