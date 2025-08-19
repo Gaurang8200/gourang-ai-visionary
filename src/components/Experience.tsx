@@ -33,7 +33,7 @@ const Experience = () => {
   const experiences = [
     {
       company: "CREAT GmbH",
-      position: "AI/ML Engineer",
+      position: "Software Engineer",
       duration: "September 2022 - July 2025",
       location: "Munich, Germany",
       description: "Leading AI/ML initiatives focused on automotive applications and computer vision solutions. Developing cutting-edge algorithms for autonomous vehicle perception systems.",
