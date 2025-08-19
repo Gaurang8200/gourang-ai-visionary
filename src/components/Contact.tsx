@@ -201,7 +201,17 @@ const Contact = () => {
                         {info.href !== "#" ? (
                           <a
                             href={info.href}
-                            className="text-foreground hover:text-primary transition-smooth"
+                            onClick={(e) => {
+                              if (
+                                info.href &&
+                                (info.href.startsWith("mailto:") || info.href.startsWith("tel:"))
+                              ) {
+                                e.preventDefault();
+                                window.location.href = info.href;
+                              }
+                            }}
+                            className="text-foreground hover:text-primary transition-smooth underline underline-offset-4"
+                            aria-label={`${info.label}: ${info.value}`}
                           >
                             {info.value}
                           </a>
