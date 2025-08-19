@@ -34,7 +34,7 @@ const Experience = () => {
     {
       company: "CREAT GmbH",
       position: "AI/ML Engineer",
-      duration: "2022 - Present",
+      duration: "September 2022 - July 2025",
       location: "Munich, Germany",
       description: "Leading AI/ML initiatives focused on automotive applications and computer vision solutions. Developing cutting-edge algorithms for autonomous vehicle perception systems.",
       responsibilities: [
