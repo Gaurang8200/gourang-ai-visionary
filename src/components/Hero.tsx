@@ -52,22 +52,18 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-6">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            <TypewriterText 
-              text="Gourangkumar" 
-              className="gradient-text block"
-              typingSpeed={120}
-              deletingSpeed={80}
-              pauseDuration={1500}
-            />
-            <TypewriterText 
-              text="Monashara" 
-              className="text-foreground block"
-              typingSpeed={130}
-              deletingSpeed={75}
-              pauseDuration={1800}
-            />
-          </h1>
+          <div className="relative">
+            <span className="absolute -top-8 -left-4 text-lg text-muted-foreground">I'm</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+              <TypewriterText 
+                text="Gourangkumar Monashara" 
+                className="gradient-text"
+                typingSpeed={120}
+                deletingSpeed={80}
+                pauseDuration={1500}
+              />
+            </h1>
+          </div>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             AI, ML & Computer Vision Engineer
