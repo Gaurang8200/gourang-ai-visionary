@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
 
 const Hero = () => {
-  // No longer need canvas ref for particles
-
-  // Removed particle animation system for cleaner video background
+  const { theme } = useTheme();
 
   const scrollToNext = () => {
     const aboutSection = document.querySelector("#about");
@@ -25,9 +24,19 @@ const Hero = () => {
           loop 
           className="absolute inset-0 w-full h-full object-cover opacity-80"
           style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+          key={theme} // Force re-render when theme changes
         >
-          <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/8721342/8721342-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          {theme === "light" ? (
+            <>
+              <source src="https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/8182986/8182986-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            </>
+          ) : (
+            <>
+              <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/8721342/8721342-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            </>
+          )}
           {/* Fallback gradient for when video doesn't load */}
         </video>
         {/* Dark overlay for better text readability */}
