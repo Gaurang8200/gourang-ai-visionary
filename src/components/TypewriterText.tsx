@@ -62,23 +62,22 @@ const TypewriterText = ({
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration, started]);
 
-  const lines = displayText.split('\n');
-  
+  const [line1Full, line2Full = ""] = text.split('\n');
+  const idx = displayText.length;
+  const line1Count = Math.min(idx, line1Full.length);
+  const hasNewlineTyped = idx > line1Full.length;
+  const line2Count = hasNewlineTyped ? Math.min(line2Full.length, idx - line1Full.length - 1) : 0;
+
   return (
     <div>
-      {lines.map((line, index) => (
-        <div key={index} className={`${className} ${index === 0 ? 'block' : 'block'}`}>
-          {line}
-          {index === lines.length - 1 && line.length > 0 && (
-            <span className="animate-pulse">|</span>
-          )}
-        </div>
-      ))}
-      {lines.length === 1 && displayText.length > 0 && (
-        <div className={className}>
-          <span className="animate-pulse">|</span>
-        </div>
-      )}
+      <div className={className}>
+        {line1Full.slice(0, line1Count)}
+        {!hasNewlineTyped && <span className="animate-pulse">|</span>}
+      </div>
+      <div className={className}>
+        {line2Full.slice(0, line2Count)}
+        {hasNewlineTyped && <span className="animate-pulse">|</span>}
+      </div>
     </div>
   );
 };
