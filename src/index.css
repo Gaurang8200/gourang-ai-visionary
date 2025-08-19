@@ -1,42 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Futuristic Portfolio Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Colors - Dark theme with light text */
+    --background: 217 33% 8%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cards with glassmorphism */
+    --card: 217 33% 10%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 217 33% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Primary - Electric Blue */
+    --primary: 199 89% 48%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Deep Blue */
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Darker variants */
+    --muted: 217 33% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Cyan */
+    --accent: 180 100% 50%;
+    --accent-foreground: 217 33% 8%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Neon accent colors */
+    --neon-blue: 199 89% 48%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 271 81% 56%;
+    --neon-pink: 322 81% 57%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 217 33% 20%;
+    --input: 217 33% 15%;
+    --ring: 199 89% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-cyan)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-pink)));
+    --gradient-hero: linear-gradient(135deg, hsl(217 33% 8%), hsl(217 33% 12%), hsl(217 33% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(217 33% 10% / 0.8), hsl(217 33% 15% / 0.8));
+
+    /* Glassmorphism */
+    --glass-bg: hsl(217 33% 15% / 0.1);
+    --glass-border: hsl(210 40% 98% / 0.1);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--neon-blue) / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(217 33% 5% / 0.5);
+    --shadow-neon: 0 0 20px hsl(var(--neon-cyan) / 0.5);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +133,94 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utilities */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Gradient utilities */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-neon {
+    box-shadow: var(--shadow-neon);
+  }
+
+  /* Animation utilities */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Pulse glow animation */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--neon-blue) / 0.8); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Particle background */
+  .particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
   }
 }
