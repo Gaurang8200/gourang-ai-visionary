@@ -64,8 +64,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "gourang.monashara@email.com",
-      href: "mailto:gourang.monashara@email.com"
+      value: "monashragaurang6@gmail.com",
+      href: "mailto:monashragaurang6@gmail.com"
     },
     {
       icon: Phone,
@@ -97,7 +97,7 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:gourang.monashara@email.com",
+      href: "mailto:monashragaurang6@gmail.com",
       color: "hover:text-red-400"
     }
   ];
