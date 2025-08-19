@@ -50,8 +50,14 @@ const TypewriterText = ({
 
   return (
     <span className={className}>
-      {displayText}
-      <span className="animate-pulse">|</span>
+      {displayText.split('\n').map((line, index) => (
+        <span key={index} className="block">
+          {line}
+          {index === displayText.split('\n').length - 1 && (
+            <span className="animate-pulse">|</span>
+          )}
+        </span>
+      ))}
     </span>
   );
 };

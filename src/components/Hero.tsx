@@ -56,7 +56,7 @@ const Hero = () => {
             <span className="absolute -top-8 -left-4 text-lg text-muted-foreground">I'm</span>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
               <TypewriterText 
-                text="Gourangkumar Monashara" 
+                text="Gourangkumar\nMonashara" 
                 className="gradient-text"
                 typingSpeed={120}
                 deletingSpeed={80}
