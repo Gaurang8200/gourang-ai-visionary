@@ -223,4 +223,44 @@
     pointer-events: none;
     z-index: -1;
   }
+  }
+
+  /* Grid Pattern Background for AI theme */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 191, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 191, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Enhanced Particle Animation */
+  @keyframes matrix-rain {
+    0% {
+      transform: translateY(-100vh) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(-10px);
+      opacity: 0;
+    }
+  }
+
+  .animate-matrix {
+    animation: matrix-rain 3s linear infinite;
+  }
+
+  /* AI-themed animations */
+  @keyframes data-flow {
+    0%, 100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-data-flow {
+    animation: data-flow 4s ease-in-out infinite;
+  }
 }
