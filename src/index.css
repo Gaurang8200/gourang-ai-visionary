@@ -8,7 +8,81 @@
 
 @layer base {
   :root {
-    /* Core Colors - Dark theme with light text */
+    /* Light Theme Colors */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary - Electric Blue */
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary - Light variants */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    /* Muted - Light variants */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* Accent - Cyan */
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+
+    /* Neon accent colors */
+    --neon-blue: 199 89% 48%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 271 81% 56%;
+    --neon-pink: 322 81% 57%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders and inputs */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradients - Light theme */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-cyan)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-pink)));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%), hsl(0 0% 100%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(210 40% 98% / 0.9));
+
+    /* Glassmorphism - Light theme */
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --glass-border: hsl(222.2 84% 4.9% / 0.1);
+
+    /* Shadows - Light theme */
+    --shadow-glow: 0 0 40px hsl(var(--neon-blue) / 0.2);
+    --shadow-card: 0 10px 30px -10px hsl(222.2 84% 4.9% / 0.1);
+    --shadow-neon: 0 0 20px hsl(var(--neon-cyan) / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Theme Colors */
     --background: 217 33% 8%;
     --foreground: 210 40% 98%;
 
@@ -35,12 +109,6 @@
     --accent: 180 100% 50%;
     --accent-foreground: 217 33% 8%;
 
-    /* Neon accent colors */
-    --neon-blue: 199 89% 48%;
-    --neon-cyan: 180 100% 50%;
-    --neon-purple: 271 81% 56%;
-    --neon-pink: 322 81% 57%;
-
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
@@ -50,41 +118,26 @@
     --input: 217 33% 15%;
     --ring: 199 89% 48%;
 
-    --radius: 0.75rem;
-
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-cyan)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-pink)));
+    /* Custom gradients - Dark theme */
     --gradient-hero: linear-gradient(135deg, hsl(217 33% 8%), hsl(217 33% 12%), hsl(217 33% 8%));
     --gradient-card: linear-gradient(135deg, hsl(217 33% 10% / 0.8), hsl(217 33% 15% / 0.8));
 
-    /* Glassmorphism */
+    /* Glassmorphism - Dark theme */
     --glass-bg: hsl(217 33% 15% / 0.1);
     --glass-border: hsl(210 40% 98% / 0.1);
 
-    /* Shadows */
+    /* Shadows - Dark theme */
     --shadow-glow: 0 0 40px hsl(var(--neon-blue) / 0.3);
     --shadow-card: 0 10px 30px -10px hsl(217 33% 5% / 0.5);
     --shadow-neon: 0 0 20px hsl(var(--neon-cyan) / 0.5);
 
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 222.2 84% 4.9%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
