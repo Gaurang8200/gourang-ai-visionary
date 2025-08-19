@@ -17,21 +17,34 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Video Background */}
+      {/* Video Background with better error handling */}
       <div className="absolute inset-0 w-full h-full">
         <video 
           autoPlay 
           muted 
           loop 
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.6) contrast(1.2) saturate(1.1)' }}
+          onError={(e) => {
+            console.log('Video failed to load:', e);
+            // Hide video element if it fails to load
+            e.currentTarget.style.display = 'none';
+          }}
+          onLoadStart={() => {
+            console.log('Video started loading');
+          }}
+          onCanPlay={() => {
+            console.log('Video can play');
+          }}
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
-          {/* Fallback for when video doesn't load */}
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/20 to-background"></div>
+          <source src="/hero-bg.webm" type="video/webm" />
+          Your browser does not support the video tag.
         </video>
+        {/* Fallback background when video doesn't load */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/20 to-background opacity-80"></div>
         {/* Enhanced overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
         {/* Subtle tech grid overlay */}
