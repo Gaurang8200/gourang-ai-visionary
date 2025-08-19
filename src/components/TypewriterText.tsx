@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 interface TypewriterTextProps {
   text: string;
@@ -19,17 +19,18 @@ const TypewriterText = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [started, setStarted] = useState(false);
+  const normalizedText = useMemo(() => text.replace(/\\n/g, '\n'), [text]);
 
   // Start typing immediately on mount
   useEffect(() => {
     if (!started) {
       setStarted(true);
       const timeout = setTimeout(() => {
-        setDisplayText(text.slice(0, 1));
+        setDisplayText(normalizedText.slice(0, 1));
       }, 500); // Initial delay
       return () => clearTimeout(timeout);
     }
-  }, [started, text]);
+  }, [started, normalizedText]);
 
   useEffect(() => {
     if (!started) return;
@@ -50,9 +51,9 @@ const TypewriterText = ({
         setIsPaused(true);
       }
     } else {
-      if (displayText.length < text.length) {
+      if (displayText.length < normalizedText.length) {
         timeout = setTimeout(() => {
-          setDisplayText(text.slice(0, displayText.length + 1));
+          setDisplayText(normalizedText.slice(0, displayText.length + 1));
         }, typingSpeed);
       } else {
         setIsPaused(true);
@@ -60,9 +61,9 @@ const TypewriterText = ({
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration, started]);
+  }, [displayText, isDeleting, isPaused, normalizedText, typingSpeed, deletingSpeed, pauseDuration, started]);
 
-  const [line1Full, line2Full = ""] = text.split('\n');
+  const [line1Full, line2Full = ""] = normalizedText.split('\n');
   const idx = displayText.length;
   const line1Count = Math.min(idx, line1Full.length);
   const hasNewlineTyped = idx > line1Full.length;
