@@ -23,15 +23,15 @@ const Hero = () => {
           autoPlay 
           muted 
           loop 
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
-          style={{ filter: 'brightness(0.4) contrast(1.1)' }}
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          style={{ filter: 'brightness(0.7) contrast(1.1)' }}
         >
           <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
           <source src="https://videos.pexels.com/video-files/8721342/8721342-uhd_2560_1440_25fps.mp4" type="video/mp4" />
           {/* Fallback gradient for when video doesn't load */}
         </video>
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/50"></div>
         {/* Subtle AI-themed grid overlay */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       </div>
