@@ -3,6 +3,7 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import TypewriterText from "./TypewriterText";
+import heroBg from "@/assets/hero-bg.jpg";
 
 
 const Hero = () => {
@@ -25,12 +26,11 @@ const Hero = () => {
           loop 
           playsInline
           preload="metadata"
+          poster={heroBg}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.6) contrast(1.2) saturate(1.1)' }}
           onError={(e) => {
-            console.log('Video failed to load:', e);
-            // Hide video element if it fails to load
-            e.currentTarget.style.display = 'none';
+            console.error('Hero video error:', e.currentTarget.error);
           }}
           onLoadStart={() => {
             console.log('Video started loading');
@@ -40,7 +40,7 @@ const Hero = () => {
           }}
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
-          <source src="/hero-bg.webm" type="video/webm" />
+          
           Your browser does not support the video tag.
         </video>
         {/* Fallback background when video doesn't load */}
