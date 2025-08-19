@@ -28,9 +28,9 @@ const Hero = () => {
         >
           {theme === "light" ? (
             <>
-              <source src="https://videos.pexels.com/video-files/3196034/3196034-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/3141211/3141211-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/7710243/7710243-hd_1920_1080_25fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
             </>
           ) : (
             <>
