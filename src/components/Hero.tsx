@@ -46,7 +46,7 @@ const Hero = () => {
       <div className="relative z-10 text-center px-6">
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            <span className="absolute -top-8 -left-4 text-lg text-muted-foreground">I'm</span>
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-lg text-muted-foreground">I'm</span>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
               <TypewriterText 
                 text="Gourangkumar\nMonashara" 
