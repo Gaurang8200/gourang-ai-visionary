@@ -201,7 +201,9 @@ const Contact = () => {
                         {info.href !== "#" ? (
                           <a
                             href={info.href}
-                            className="text-foreground hover:text-primary transition-smooth"
+                            className="text-foreground hover:text-primary transition-smooth cursor-pointer underline"
+                            target={info.href.startsWith('mailto:') ? '_self' : '_blank'}
+                            rel={info.href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
                           >
                             {info.value}
                           </a>
