@@ -1,123 +1,159 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-interface Dot {
+interface Star {
+  id: number;
   x: number;
   y: number;
+  vx: number;
+  vy: number;
   opacity: number;
-  scale: number;
-  id: number;
+  length: number;
+  angle: number;
 }
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [dots, setDots] = useState<Dot[]>([]);
   const [isMoving, setIsMoving] = useState(false);
-  const [movementTimeout, setMovementTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [stars, setStars] = useState<Star[]>([]);
+  const [cursorPos, setCursorPos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+  const targetRef = useRef({ x: cursorPos.x, y: cursorPos.y });
+  const lagRef = useRef({ x: cursorPos.x, y: cursorPos.y });
+  const prevRef = useRef({ x: cursorPos.x, y: cursorPos.y });
+  const speedRef = useRef(0);
+  const spawnCooldownRef = useRef(0);
+  const stopTimerRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const onMove = (e: MouseEvent) => {
+      targetRef.current.x = e.clientX;
+      targetRef.current.y = e.clientY;
       setIsMoving(true);
 
-      // Clear existing timeout
-      if (movementTimeout) {
-        clearTimeout(movementTimeout);
-      }
-
-      // Set new timeout to detect when mouse stops
-      const timeout = setTimeout(() => {
+      if (stopTimerRef.current) window.clearTimeout(stopTimerRef.current);
+      stopTimerRef.current = window.setTimeout(() => {
         setIsMoving(false);
-        setDots([]); // Clear all dots when stopped
-      }, 150);
-
-      setMovementTimeout(timeout);
+        setStars([]); // Clear trail when stationary
+      }, 140);
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      if (movementTimeout) {
-        clearTimeout(movementTimeout);
-      }
-    };
-  }, [movementTimeout]);
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
 
   useEffect(() => {
-    if (!isMoving) return;
+    const tick = () => {
+      // Lagging cursor position
+      const ease = 0.15;
+      const { x: tx, y: ty } = targetRef.current;
+      lagRef.current.x += (tx - lagRef.current.x) * ease;
+      lagRef.current.y += (ty - lagRef.current.y) * ease;
 
-    const interval = setInterval(() => {
-      setDots(prevDots => {
-        // Add new falling star dot only when moving
-        const newDot: Dot = {
-          x: mousePosition.x + (Math.random() - 0.5) * 10,
-          y: mousePosition.y + (Math.random() - 0.5) * 10,
+      // Velocity and speed
+      const vx = lagRef.current.x - prevRef.current.x;
+      const vy = lagRef.current.y - prevRef.current.y;
+      const speed = Math.hypot(vx, vy);
+      speedRef.current = speed;
+      prevRef.current.x = lagRef.current.x;
+      prevRef.current.y = lagRef.current.y;
+
+      // Spawn falling star when moving fast enough
+      if (isMoving && speed > 0.4 && spawnCooldownRef.current <= 0) {
+        const angle = Math.atan2(vy, vx);
+        const length = Math.min(28, 6 + speed * 0.9);
+        const star: Star = {
+          id: Date.now() + Math.random(),
+          x: lagRef.current.x,
+          y: lagRef.current.y,
+          vx: vx * 0.8,
+          vy: vy * 0.8 + 0.25, // slight downward bias
           opacity: 1,
-          scale: Math.random() * 0.8 + 0.4,
-          id: Date.now() + Math.random()
+          length,
+          angle,
         };
+        setStars((prev) => [star, ...prev].slice(0, 24));
+        spawnCooldownRef.current = 2; // throttle spawning
+      } else {
+        spawnCooldownRef.current -= 1;
+      }
 
-        // Update existing dots with falling effect
-        const updatedDots = prevDots
-          .map(dot => ({
-            ...dot,
-            y: dot.y + 2, // Falling effect
-            x: dot.x + (Math.random() - 0.5) * 1, // Slight horizontal drift
-            opacity: dot.opacity - 0.08,
-            scale: dot.scale * 0.95
-          }))
-          .filter(dot => dot.opacity > 0);
+      // Update stars physics
+      if (stars.length) {
+        setStars((prev) =>
+          prev
+            .map((s) => ({
+              ...s,
+              x: s.x + s.vx,
+              y: s.y + s.vy,
+              vy: s.vy + 0.18, // gravity
+              opacity: s.opacity - 0.06,
+              length: s.length * 0.96,
+            }))
+            .filter((s) => s.opacity > 0.05 && s.length > 2)
+        );
+      }
 
-        return [newDot, ...updatedDots].slice(0, 15);
-      });
-    }, 40);
+      // Reflect lag position to UI
+      setCursorPos({ x: lagRef.current.x, y: lagRef.current.y });
 
-    return () => clearInterval(interval);
-  }, [mousePosition, isMoving]);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isMoving, stars.length]);
 
   return (
     <>
-      {/* Main cursor - AI symbol when stationary, dot when moving */}
+      {/* Main cursor: AI symbol when stationary, subtle dot when moving (lagged) */}
       <div
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-300 ${
-          isMoving 
-            ? "w-3 h-3 bg-primary rounded-full mix-blend-difference" 
-            : "w-6 h-6 text-primary"
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] ${
+          isMoving ? 'w-3 h-3 rounded-full bg-primary mix-blend-difference' : 'w-7 h-7 text-primary'
         }`}
         style={{
-          transform: `translate(${mousePosition.x - (isMoving ? 6 : 12)}px, ${mousePosition.y - (isMoving ? 6 : 12)}px)`,
-          transition: 'transform 0.05s ease-out'
+          transform: `translate(${cursorPos.x - (isMoving ? 6 : 14)}px, ${cursorPos.y - (isMoving ? 6 : 14)}px)`,
+          transition: isMoving ? 'transform 0.05s ease-out' : 'transform 0.15s ease-out',
         }}
       >
         {!isMoving && (
-          <div className="relative w-full h-full animate-pulse">
-            {/* AI symbol - brain/neural network */}
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-              <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
-              <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.8" />
-            </svg>
-            <div className="absolute inset-0 animate-ping">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full opacity-30">
-                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
+          <div className="relative w-full h-full">
+            {/* AI badge */}
+            <div className="absolute inset-0 rounded-full bg-primary/10 blur-sm" />
+            <div className="absolute inset-0 rounded-full border border-primary/40" />
+            <div className="absolute inset-0 grid place-items-center text-[10px] font-semibold tracking-wider">
+              AI
+            </div>
+            <div className="absolute inset-0 rounded-full animate-ping opacity-30" style={{ color: 'hsl(var(--primary))' }}>
+              <svg viewBox="0 0 24 24" className="w-full h-full" fill="currentColor">
+                <circle cx="12" cy="12" r="11" />
               </svg>
             </div>
           </div>
         )}
       </div>
-      
-      {/* Falling star trail - only when moving */}
-      {isMoving && dots.map((dot) => (
-        <div
-          key={dot.id}
-          className="fixed top-0 left-0 w-1 h-1 bg-primary rounded-full pointer-events-none z-[9998]"
-          style={{
-            transform: `translate(${dot.x}px, ${dot.y}px) scale(${dot.scale})`,
-            opacity: dot.opacity,
-            mixBlendMode: 'difference',
-            boxShadow: '0 0 8px currentColor'
-          }}
-        />
-      ))}
+
+      {/* Falling stars trail (only while moving) */}
+      {isMoving &&
+        stars.map((s) => (
+          <div
+            key={s.id}
+            className="fixed top-0 left-0 pointer-events-none z-[9998]"
+            style={{
+              transform: `translate(${s.x}px, ${s.y}px) rotate(${(s.angle * 180) / Math.PI}deg)`,
+              transformOrigin: 'left center',
+              width: `${s.length}px`,
+              height: '2px',
+              opacity: s.opacity,
+              background: 'linear-gradient(90deg, currentColor, transparent)',
+              color: 'hsl(var(--primary))',
+              boxShadow: '0 0 10px currentColor',
+              borderRadius: '9999px',
+              mixBlendMode: 'screen',
+            }}
+          />
+        ))}
     </>
   );
 };
