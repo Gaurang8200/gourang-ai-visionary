@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
+import TypewriterText from "./TypewriterText";
 
 
 const Hero = () => {
@@ -52,9 +53,20 @@ const Hero = () => {
       <div className="relative z-10 text-center px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            <span className="gradient-text">Gourangkumar</span>
-            <br />
-            <span className="text-foreground">Monashara</span>
+            <TypewriterText 
+              text="Gourangkumar" 
+              className="gradient-text block"
+              typingSpeed={120}
+              deletingSpeed={80}
+              pauseDuration={1500}
+            />
+            <TypewriterText 
+              text="Monashara" 
+              className="text-foreground block"
+              typingSpeed={130}
+              deletingSpeed={75}
+              pauseDuration={1800}
+            />
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
