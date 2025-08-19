@@ -85,7 +85,7 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com",
+      href: "https://github.com/Gaurang8200?tab=repositories",
       color: "hover:text-foreground"
     },
     {
