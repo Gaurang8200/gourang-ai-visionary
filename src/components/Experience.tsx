@@ -38,10 +38,12 @@ const Experience = () => {
       location: "Munich, Germany",
       description: "Leading AI/ML initiatives focused on automotive applications and computer vision solutions. Developing cutting-edge algorithms for autonomous vehicle perception systems.",
       responsibilities: [
-        "Developed deep learning models for autonomous vehicle perception",
-        "Implemented real-time computer vision algorithms for object detection",
-        "Optimized ML models for edge computing deployment",
-        "Led cross-functional teams in AI project delivery"
+        "Developed and deployed deep learning (CNN, LSTM) for camera object detection and radar-based use cases across automotive scenarios",
+        "Created Python-based automation scripts to reduce time and manual effort in test result report analysis, improving overall workflow efficiency",
+        "Integrated AI-powered vision modules into cloud-based Test Management System, enabling automated system validation and monitoring",
+        "Automated AI-related data workflows using Python and PostgreSQL to manage report bank data and test result processing from internal servers",
+        "Utilized TensorFlow, PyTorch, Docker and Git for AI Pipeline development, model deployment, and test automation workflows",
+        "Proposed AI-driven solutions to enhance functionality and automate tedious processes, resulting in overall user satisfaction"
       ],
       technologies: ["PyTorch", "OpenCV", "CUDA", "TensorRT", "ROS", "Python", "C++"]
     },
