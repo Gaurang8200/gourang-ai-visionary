@@ -76,7 +76,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "Munich, Germany",
+      value: "Ingolstadt, Germany",
       href: "#"
     }
   ];
