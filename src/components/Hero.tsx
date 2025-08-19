@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+
 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -126,7 +126,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
         <video 
