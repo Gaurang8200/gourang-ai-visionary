@@ -63,9 +63,9 @@ const TypewriterText = ({
   }, [displayText, isDeleting, isPaused, text, typingSpeed, deletingSpeed, pauseDuration, started]);
 
   return (
-    <span className={className}>
+    <span>
       {displayText.split('\n').map((line, index) => (
-        <span key={index} className="block">
+        <span key={index} className={`block ${className}`}>
           {line}
           {index === displayText.split('\n').length - 1 && (
             <span className="animate-pulse">|</span>
