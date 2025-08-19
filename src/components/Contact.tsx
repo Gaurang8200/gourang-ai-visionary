@@ -91,7 +91,7 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com",
+      href: "www.linkedin.com/in/gourangkumar-n-monashara-b77972141",
       color: "hover:text-blue-400"
     },
     {
