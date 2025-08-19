@@ -23,17 +23,21 @@ const Hero = () => {
           autoPlay 
           muted 
           loop 
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
-          style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'brightness(0.6) contrast(1.2) saturate(1.1)' }}
         >
-          {/* Replace with your own video file - place it in the public folder */}
           <source src="/hero-bg.mp4" type="video/mp4" />
-          {/* Fallback gradient for when video doesn't load */}
+          {/* Fallback for when video doesn't load */}
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/20 to-background"></div>
         </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/50"></div>
-        {/* Subtle AI-themed grid overlay */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        {/* Enhanced overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
+        {/* Subtle tech grid overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+        </div>
       </div>
       {/* Clean background without particles */}
       <div className="absolute inset-0 pointer-events-none z-10"></div>
