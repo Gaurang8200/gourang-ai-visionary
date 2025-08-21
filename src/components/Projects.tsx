@@ -82,7 +82,24 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-6" ref={sectionRef}>
+    <section id="projects" className="relative py-20 px-6" ref={sectionRef}>
+      {/* Background animation */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <video
+          className="h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/hero-bg1.webm" type="video/webm" />
+          <source src="/hero-bg1.mp4" type="video/mp4" />
+          {/* Fallback image (optional) */}
+          {/* <img src="/hero-bg1.jpg" alt="Background" className="h-full w-full object-cover" /> */}
+        </video>
+        {/* Dark gradient overlay to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background/90" />
+      </div>
       <div className="container mx-auto max-w-6xl">
         <div
           className={`transition-smooth duration-1000 ${
