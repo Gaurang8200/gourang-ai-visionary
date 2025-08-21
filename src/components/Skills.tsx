@@ -63,7 +63,24 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 px-6 bg-secondary/20" ref={sectionRef}>
+    <section id="skills" className="relative py-20 px-6 bg-secondary/20" ref={sectionRef}>
+      {/* Background animation */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <video
+          className="h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/hero-bg2.webm" type="video/webm" />
+          <source src="/hero-bg2.mp4" type="video/mp4" />
+          {/* Fallback image (optional) */}
+          {/* <img src="/hero-bg2.jpg" alt="Background" className="h-full w-full object-cover" /> */}
+        </video>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background/90" />
+      </div>
       <div className="container mx-auto max-w-6xl">
         <div
           className={`transition-smooth duration-1000 ${
