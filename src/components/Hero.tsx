@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles, Code, Brain, Cpu } from "lucide-react";
 import TypewriterText from "./TypewriterText";
 import { useMousePosition } from "@/hooks/useMouseParallax";
-import AnimatedCharacter from "./AnimatedCharacter";
-import BackgroundLayers from "./BackgroundLayers";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,9 +26,6 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* 3D Background Layers */}
-      <BackgroundLayers />
-      
       {/* Main content with fade-in animation */}
       <div 
         className={`relative z-10 text-center px-6 transition-all duration-1000 ${
@@ -138,11 +133,6 @@ const Hero = () => {
             <span className="text-xs text-muted-foreground/50 mt-2">Scroll to explore</span>
           </div>
         </div>
-      </div>
-
-      {/* Animated Character on right side */}
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:block">
-        <AnimatedCharacter type="code" className="scale-125" />
       </div>
     </section>
   );
