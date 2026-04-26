@@ -98,10 +98,7 @@ const About = () => {
         </div>
 
         {/* Main content */}
-        <div 
-          className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'scroll-reveal active' : 'scroll-reveal'}`}
-        >
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <div className={`grid md:grid-cols-2 gap-8 lg:gap-12 ${isInView ? 'scroll-reveal active' : 'scroll-reveal'}`}>
           {/* Left - Bio card */}
           <div className="relative group">
             <div 
