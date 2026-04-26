@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Github, Linkedin, Mail, Phone, MapPin, Send, ArrowRight, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useMousePosition } from "@/hooks/useMouseParallax";
-import AnimatedCharacter from "./AnimatedCharacter";
 
 const Contact = () => {
   const [isInView, setIsInView] = useState(false);
@@ -242,15 +241,10 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information with Animated Character */}
+          {/* Contact Information */}
           <div className={`space-y-6 transition-all duration-700 delay-300 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}>
-            {/* Animated Character */}
-            <div className="flex justify-center lg:justify-start mb-4">
-              <AnimatedCharacter type="wave" className="scale-150" />
-            </div>
-
             {/* Contact Info Card */}
             <Card className="glass-card border-border/30">
               <CardHeader>
