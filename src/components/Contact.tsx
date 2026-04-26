@@ -109,6 +109,20 @@ const Contact = () => {
       className="relative py-32 px-6"
       ref={sectionRef}
     >
+      {/* 3D Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-10 left-1/4 w-28 h-28 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float">
+            <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-500"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-20 right-1/3 w-32 h-32 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse">
+            <rect x="20" y="20" width="60" height="60" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-purple-500"/>
+          </svg>
+        </div>
+      </div>
+
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
       
@@ -123,7 +137,7 @@ const Contact = () => {
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Section header - scroll animation */}
+        {/* Section header */}
         <div 
           className={`text-center mb-16 transition-all duration-700 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
@@ -290,7 +304,7 @@ const Contact = () => {
                 
                 <p className="text-muted-foreground leading-relaxed">
                   I'm always open to discussing new opportunities, innovative projects, 
-                  or potential collaborations in AI, ML, and Computer Vision.
+                  or potential collaborations in AI and Machine Learning.
                 </p>
 
                 <div className="mt-4 pt-4 border-t border-border/30">

@@ -84,7 +84,7 @@ const Hero = () => {
             }}
           >
             <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="hidden sm:inline">AI & Computer Vision Engineer</span>
+            <span className="hidden sm:inline">Agentic AI & Full Stack Engineer</span>
             <span className="sm:hidden">AI Engineer</span>
           </div>
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Eye, Cpu, Car, Zap, Database, Cloud, Sparkles } from "lucide-react";
+import { Brain, Code, Eye, Cpu, Car, Zap, Database, Cloud, Sparkles, GitBranch, Container, AppWindow } from "lucide-react";
 import { useMousePosition } from "@/hooks/useMouseParallax";
 
 const Skills = () => {
@@ -27,39 +27,39 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: "Programming Languages",
+      title: "Programming",
       icon: Code,
-      skills: ["Python", "C++", "JavaScript", "TypeScript", "MATLAB"],
+      skills: ["Python", "JAVA", "C", "C++", "R", "React"],
       color: "from-blue-500 to-cyan-500",
     },
     {
-      title: "ML & AI Frameworks",
+      title: "AI & ML Frameworks",
       icon: Brain,
-      skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Keras", "Pandas", "NumPy"],
+      skills: ["Pytorch", "TensorFlow", "Scikit Learn", "LangChain", "LangGraph", "GPT"],
       color: "from-purple-500 to-pink-500",
     },
     {
-      title: "Computer Vision",
-      icon: Eye,
-      skills: ["OpenCV", "PIL", "Detectron2", "YOLO", "Image Processing"],
+      title: "Data & Cloud",
+      icon: Cloud,
+      skills: ["AWS S3", "Azure", "Google Vertex", "Sagemaker", "BigData", "Spark"],
       color: "from-green-500 to-emerald-500",
     },
     {
-      title: "Automotive AI",
-      icon: Car,
-      skills: ["Autonomous Driving", "ADAS", "Sensor Fusion", "Path Planning"],
+      title: "Agentic AI",
+      icon: Sparkles,
+      skills: ["AI Agents", "RAG", "N8N", "Claude Opus", "Cursor", "Codex"],
       color: "from-orange-500 to-red-500",
     },
     {
-      title: "Testing & Validation",
+      title: "DevOps & MLOps",
       icon: Zap,
-      skills: ["HIL Testing", "Unit Testing", "Integration Testing", "Model Validation"],
+      skills: ["Docker", "Kubernetes", "CI/CD", "MLOps", "DevOps", "Jupyter"],
       color: "from-yellow-500 to-amber-500",
     },
     {
-      title: "Infrastructure",
-      icon: Cloud,
-      skills: ["Docker", "Kubernetes", "AWS", "PostgreSQL", "Linux"],
+      title: "Version Control",
+      icon: GitBranch,
+      skills: ["Git", "GitHub", "GitLab", "MS Office", "SAP 4/HANA"],
       color: "from-indigo-500 to-blue-500",
     },
   ];
@@ -70,6 +70,34 @@ const Skills = () => {
       className="relative py-32 px-6 bg-secondary/10"
       ref={sectionRef}
     >
+      {/* 3D Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-10 left-1/4 w-32 h-32 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float">
+            <path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-500"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" className="text-purple-500"/>
+          </svg>
+        </div>
+        <div className="absolute top-20 right-1/3 w-28 h-28 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '1.5s'}}>
+            <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-500"/>
+            <rect x="30" y="30" width="40" height="40" rx="5" fill="none" stroke="currentColor" className="text-cyan-400"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-20 left-1/3 w-24 h-24 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float" style={{animationDelay: '0.5s'}}>
+            <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-pink-500"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-purple-400"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-10 right-20 w-36 h-36 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '2s'}}>
+            <path d="M20 80 L50 20 L80 80" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-500"/>
+            <circle cx="50" cy="50" r="10" fill="currentColor" className="text-cyan-400"/>
+          </svg>
+        </div>
+      </div>
+
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-background" />
       
@@ -85,7 +113,7 @@ const Skills = () => {
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Section header - scroll drop */}
+        {/* Section header */}
         <div 
           className={`text-center mb-16 transition-all duration-700 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"
@@ -95,11 +123,11 @@ const Skills = () => {
             Technical <span className="gradient-text">Skills</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Technologies I work with to bring ideas to life
+            Technologies I use to build intelligent solutions
           </p>
         </div>
 
-        {/* Skills grid - stagger */}
+        {/* Skills grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
             <div
@@ -113,7 +141,6 @@ const Skills = () => {
                 transition: "transform 0.3s ease-out, box-shadow 0.3s ease-out",
               }}
             >
-              {/* Gradient border on hover */}
               <div 
                 className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${category.color} -z-10`}
                 style={{ filter: "blur(20px)", opacity: 0.2 }}
@@ -143,17 +170,17 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Additional info - scroll fade */}
+        {/* Additional skills */}
         <div 
           className={`mt-16 text-center transition-all duration-700 delay-300 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <p className="text-muted-foreground mb-6">
-            Always learning and exploring new technologies
+            Additional Expertise
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["RAG Systems", "LLMs", "Agentic AI", "Edge AI", "TensorRT"].map((tech) => (
+            {["Agile Methodology (Jira)", "Business intelligence", "Forecasting", "Predictive Analytics", "NLP", "Computer Vision"].map((tech) => (
               <span 
                 key={tech}
                 className="px-3 py-1 text-sm rounded-full border border-border/50 text-muted-foreground/60 hover:text-cyan-400 hover:border-cyan-400/50 transition-colors cursor-pointer"

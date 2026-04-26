@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Brain, Cpu, Eye, Rocket, Sparkles, Award, Users, Globe } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Brain, Cpu, Eye, Rocket, Sparkles, MapPin, Calendar, Mail, Phone } from "lucide-react";
 import { useMousePosition } from "@/hooks/useMouseParallax";
 
 const About = () => {
@@ -28,29 +27,29 @@ const About = () => {
   const highlights = [
     {
       icon: Brain,
-      title: "AI Innovation",
-      description: "Building intelligent systems that push boundaries",
+      title: "Agentic AI",
+      description: "Building AI agents with LangChain and LangGraph",
       color: "text-purple-400",
       bgColor: "bg-purple-500/20",
     },
     {
       icon: Cpu,
-      title: "Performance",
-      description: "Optimized solutions for real-world applications",
+      title: "Full Stack AI",
+      description: "End-to-end AI applications development",
       color: "text-cyan-400",
       bgColor: "bg-cyan-500/20",
     },
     {
       icon: Eye,
-      title: "Vision",
-      description: "Advanced computer vision for complex challenges",
+      title: "Computer Vision",
+      description: "Advanced vision systems for automotive",
       color: "text-green-400",
       bgColor: "bg-green-500/20",
     },
     {
       icon: Rocket,
-      title: "Scale",
-      description: "Production-ready systems deployed worldwide",
+      title: "MLOps",
+      description: "Production-ready AI deployments",
       color: "text-pink-400",
       bgColor: "bg-pink-500/20",
     },
@@ -62,6 +61,35 @@ const About = () => {
       className="relative py-32 px-6 overflow-hidden"
       ref={sectionRef}
     >
+      {/* 3D Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 left-10 w-40 h-40 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-500"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-purple-500"/>
+            <circle cx="50" cy="50" r="8" fill="currentColor" className="text-cyan-400"/>
+          </svg>
+        </div>
+        <div className="absolute top-30 right-20 w-36 h-36 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '1s'}}>
+            <rect x="15" y="25" width="70" height="50" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-500"/>
+            <circle cx="35" cy="75" r="8" fill="none" stroke="currentColor" className="text-cyan-500"/>
+            <circle cx="65" cy="75" r="8" fill="none" stroke="currentColor" className="text-cyan-500"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-30 left-1/4 w-28 h-28 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float" style={{animationDelay: '0.5s'}}>
+            <path d="M50 15 L85 85 L50 70 L15 85 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-pink-500"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-20 right-1/4 w-32 h-32 opacity-10">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '1.5s'}}>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-purple-500"/>
+            <path d="M25 50 L50 25 L75 50 L50 75 Z" fill="none" stroke="currentColor" className="text-cyan-400"/>
+          </svg>
+        </div>
+      </div>
+
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
       
@@ -84,7 +112,7 @@ const About = () => {
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Section header - scroll drop animation */}
+        {/* Section header */}
         <div 
           className={`text-center mb-16 transition-all duration-700 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"
@@ -94,11 +122,11 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Passionate engineer transforming ideas into intelligent solutions
+            AI Engineer passionate about building intelligent solutions
           </p>
         </div>
 
-        {/* Main content - scroll reveal */}
+        {/* Main content */}
         <div 
           className={`grid md:grid-cols-2 gap-8 lg:gap-12 transition-all duration-700 delay-200 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
@@ -115,44 +143,50 @@ const About = () => {
             >
               <div className="relative z-10">
                 <h3 className="text-2xl font-semibold mb-6 gradient-text">
-                  AI & Computer Vision Engineer
+                  AI Engineer & Full Stack Developer
                 </h3>
                 
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    I'm a passionate AI and Machine Learning engineer with deep expertise in computer vision, 
-                    autonomous systems, and automotive AI solutions. Currently working at CREAT GmbH in Munich, Germany.
+                    With 3+ years of global experience as an Agentic AI and Full Stack Engineer, 
+                    I develop and deploy ML and AI solutions for real-world applications 
+                    across Business, cloud-based, and customer domains.
                   </p>
                   <p>
-                    My journey spans from building real-time perception systems for autonomous vehicles 
-                    to developing automated testing frameworks that reduce manual effort by significant margins.
+                    Currently working at BMW Group in Munich, designing AI agent workflows 
+                    and building full-stack AI applications. Previously at CREAT GmbH 
+                    and THI AI LAB.
                   </p>
                   <p>
-                    I believe in creating solutions that are not just technically impressive, but also 
-                    practical, scalable, and impactful in the real world.
+                    Based in Ingolstadt, Germany. Open to relocation in Germany. 
+                    Available from July 2026.
                   </p>
                 </div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-border/50">
-                  <div className="text-center">
-                    <div className="text-2xl lg:text-3xl font-bold gradient-text">3+</div>
-                    <div className="text-xs lg:text-sm text-muted-foreground">Years Experience</div>
+                {/* Quick info */}
+                <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-border/50">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm">Ingolstadt, Germany</span>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl lg:text-3xl font-bold gradient-text">10+</div>
-                    <div className="text-xs lg:text-sm text-muted-foreground">Projects Delivered</div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm">Available: July 2026</span>
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl lg:text-3xl font-bold gradient-text">95%</div>
-                    <div className="text-xs lg:text-sm text-muted-foreground">Accuracy Rate</div>
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm">monashragaurang6@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm">+49 17657713152</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right - Highlights - stagger animation */}
+          {/* Right - Highlights */}
           <div className="grid grid-cols-2 gap-4">
             {highlights.map((item, index) => (
               <div
@@ -176,26 +210,6 @@ const About = () => {
                   {item.description}
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Tech stack - scroll fade */}
-        <div 
-          className={`mt-16 pt-8 border-t border-border/30 transition-all duration-700 delay-500 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <p className="text-center text-sm text-muted-foreground mb-6">Core Technologies</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {["PyTorch", "TensorFlow", "OpenCV", "Python", "C++", "CUDA", "ROS", "Docker"].map((tech, index) => (
-              <span 
-                key={tech}
-                className="px-4 py-2 rounded-full glass text-sm text-muted-foreground hover:text-foreground hover:bg-primary/20 transition-all cursor-pointer animate-float"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {tech}
-              </span>
             ))}
           </div>
         </div>
