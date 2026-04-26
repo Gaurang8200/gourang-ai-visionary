@@ -32,9 +32,9 @@ export const BackgroundLayers = () => {
     };
 
     // Clear existing
-    deepRef.current?.innerHTML = "";
-    midRef.current?.innerHTML = "";
-    frontRef.current?.innerHTML = "";
+    if (deepRef.current) deepRef.current.innerHTML = "";
+    if (midRef.current) midRef.current.innerHTML = "";
+    if (frontRef.current) frontRef.current.innerHTML = "";
 
     // Create particles for each layer
     if (deepRef.current) createParticles(20, deepRef.current);
