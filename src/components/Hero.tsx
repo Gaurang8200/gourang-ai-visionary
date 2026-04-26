@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles, Code, Brain, Cpu } from "lucide-react";
-import { ParticleField, OrbitalRings } from "./ParticleField";
 import TypewriterText from "./TypewriterText";
 import { useMousePosition } from "@/hooks/useMouseParallax";
 import AnimatedCharacter from "./AnimatedCharacter";
+import BackgroundLayers from "./BackgroundLayers";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,46 +28,9 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/20" />
+      {/* 3D Background Layers */}
+      <BackgroundLayers />
       
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-50" />
-      
-      {/* Particle field background */}
-      <ParticleField />
-      
-      {/* Orbital rings */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div 
-          className="absolute w-[500px] h-[500px] lg:w-[700px] lg:h-[700px] opacity-30"
-          style={{
-            transform: `translate(${smoothPosition.x * 30}px, ${smoothPosition.y * 30}px)`,
-            transition: "transform 0.3s ease-out",
-          }}
-        >
-          <OrbitalRings />
-        </div>
-      </div>
-
-      {/* Gradient orbs */}
-      <div className="absolute pointer-events-none">
-        <div 
-          className="absolute w-[400px] h-[400px] rounded-full bg-cyan-500/5 blur-3xl -top-20 -left-40"
-          style={{
-            transform: `translate(${smoothPosition.x * -20}px, ${smoothPosition.y * -20}px)`,
-            transition: "transform 0.5s ease-out",
-          }}
-        />
-        <div 
-          className="absolute w-[300px] h-[300px] rounded-full bg-purple-500/5 blur-3xl bottom-20 right-0"
-          style={{
-            transform: `translate(${smoothPosition.x * 30}px, ${smoothPosition.y * 30}px)`,
-            transition: "transform 0.5s ease-out",
-          }}
-        />
-      </div>
-
       {/* Main content with fade-in animation */}
       <div 
         className={`relative z-10 text-center px-6 transition-all duration-1000 ${

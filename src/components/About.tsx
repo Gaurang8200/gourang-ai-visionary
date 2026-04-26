@@ -61,35 +61,6 @@ const About = () => {
       className="relative py-32 px-6 overflow-hidden"
       ref={sectionRef}
     >
-      {/* 3D Background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-10 w-40 h-40 opacity-10">
-          <svg viewBox="0 0 100 100" className="w-full h-full animate-float">
-            <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-500"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-purple-500"/>
-            <circle cx="50" cy="50" r="8" fill="currentColor" className="text-cyan-400"/>
-          </svg>
-        </div>
-        <div className="absolute top-30 right-20 w-36 h-36 opacity-10">
-          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '1s'}}>
-            <rect x="15" y="25" width="70" height="50" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-500"/>
-            <circle cx="35" cy="75" r="8" fill="none" stroke="currentColor" className="text-cyan-500"/>
-            <circle cx="65" cy="75" r="8" fill="none" stroke="currentColor" className="text-cyan-500"/>
-          </svg>
-        </div>
-        <div className="absolute bottom-30 left-1/4 w-28 h-28 opacity-10">
-          <svg viewBox="0 0 100 100" className="w-full h-full animate-float" style={{animationDelay: '0.5s'}}>
-            <path d="M50 15 L85 85 L50 70 L15 85 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-pink-500"/>
-          </svg>
-        </div>
-        <div className="absolute bottom-20 right-1/4 w-32 h-32 opacity-10">
-          <svg viewBox="0 0 100 100" className="w-full h-full animate-float-reverse" style={{animationDelay: '1.5s'}}>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-purple-500"/>
-            <path d="M25 50 L50 25 L75 50 L50 75 Z" fill="none" stroke="currentColor" className="text-cyan-400"/>
-          </svg>
-        </div>
-      </div>
-
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
       
@@ -128,10 +99,9 @@ const About = () => {
 
         {/* Main content */}
         <div 
-          className={`grid md:grid-cols-2 gap-8 lg:gap-12 transition-all duration-700 delay-200 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
+          className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'scroll-reveal active' : 'scroll-reveal'}`}
         >
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left - Bio card */}
           <div className="relative group">
             <div 

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import CustomCursor from "./components/CustomCursor";
+import BackgroundLayers from "./components/BackgroundLayers";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -20,6 +21,7 @@ const App = () => (
     >
       <TooltipProvider>
         <CustomCursor />
+        <BackgroundLayers />
         <Toaster />
         <Sonner />
         <BrowserRouter>

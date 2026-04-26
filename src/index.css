@@ -407,6 +407,19 @@
   }
 }
 
+/* Gradient shift for background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @keyframes scroll-fade-in {
   from {
     opacity: 0;
@@ -660,4 +673,168 @@
 /* High contrast text */
 .text-glow {
   text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+/* ===== 3D Background Layers ===== */
+/* Deep layer: very slow, large scale */
+.bg-layer-deep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+}
+.bg-layer-deep .shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, hsl(199 89% 48% / 0.05), transparent);
+  animation: float-deep 40s ease-in-out infinite;
+}
+.bg-layer-deep .shape:nth-child(1) { width: 800px; height: 800px; top: -400px; left: -400px; animation-delay: 0s; }
+.bg-layer-deep .shape:nth-child(2) { width: 600px; height: 600px; top: 10%; left: 50%; animation-delay: 10s; }
+.bg-layer-deep .shape:nth-child(3) { width: 1000px; height: 1000px; top: 50%; left: -500px; animation-delay: 20s; }
+@keyframes float-deep {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(100px, 100px) rotate(10deg); }
+  66% { transform: translate(-100px, -50px) rotate(-5deg); }
+}
+
+/* Mid layer: medium speed, medium size */
+.bg-layer-mid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+.bg-layer-mid .shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, hsl(180 100% 50% / 0.08), transparent);
+  animation: float-mid 20s ease-in-out infinite;
+}
+.bg-layer-mid .shape:nth-child(1) { width: 300px; height: 300px; top: 20%; left: 10%; animation-delay: 0s; }
+.bg-layer-mid .shape:nth-child(2) { width: 400px; height: 400px; top: 60%; left: 70%; animation-delay: 5s; }
+.bg-layer-mid .shape:nth-child(3) { width: 200px; height: 200px; top: 80%; left: 20%; animation-delay: 10s; }
+@keyframes float-mid {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(80px, 80px) rotate(5deg); }
+  66% { transform: translate(-80px, -40px) rotate(-3deg); }
+}
+
+/* Front layer: subtle particles, reacts to mouse */
+.bg-layer-front {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.bg-layer-front .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: hsl(199 89% 60% / 0.6);
+  border-radius: 50%;
+  animation: float-front 6s linear infinite;
+}
+.bg-layer-front .particle:nth-child(odd) {
+  animation-duration: 8s;
+  animation-delay: 2s;
+}
+
+/* Parallax container for sections */
+.parallax-section {
+  position: relative;
+  z-index: 10;
+  background: var(--gradient-card);
+}
+.parallax-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(40px) brightness(0.9);
+  transform: translateZ(-10px) scale(1.1);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Enhanced glass card with depth */
+.glass-card-3d {
+  @apply glass-card;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.glass-card-3d:hover {
+  transform: translateY(-8px) scale(1.02) rotateY(2deg) rotateX(-2deg);
+  box-shadow: 0 30px 60px -20px hsl(199 89% 60% / 0.3), 0 0 40px hsl(199 89% 60% / 0.2);
+}
+
+/* Scroll reveal variants */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.scroll-reveal.active {
+  animation: reveal-up 0.8s ease forwards;
+}
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.stagger-children.active > * {
+  animation: stagger-up 0.6s ease forwards;
+}
+.stagger-children.active > *:nth-child(odd) {
+  animation-delay: 0ms;
+}
+.stagger-children.active > *:nth-child(even) {
+  animation-delay: 100ms;
+}
+.stagger-children.active > *:nth-child(3n) {
+  animation-delay: 200ms;
+}
+
+/* Hover lift for interactive elements */
+.hover-lift-3d {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+.hover-lift-3d:hover {
+  transform: translateY(-6px) scale(1.01) rotateY(1deg) rotateX(-1deg);
+  box-shadow: 0 20px 40px -10px hsl(199 89% 60% / 0.25), 0 0 30px hsl(199 89% 60% / 0.15);
+}
+
+/* Soft divider */
+.divider-soft {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(199 89% 60% / 0.4), transparent);
+  margin: 24px 0;
+}
+
+/* Mouse reactive tilt container */
+.tilt-container {
+  perspective: 1000px;
+}
+.tilt-element {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+/* Reduced motion safe */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
