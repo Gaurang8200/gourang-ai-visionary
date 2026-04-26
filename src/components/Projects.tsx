@@ -3,20 +3,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, Eye } from "lucide-react";
+import { ExternalLink, Github, Eye, ArrowUpRight, Sparkles, TrendingUp, Shield, Zap, Code } from "lucide-react";
+import { useMousePosition } from "@/hooks/useMouseParallax";
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { smoothPosition } = useMousePosition();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setIsInView(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -28,178 +30,216 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Autonomous Vehicle Perception System",
-      description: "Real-time object detection and classification for autonomous vehicles using deep learning",
-      fullDescription: "Developed a comprehensive perception system for autonomous vehicles capable of real-time object detection, classification, and tracking. The system processes camera feeds at 30fps and achieves 95% accuracy in urban environments. Implemented using PyTorch, OpenCV, and custom CNN architectures optimized for edge computing.",
+      title: "Autonomous Vehicle Perception",
+      description: "Real-time object detection and tracking for autonomous driving",
+      fullDescription: "Developed a comprehensive perception system for autonomous vehicles capable of real-time object detection, classification, and tracking. The system processes camera feeds at 30fps and achieves 95% accuracy in urban environments.",
+      icon: TrendingUp,
+      iconColor: "text-green-400",
+      iconBg: "bg-green-500/20",
       technologies: ["PyTorch", "OpenCV", "CUDA", "ROS", "C++"],
       category: "Computer Vision",
-      highlights: [
-        "Real-time processing at 30fps",
-        "95% accuracy in object detection",
-        "Optimized for edge computing",
-        "Deployed in production vehicles"
-      ]
+      highlights: ["Real-time 30fps processing", "95% detection accuracy", "Edge computing optimized", "Production deployed"],
+      link: "#",
     },
     {
-      title: "ML Model Optimization Framework",
-      description: "Automated framework for optimizing machine learning models for production deployment",
-      fullDescription: "Built a comprehensive framework that automatically optimizes ML models for production deployment. The system reduces model size by up to 80% while maintaining accuracy, supports multiple formats (ONNX, TensorRT), and includes automated A/B testing capabilities.",
-      technologies: ["TensorFlow", "ONNX", "TensorRT", "Docker", "Kubernetes"],
+      title: "ML Model Optimization",
+      description: "Automated framework for production ML deployment",
+      fullDescription: "Built a comprehensive framework that automatically optimizes ML models for production deployment. The system reduces model size by up to 80% while maintaining accuracy.",
+      icon: Sparkles,
+      iconColor: "text-purple-400",
+      iconBg: "bg-purple-500/20",
+      technologies: ["TensorFlow", "ONNX", "TensorRT", "Docker", "K8s"],
       category: "Machine Learning",
-      highlights: [
-        "80% reduction in model size",
-        "Automated optimization pipeline",
-        "Multi-format support",
-        "Integrated A/B testing"
-      ]
+      highlights: ["80% model size reduction", "Automated optimization", "Multi-format support", "A/B testing integrated"],
+      link: "#",
     },
     {
-      title: "HIL Testing Automation Platform",
-      description: "Comprehensive platform for Hardware-in-the-Loop testing of automotive control systems",
-      fullDescription: "Designed and implemented a full-scale HIL testing platform for automotive ECU validation. The platform supports automated test case generation, real-time monitoring, and comprehensive reporting. Reduced testing time by 60% while improving test coverage.",
+      title: "HIL Testing Platform",
+      description: "Hardware-in-the-loop testing automation",
+      fullDescription: "Designed and implemented a full-scale HIL testing platform for automotive ECU validation. Reduced testing time by 60% while improving test coverage.",
+      icon: Shield,
+      iconColor: "text-blue-400",
+      iconBg: "bg-blue-500/20",
       technologies: ["Python", "CAN", "dSPACE", "MATLAB", "Jenkins"],
-      category: "Automotive Testing",
-      highlights: [
-        "60% reduction in testing time",
-        "Automated test generation",
-        "Real-time monitoring",
-        "Comprehensive reporting"
-      ]
+      category: "Automotive",
+      highlights: ["60% faster testing", "Automated generation", "Real-time monitoring", "Comprehensive reports"],
+      link: "#",
     },
     {
-      title: "Vision-Based Quality Inspection",
-      description: "AI-powered quality inspection system for manufacturing using computer vision",
-      fullDescription: "Developed an AI-powered quality inspection system that automatically detects defects in manufactured products. The system uses advanced computer vision techniques and achieves 99.5% accuracy, significantly reducing manual inspection time and costs.",
+      title: "Vision Quality Inspection",
+      description: "AI-powered manufacturing quality control",
+      fullDescription: "Developed an AI-powered quality inspection system that automatically detects defects in manufactured products with 99.5% accuracy.",
+      icon: Zap,
+      iconColor: "text-orange-400",
+      iconBg: "bg-orange-500/20",
       technologies: ["OpenCV", "TensorFlow", "FastAPI", "PostgreSQL", "React"],
       category: "Computer Vision",
-      highlights: [
-        "99.5% defect detection accuracy",
-        "Real-time processing capability",
-        "Reduced inspection costs by 40%",
-        "Scalable cloud architecture"
-      ]
-    }
+      highlights: ["99.5% accuracy", "Real-time processing", "40% cost reduction", "Cloud scalable"],
+      link: "#",
+    },
   ];
 
   return (
-    <section id="projects" className="relative py-20 px-6" ref={sectionRef}>
-      {/* Background animation */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <video
-          className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/hero-bg1.webm" type="video/webm" />
-          <source src="/hero-bg1.mp4" type="video/mp4" />
-          {/* Fallback image (optional) */}
-          {/* <img src="/hero-bg1.jpg" alt="Background" className="h-full w-full object-cover" /> */}
-        </video>
-        {/* Dark gradient overlay to keep text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background/90" />
+    <section 
+      id="projects" 
+      className="relative py-32 px-6"
+      ref={sectionRef}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+      
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute w-[600px] h-[600px] rounded-full bg-cyan-500/3 blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{
+            transform: `translate(-50%, -50%) translate(${smoothPosition.x * 30}px, ${smoothPosition.y * 30}px)`,
+          }}
+        />
       </div>
-      <div className="container mx-auto max-w-6xl">
-        <div
-          className={`transition-smooth duration-1000 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        {/* Section header - scroll drop */}
+        <div 
+          className={`text-center mb-16 transition-all duration-700 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Featured <span className="gradient-text">Projects</span>
           </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Key projects demonstrating my technical expertise
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card
-                key={project.title}
-                className={`glass-card border-border/50 hover:glow-blue transition-smooth duration-500 group animate-fade-in hover:scale-105`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-2">
-                    <Badge variant="outline" className="text-primary border-primary/50">
-                      {project.category}
+        {/* Projects grid - stagger */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {projects.map((project, index) => (
+            <Card
+              key={project.title}
+              className={`group glass-card border-border/30 hover:border-cyan-500/30 transition-all duration-500 ${
+                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ 
+                animationDelay: `${index * 150}ms`,
+                transform: `perspective(1000px) rotateY(${smoothPosition.x * 3}deg) translateZ(${smoothPosition.y * 5}px)`,
+                transition: "transform 0.3s ease-out, border-color 0.3s ease-out",
+              }}
+            >
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between mb-2">
+                  <Badge variant="outline" className="text-cyan-400 border-cyan-400/50">
+                    {project.category}
+                  </Badge>
+                  <div 
+                    className={`w-8 h-8 rounded-lg ${project.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}
+                  >
+                    <project.icon className={`w-4 h-4 ${project.iconColor}`} />
+                  </div>
+                </div>
+                <CardTitle className="text-xl font-bold group-hover:gradient-text transition-all">
+                  {project.title}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  {project.description}
+                </CardDescription>
+              </CardHeader>
+              
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <Badge key={tech} variant="secondary" className="text-xs bg-muted/30">
+                      {tech}
                     </Badge>
-                  </div>
-                  <CardTitle className="text-xl font-bold group-hover:gradient-text transition-smooth">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+                  ))}
+                </div>
 
-                  <div className="flex gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="glass" size="sm" className="flex-1">
-                          <Eye className="h-4 w-4 mr-2" />
-                          View Details
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="glass-card border-border/50 max-w-2xl">
-                        <DialogHeader>
-                          <DialogTitle className="gradient-text">{project.title}</DialogTitle>
-                          <DialogDescription className="text-muted-foreground">
-                            {project.fullDescription}
-                          </DialogDescription>
-                        </DialogHeader>
-                        
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className="font-semibold mb-2">Key Highlights</h4>
-                            <ul className="space-y-1">
-                              {project.highlights.map((highlight, idx) => (
-                                <li key={idx} className="text-muted-foreground flex items-center">
-                                  <span className="w-2 h-2 bg-primary rounded-full mr-2 flex-shrink-0" />
-                                  {highlight}
-                                </li>
-                              ))}
-                            </ul>
+                <div className="flex gap-2">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="sm" className="flex-1 hover:bg-primary/20">
+                        <Eye className="h-4 w-4 mr-2" />
+                        View Details
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="glass-card border-border/50 max-w-2xl">
+                      <DialogHeader>
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-lg ${project.iconBg} flex items-center justify-center`}>
+                            <project.icon className={`w-5 h-5 ${project.iconColor}`} />
                           </div>
-                          
                           <div>
-                            <h4 className="font-semibold mb-2">Technologies Used</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {project.technologies.map((tech) => (
-                                <Badge key={tech} variant="secondary">
-                                  {tech}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="flex gap-2 pt-4">
-                            <Button variant="neon" size="sm">
-                              <Github className="h-4 w-4 mr-2" />
-                              View Code
-                            </Button>
-                            <Button variant="glass" size="sm">
-                              <ExternalLink className="h-4 w-4 mr-2" />
-                              Live Demo
-                            </Button>
+                            <DialogTitle className="gradient-text">{project.title}</DialogTitle>
+                            <DialogDescription className="text-muted-foreground">
+                              {project.category}
+                            </DialogDescription>
                           </div>
                         </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                      </DialogHeader>
+                      
+                      <div className="space-y-4 mt-4">
+                        <p className="text-muted-foreground leading-relaxed">
+                          {project.fullDescription}
+                        </p>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-3">Key Highlights</h4>
+                          <ul className="grid grid-cols-2 gap-2">
+                            {project.highlights.map((highlight, idx) => (
+                              <li key={idx} className="flex items-center text-muted-foreground text-sm">
+                                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2" />
+                                {highlight}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-2">Technologies</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.technologies.map((tech) => (
+                              <Badge key={tech} variant="secondary">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                          <Button variant="outline" size="sm" className="hover:bg-primary/20">
+                            <Github className="h-4 w-4 mr-2" />
+                            View Code
+                          </Button>
+                          <Button variant="ghost" size="sm">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Live Demo
+                          </Button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* View more CTA - scroll fade */}
+        <div 
+          className={`text-center mt-12 transition-all duration-700 delay-500 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <a
+            href="https://github.com/Gaurang8200"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <span>View more projects on GitHub</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </section>

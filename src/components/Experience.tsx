@@ -1,26 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Building } from "lucide-react";
+import { Calendar, MapPin, Building, ArrowRight, Briefcase, GraduationCap } from "lucide-react";
 
 const Experience = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Animate items with delay
-          experiences.forEach((_, index) => {
-            setTimeout(() => {
-              setVisibleItems(prev => [...prev, index]);
-            }, index * 200);
-          });
+          setIsInView(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -32,121 +25,301 @@ const Experience = () => {
 
   const experiences = [
     {
+      type: "work",
       company: "CREAT GmbH",
-      position: "Software Engineer",
-      duration: "September 2022 - July 2025",
+      position: "Software Engineer - AI/ML & Computer Vision",
+      duration: "Sep 2022 - Jul 2025",
       location: "Munich, Germany",
-      description: "Leading AI/ML initiatives focused on automotive applications and computer vision solutions. Developing cutting-edge algorithms for autonomous vehicle perception systems.",
+      description: "Leading AI/ML initiatives for automotive applications and computer vision solutions. Developed deep learning models for autonomous vehicle perception systems.",
       responsibilities: [
-        "Developed and deployed deep learning (CNN, LSTM) for camera object detection and radar-based use cases across automotive scenarios",
-        "Created Python-based automation scripts to reduce time and manual effort in test result report analysis, improving overall workflow efficiency",
-        "Integrated AI-powered vision modules into cloud-based Test Management System, enabling automated system validation and monitoring",
-        "Automated AI-related data workflows using Python and PostgreSQL to manage report bank data and test result processing from internal servers",
-        "Utilized TensorFlow, PyTorch, Docker and Git for AI Pipeline development, model deployment, and test automation workflows",
-        "Proposed AI-driven solutions to enhance functionality and automate tedious processes, resulting in overall user satisfaction"
+        "Developed CNN/LSTM models for object detection",
+        "Reduced test analysis time by 60%",
+        "Integrated AI vision modules into cloud systems",
+        "Built AI pipelines with TensorFlow & PyTorch"
       ],
-      technologies: ["PyTorch", "OpenCV", "CUDA", "TensorRT", "ROS", "Python", "C++"]
+      technologies: ["PyTorch", "OpenCV", "CUDA", "TensorRT", "ROS", "Python", "C++", "Docker"]
     },
     {
+      type: "work",
       company: "Accenture",
       position: "AI Research Assistant",
       duration: "2020 - 2022",
       location: "Bangalore, India",
-      description: "Delivered enterprise AI solutions and consulted on digital transformation projects. Specialized in machine learning implementation for large-scale business applications.",
+      description: "Delivered enterprise AI solutions and digital transformation projects.",
       responsibilities: [
-        "Designed and implemented ML solutions for enterprise clients",
-        "Conducted technical workshops and training sessions",
-        "Optimized existing systems using AI/ML technologies",
-        "Collaborated with stakeholders to define technical requirements"
+        "Designed ML solutions for enterprise clients",
+        "Conducted technical workshops",
+        "Optimized systems using AI/ML",
+        "Collaborated with stakeholders"
       ],
       technologies: ["TensorFlow", "AWS", "Docker", "Kubernetes", "Python", "SQL"]
     }
   ];
 
+  const education = [
+    {
+      type: "education",
+      company: "MSc in Automotive Systems",
+      position: "Technical University of Munich",
+      duration: "2020 - 2022",
+      location: "Munich, Germany",
+      description: "Specialized in autonomous driving and AI systems",
+      responsibilities: [],
+      technologies: ["Machine Learning", "Computer Vision", "Robotics"]
+    },
+    {
+      type: "education",
+      company: "B.E in Electronics & Communication",
+      position: "RIT Bangalore",
+      duration: "2016 - 2020",
+      location: "Bangalore, India",
+      description: "Foundation in embedded systems and signal processing",
+      responsibilities: [],
+      technologies: ["C programming", "Embedded Systems", "DSP"]
+    }
+  ];
+
   return (
-    <section id="experience" className="py-20 px-6 bg-secondary/20" ref={sectionRef}>
-      <div className="container mx-auto max-w-4xl">
-        <div
-          className={`transition-smooth duration-1000 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+    <section 
+      id="experience" 
+      className="relative py-32 px-6 bg-secondary/10"
+      ref={sectionRef}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-background" />
+      
+      {/* Train track line */}
+      <div className="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent -translate-y-1/2" />
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        {/* Section header */}
+        <div 
+          className={`text-center mb-20 transition-all duration-700 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            Professional <span className="gradient-text">Experience</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            My <span className="gradient-text">Journey</span>
           </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            From student to AI engineer - a train journey through my career
+          </p>
+        </div>
 
+        {/* Work Experience - Train cars from alternate sides */}
+        <div className="mb-16">
+          <h3 className={`text-2xl font-bold mb-8 text-center transition-all duration-700 delay-200 ${
+            isInView ? "opacity-100" : "opacity-0"
+          }`}>
+            <Briefcase className="inline w-6 h-6 mr-2 text-cyan-400" />
+            <span className="gradient-text">Work Experience</span>
+          </h3>
+          
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary"></div>
+            {/* Train track */}
+            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-cyan-500/30 -translate-y-1/2" />
+            
+            {/* Station markers */}
+            {[0, 1].map((i) => (
+              <div 
+                key={i}
+                className="absolute top-1/2 w-4 h-4 rounded-full bg-cyan-500 border-4 border-background -translate-y-1/2"
+                style={{ 
+                  left: `${25 + i * 50}%`,
+                  boxShadow: "0 0 20px hsl(180 100% 50% / 0.5)"
+                }}
+              />
+            ))}
 
-            {experiences.map((experience, index) => (
+            {experiences.map((exp, index) => (
               <div
-                key={experience.company}
-                className={`relative mb-12 transition-smooth duration-800 ${
-                  visibleItems.includes(index)
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-x-10"
+                key={exp.company}
+                className={`relative flex items-center mb-16 ${
+                  index % 2 === 0 ? 'justify-start' : 'justify-end'
                 }`}
               >
-                {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background glow-blue"></div>
-
-                {/* Content Card */}
-                <div className="ml-20">
-                  <div className="glass-card p-6 rounded-xl hover:glow-blue transition-smooth">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold gradient-text mb-1">
-                          {experience.position}
-                        </h3>
-                        <div className="flex items-center text-lg font-semibold text-foreground mb-2">
-                          <Building className="h-4 w-4 mr-2 text-primary" />
-                          {experience.company}
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:items-end space-y-1">
-                        <div className="flex items-center text-muted-foreground">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          {experience.duration}
-                        </div>
-                        <div className="flex items-center text-muted-foreground">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          {experience.location}
-                        </div>
-                      </div>
+                {/* Card coming from left or right */}
+                <div 
+                  className={`w-full md:w-5/12 transition-all duration-1000 ${
+                    isInView 
+                      ? index % 2 === 0 
+                        ? "opacity-100 translate-x-0" 
+                        : "opacity-100 translate-x-0"
+                      : index % 2 === 0
+                        ? "opacity-0 -translate-x-32"
+                        : "opacity-0 translate-x-32"
+                  }`}
+                  style={{ 
+                    animationDelay: `${index * 300}ms`,
+                    transitionDelay: `${index * 200}ms`
+                  }}
+                >
+                  {/* Train car bubble */}
+                  <div 
+                    className={`glass-card p-6 rounded-2xl interactive-card relative ${
+                      index % 2 === 0 ? 'mr-8' : 'ml-8'
+                    }`}
+                    style={{
+                      transform: `perspective(1000px) rotateY(${index % 2 === 0 ? -5 : 5}deg)`,
+                    }}
+                  >
+                    {/* Connector to track */}
+                    <div className={`absolute top-1/2 w-8 h-0.5 bg-cyan-500/50 ${
+                      index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
+                    }`} />
+                    
+                    <div className="flex items-start justify-between mb-3">
+                      <Building className="w-5 h-5 text-cyan-400" />
+                      <Badge variant="outline" className="text-xs text-cyan-400 border-cyan-400/50">
+                        {index === 0 ? "Current" : "Past"}
+                      </Badge>
                     </div>
 
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                      {experience.description}
+                    <h3 className="text-lg font-bold gradient-text mb-1">
+                      {exp.position}
+                    </h3>
+                    <p className="text-foreground font-medium mb-2 flex items-center gap-1">
+                      {exp.company}
                     </p>
 
-                    <div className="mb-4">
-                      <h4 className="font-semibold mb-2">Key Responsibilities:</h4>
+                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mb-3">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {exp.duration}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {exp.location}
+                      </span>
+                    </div>
+
+                    <p className="text-muted-foreground text-sm mb-3 leading-relaxed">
+                      {exp.description}
+                    </p>
+
+                    <div className="mb-3">
                       <ul className="space-y-1">
-                        {experience.responsibilities.map((responsibility, idx) => (
-                          <li key={idx} className="text-muted-foreground flex items-start">
-                            <span className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                            {responsibility}
+                        {exp.responsibilities.slice(0, 3).map((resp, idx) => (
+                          <li key={idx} className="text-xs text-muted-foreground flex items-start">
+                            <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                            {resp}
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div>
-                      <h4 className="font-semibold mb-2">Technologies:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.technologies.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="secondary"
-                            className="bg-muted/50 text-foreground hover:bg-primary/20 transition-smooth"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border/30">
+                      {exp.technologies.slice(0, 5).map((tech) => (
+                        <Badge 
+                          key={tech} 
+                          variant="secondary" 
+                          className="text-xs bg-muted/30"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Education - Train cars */}
+        <div>
+          <h3 className={`text-2xl font-bold mb-8 text-center transition-all duration-700 delay-500 ${
+            isInView ? "opacity-100" : "opacity-0"
+          }`}>
+            <GraduationCap className="inline w-6 h-6 mr-2 text-purple-400" />
+            <span className="gradient-text-alt">Education</span>
+          </h3>
+          
+          <div className="relative">
+            {/* Train track */}
+            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-purple-500/30 -translate-y-1/2" />
+            
+            {[0, 1].map((i) => (
+              <div 
+                key={i}
+                className="absolute top-1/2 w-4 h-4 rounded-full bg-purple-500 border-4 background -translate-y-1/2"
+                style={{ 
+                  left: `${25 + i * 50}%`,
+                  boxShadow: "0 0 20px hsl(280 100% 50% / 0.5)"
+                }}
+              />
+            ))}
+
+            {education.map((edu, index) => (
+              <div
+                key={edu.company}
+                className={`relative flex items-center mb-16 ${
+                  index % 2 === 0 ? 'justify-start' : 'justify-end'
+                }`}
+              >
+                <div 
+                  className={`w-full md:w-5/12 transition-all duration-1000 ${
+                    isInView 
+                      ? index % 2 === 0 
+                        ? "opacity-100 translate-x-0" 
+                        : "opacity-100 translate-x-0"
+                      : index % 2 === 0
+                        ? "opacity-0 -translate-x-32"
+                        : "opacity-0 translate-x-32"
+                  }`}
+                  style={{ 
+                    animationDelay: `${(index + 2) * 300}ms`,
+                    transitionDelay: `${(index + 2) * 200}ms`
+                  }}
+                >
+                  <div 
+                    className={`glass-card p-6 rounded-2xl interactive-card ${
+                      index % 2 === 0 ? 'mr-8' : 'ml-8'
+                    }`}
+                    style={{
+                      transform: `perspective(1000px) rotateY(${index % 2 === 0 ? -5 : 5}deg)`,
+                    }}
+                  >
+                    <div className="absolute top-1/2 w-8 h-0.5 bg-purple-500/50 ${
+                      index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
+                    }` />
+                    
+                    <div className="flex items-start justify-between mb-3">
+                      <GraduationCap className="w-5 h-5 text-purple-400" />
+                    </div>
+
+                    <h3 className="text-lg font-bold gradient-text-alt mb-1">
+                      {edu.company}
+                    </h3>
+                    <p className="text-foreground font-medium mb-2">
+                      {edu.position}
+                    </p>
+
+                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mb-3">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {edu.duration}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {edu.location}
+                      </span>
+                    </div>
+
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {edu.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-border/30">
+                      {edu.technologies.map((tech) => (
+                        <Badge 
+                          key={tech} 
+                          variant="secondary" 
+                          className="text-xs bg-purple-500/20"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
                     </div>
                   </div>
                 </div>

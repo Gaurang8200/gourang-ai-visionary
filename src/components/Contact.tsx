@@ -3,28 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Linkedin, Mail, Phone, MapPin, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MapPin, Send, ArrowRight, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useMousePosition } from "@/hooks/useMouseParallax";
+import AnimatedCharacter from "./AnimatedCharacter";
 
 const Contact = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const { smoothPosition } = useMousePosition();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setIsInView(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -42,22 +46,19 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     toast({
       title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon!",
+      description: "Thank you for reaching out. I'll get back to you soon!",
     });
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: ""
-    });
+    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(false);
   };
 
   const contactInfo = [
@@ -85,164 +86,224 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/Gaurang8200?tab=repositories",
-      color: "hover:text-foreground"
+      href: "https://github.com/Gaurang8200",
+      color: "hover:text-foreground hover:bg-primary/20"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "www.linkedin.com/in/gourangkumar-n-monashara-b77972141",
-      color: "hover:text-blue-400"
+      href: "https://www.linkedin.com/in/gourangkumar-n-monashara-b77972141",
+      color: "hover:text-blue-400 hover:bg-primary/20"
     },
     {
       icon: Mail,
       label: "Email",
       href: "mailto:monashragaurang6@gmail.com",
-      color: "hover:text-red-400"
+      color: "hover:text-red-400 hover:bg-primary/20"
     }
   ];
 
   return (
-    <section id="contact" className="py-20 px-6" ref={sectionRef}>
-      <div className="container mx-auto max-w-6xl">
-        <div
-          className={`transition-smooth duration-1000 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+    <section 
+      id="contact" 
+      className="relative py-32 px-6"
+      ref={sectionRef}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+      
+      {/* Glow effects */}
+      <div className="absolute pointer-events-none">
+        <div 
+          className="absolute w-[500px] h-[500px] rounded-full bg-cyan-500/5 blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{
+            transform: `translate(-50%, -50%) translate(${smoothPosition.x * 25}px, ${smoothPosition.y * 25}px)`,
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        {/* Section header - scroll animation */}
+        <div 
+          className={`text-center mb-16 transition-all duration-700 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Let's build something amazing together
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <Card className="glass-card border-border/50">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold">Send a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Input
-                        name="name"
-                        placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="glass border-border/50 focus:border-primary/50"
-                      />
-                    </div>
-                    <div>
-                      <Input
-                        name="email"
-                        type="email"
-                        placeholder="Your Email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="glass border-border/50 focus:border-primary/50"
-                      />
-                    </div>
-                  </div>
-                  
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <Card 
+            className={`glass-card border-border/30 transition-all duration-700 delay-200 ${
+              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+            style={{
+              transform: `perspective(1000px) rotateY(${smoothPosition.x * 2}deg)`,
+              transition: "transform 0.3s ease-out",
+            }}
+          >
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-cyan-400" />
+                Send a Message
+              </CardTitle>
+              <p className="text-muted-foreground text-sm">
+                Have a project in mind? Let's discuss.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Input
-                      name="subject"
-                      placeholder="Subject"
-                      value={formData.subject}
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="glass border-border/50 focus:border-primary/50"
+                      className="glass border-border/30 focus:border-cyan-500/50"
                     />
                   </div>
-                  
                   <div>
-                    <Textarea
-                      name="message"
-                      placeholder="Your Message"
-                      rows={6}
-                      value={formData.message}
+                    <Input
+                      name="email"
+                      type="email"
+                      placeholder="Your Email"
+                      value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="glass border-border/50 focus:border-primary/50 resize-none"
+                      className="glass border-border/30 focus:border-cyan-500/50"
                     />
                   </div>
-                  
-                  <Button
-                    type="submit"
-                    variant="neon"
-                    size="lg"
-                    className="w-full animate-pulse-glow"
-                  >
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
+                </div>
+                
+                <div>
+                  <Input
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className="glass border-border/30 focus:border-cyan-500/50"
+                  />
+                </div>
+                
+                <div>
+                  <Textarea
+                    name="message"
+                    placeholder="Your Message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    className="glass border-border/30 focus:border-cyan-500/50 resize-none"
+                  />
+                </div>
+                
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full group"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin" />
+                      Sending...
+                    </span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          {/* Contact Information with Animated Character */}
+          <div className={`space-y-6 transition-all duration-700 delay-300 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}>
+            {/* Animated Character */}
+            <div className="flex justify-center lg:justify-start mb-4">
+              <AnimatedCharacter type="wave" className="scale-150" />
+            </div>
+
+            {/* Contact Info Card */}
+            <Card className="glass-card border-border/30">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold">Contact Information</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {contactInfo.map((info) => (
+                  <div key={info.label} className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                      <info.icon className="w-5 h-5 text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">{info.label}</p>
+                      {info.href !== "#" ? (
+                        <a
+                          href={info.href}
+                          className="text-foreground hover:text-cyan-400 transition-colors"
+                          target={info.href.startsWith('mailto:') ? '_self' : '_blank'}
+                          rel={info.href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="text-foreground">{info.value}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {contactInfo.map((info) => (
-                    <div key={info.label} className="flex items-center space-x-4">
-                      <div className="w-12 h-12 glass rounded-full flex items-center justify-center glow-blue">
-                        <info.icon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{info.label}</p>
-                        {info.href !== "#" ? (
-                          <a
-                            href={info.href}
-                            className="text-foreground hover:text-primary transition-smooth cursor-pointer underline"
-                            target={info.href.startsWith('mailto:') ? '_self' : '_blank'}
-                            rel={info.href.startsWith('mailto:') ? '' : 'noopener noreferrer'}
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-foreground">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
+            {/* Social Links */}
+            <Card className="glass-card border-border/30">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold">Connect With Me</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-3 mb-4">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-12 h-12 rounded-lg glass flex items-center justify-center transition-all group ${social.color}`}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
                   ))}
-                </CardContent>
-              </Card>
+                </div>
+                
+                <p className="text-muted-foreground leading-relaxed">
+                  I'm always open to discussing new opportunities, innovative projects, 
+                  or potential collaborations in AI, ML, and Computer Vision.
+                </p>
 
-              {/* Social Links */}
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">Connect With Me</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-4">
-                    {socialLinks.map((social) => (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 glass rounded-full flex items-center justify-center hover:glow-blue transition-smooth group"
-                      >
-                        <social.icon className={`h-5 w-5 text-muted-foreground group-hover:text-primary transition-smooth`} />
-                      </a>
-                    ))}
-                  </div>
-                  
-                  <p className="text-muted-foreground mt-4 leading-relaxed">
-                    I'm always interested in discussing new opportunities, innovative projects, 
-                    or potential collaborations in AI, ML, and Computer Vision. Feel free to reach out!
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+                <div className="mt-4 pt-4 border-t border-border/30">
+                  <a
+                    href="mailto:monashragaurang6@gmail.com"
+                    className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                  >
+                    <span>Let's talk</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

@@ -1,13 +1,20 @@
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
+import { ArrowDown, Github, Linkedin, Mail, Sparkles, Code, Brain, Cpu } from "lucide-react";
+import { ParticleField, OrbitalRings } from "./ParticleField";
 import TypewriterText from "./TypewriterText";
-import heroBg from "@/assets/hero-bg.jpg";
-
+import { useMousePosition } from "@/hooks/useMouseParallax";
+import AnimatedCharacter from "./AnimatedCharacter";
 
 const Hero = () => {
-  const { theme } = useTheme();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { smoothPosition } = useMousePosition();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scrollToNext = () => {
     const aboutSection = document.querySelector("#about");
@@ -17,111 +24,162 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Video Background with better error handling */}
-      <div className="absolute inset-0 w-full h-full">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          preload="metadata"
-          poster={heroBg}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'brightness(0.6) contrast(1.2) saturate(1.1)' }}
-          onError={(e) => {
-            console.error('Hero video error:', e.currentTarget.error);
-          }}
-          onLoadStart={() => {
-            console.log('Video started loading');
-          }}
-          onCanPlay={() => {
-            console.log('Video can play');
+    <section 
+      ref={heroRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+    >
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/20" />
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-50" />
+      
+      {/* Particle field background */}
+      <ParticleField />
+      
+      {/* Orbital rings */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div 
+          className="absolute w-[500px] h-[500px] lg:w-[700px] lg:h-[700px] opacity-30"
+          style={{
+            transform: `translate(${smoothPosition.x * 30}px, ${smoothPosition.y * 30}px)`,
+            transition: "transform 0.3s ease-out",
           }}
         >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-          
-          Your browser does not support the video tag.
-        </video>
-        {/* Fallback background when video doesn't load */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/20 to-background opacity-80"></div>
-        {/* Enhanced overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
-        {/* Subtle tech grid overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+          <OrbitalRings />
         </div>
       </div>
-      {/* Clean background without particles */}
-      <div className="absolute inset-0 pointer-events-none z-10"></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-lg text-muted-foreground">I'm</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-              <TypewriterText 
-                text="Gourangkumar\nMonashara" 
-                className="gradient-text"
-                typingSpeed={120}
-                deletingSpeed={80}
-                pauseDuration={1500}
-              />
+      {/* Gradient orbs */}
+      <div className="absolute pointer-events-none">
+        <div 
+          className="absolute w-[400px] h-[400px] rounded-full bg-cyan-500/5 blur-3xl -top-20 -left-40"
+          style={{
+            transform: `translate(${smoothPosition.x * -20}px, ${smoothPosition.y * -20}px)`,
+            transition: "transform 0.5s ease-out",
+          }}
+        />
+        <div 
+          className="absolute w-[300px] h-[300px] rounded-full bg-purple-500/5 blur-3xl bottom-20 right-0"
+          style={{
+            transform: `translate(${smoothPosition.x * 30}px, ${smoothPosition.y * 30}px)`,
+            transition: "transform 0.5s ease-out",
+          }}
+        />
+      </div>
+
+      {/* Main content with fade-in animation */}
+      <div 
+        className={`relative z-10 text-center px-6 transition-all duration-1000 ${
+          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <div className="max-w-5xl mx-auto">
+          {/* Badge */}
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass text-sm text-muted-foreground animate-fade-in-up"
+            style={{
+              transform: `translate(${smoothPosition.x * 10}px, ${smoothPosition.y * 10}px)`,
+              transition: "transform 0.3s ease-out",
+            }}
+          >
+            <Sparkles className="w-4 h-4 text-cyan-400" />
+            <span className="hidden sm:inline">AI & Computer Vision Engineer</span>
+            <span className="sm:hidden">AI Engineer</span>
+          </div>
+
+          {/* Main headline */}
+          <div className="relative mb-6">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
+              <span className="block text-muted-foreground text-xl md:text-2xl lg:text-3xl font-normal mb-4">
+                Hello, I'm
+              </span>
+              <div className="gradient-text inline-block">
+                <TypewriterText 
+                  text="Gourangkumar\nMonashara" 
+                  typingSpeed={100}
+                  deletingSpeed={60}
+                  pauseDuration={2000}
+                  className="leading-tight"
+                />
+              </div>
             </h1>
           </div>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            AI, ML & Computer Vision Engineer
-          </p>
-          
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            Crafting intelligent solutions with cutting-edge machine learning and computer vision technologies
+
+          {/* Subtitle */}
+          <div className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4 font-light animate-fade-in-up delay-200">
+            Building the future with <span className="text-cyan-400">intelligent systems</span>
+          </div>
+
+          {/* Description */}
+          <p className="text-lg text-muted-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-300">
+            Specializing in AI, Machine Learning, and Computer Vision. 
+            Creating cutting-edge solutions that bridge the gap between human intelligence and machine capability.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up delay-400">
             <Button
-              variant="neon"
               size="lg"
               onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="animate-pulse-glow"
+              className="btn-glass text-lg px-8 py-6 hover:scale-105 transition-transform"
             >
+              <Code className="w-5 h-5 mr-2" />
               View Projects
             </Button>
             <Button
-              variant="glass"
               size="lg"
+              variant="ghost"
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="text-lg px-8 py-6"
             >
+              <Mail className="w-5 h-5 mr-2" />
               Contact Me
             </Button>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-6 mb-12 animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <Button variant="ghost" size="icon" className="hover:glow-blue transition-smooth">
-              <Github className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hover:glow-blue transition-smooth">
-              <Linkedin className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hover:glow-blue transition-smooth">
-              <Mail className="h-5 w-5" />
-            </Button>
+          <div className="flex justify-center gap-6 mb-16 animate-fade-in-up delay-500">
+            <a
+              href="https://github.com/Gaurang8200"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/20 transition-all group"
+            >
+              <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gourangkumar-n-monashara-b77972141"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-blue-400 hover:bg-primary/20 transition-all group"
+            >
+              <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </a>
+            <a
+              href="mailto:monashragaurang6@gmail.com"
+              className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-red-400 hover:bg-primary/20 transition-all group"
+            >
+              <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </a>
           </div>
 
-          {/* Scroll Indicator */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={scrollToNext}
-            className="animate-bounce hover:glow-blue transition-smooth animate-fade-in"
-            style={{ animationDelay: "1s" }}
-          >
-            <ArrowDown className="h-5 w-5" />
-          </Button>
+          {/* Scroll indicator */}
+          <div className="flex flex-col items-center animate-fade-in-up delay-700">
+            <button
+              onClick={scrollToNext}
+              className="text-muted-foreground hover:text-foreground transition-colors group"
+            >
+              <ArrowDown className="w-6 h-6 animate-bounce group-hover:translate-y-1 transition-transform" />
+            </button>
+            <span className="text-xs text-muted-foreground/50 mt-2">Scroll to explore</span>
+          </div>
         </div>
+      </div>
+
+      {/* Animated Character on right side */}
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:block">
+        <AnimatedCharacter type="code" className="scale-125" />
       </div>
     </section>
   );
