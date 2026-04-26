@@ -98,7 +98,7 @@ const Experience = () => {
             isInView ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-title-glow">
             My <span className="gradient-text">Journey</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">

@@ -89,7 +89,7 @@ const Hero = () => {
           </div>
 
           {/* Main headline */}
-          <div className="relative mb-6">
+          <div className="relative mb-6 animate-title-glow">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
               <span className="block text-muted-foreground text-xl md:text-2xl lg:text-3xl font-normal mb-4">
                 Hello, I'm
