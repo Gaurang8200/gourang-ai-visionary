@@ -164,9 +164,9 @@ const Experience = () => {
                     }}
                   >
                     {/* Connector to track */}
-                    <div className={`absolute top-1/2 w-8 h-0.5 bg-cyan-500/50 ${
-                      index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
-                    }`} />
+                    <div className="absolute top-1/2 w-8 h-0.5 bg-cyan-500/50" 
+                      style={index % 2 === 0 ? { right: 0, transform: 'translateX(100%)' } : { left: 0, transform: 'translateX(-100%)' }} 
+                    />
                     
                     <div className="flex items-start justify-between mb-3">
                       <Building className="w-5 h-5 text-cyan-400" />
@@ -280,9 +280,9 @@ const Experience = () => {
                       transform: `perspective(1000px) rotateY(${index % 2 === 0 ? -5 : 5}deg)`,
                     }}
                   >
-                    <div className="absolute top-1/2 w-8 h-0.5 bg-purple-500/50 ${
-                      index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
-                    }` />
+                    <div className="absolute top-1/2 w-8 h-0.5 bg-purple-500/50" 
+                      style={index % 2 === 0 ? { right: 0, transform: 'translateX(100%)' } : { left: 0, transform: 'translateX(-100%)' }} 
+                    />
                     
                     <div className="flex items-start justify-between mb-3">
                       <GraduationCap className="w-5 h-5 text-purple-400" />
