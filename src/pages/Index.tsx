@@ -466,23 +466,93 @@ function SkillsSection() {
   );
 }
 
-/* ─── PROJECTS ──────────────────────────────────────────────── */
-function ProjectsSection() {
-  const ref = useRef<HTMLElement>(null);
+/* ─── 3D TILT PROJECT CARD ──────────────────────────────────── */
+function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const shineRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".proj-card").forEach((card, i) => {
-        gsap.from(card, {
-          opacity: 0, y: 70, duration: 1, delay: i * 0.15, ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 87%", toggleActions: "play none none reverse" },
-        });
+    const card = cardRef.current;
+    const inner = innerRef.current;
+    const shine = shineRef.current;
+    if (!card || !inner || !shine) return;
+    if (window.matchMedia("(max-width: 768px)").matches) return;
+
+    const onMove = (e: MouseEvent) => {
+      const r = card.getBoundingClientRect();
+      const xPct = (e.clientX - r.left) / r.width  - 0.5;
+      const yPct = (e.clientY - r.top)  / r.height - 0.5;
+      gsap.to(inner, {
+        rotateY: xPct * 12, rotateX: yPct * -10,
+        duration: 0.4, ease: "power2.out", transformPerspective: 1200,
       });
-    }, ref);
-    return () => ctx.revert();
+      shine.style.background =
+        `radial-gradient(circle at ${(xPct + 0.5) * 100}% ${(yPct + 0.5) * 100}%, rgba(0,212,255,0.18), transparent 50%)`;
+    };
+    const onLeave = () => {
+      gsap.to(inner, { rotateY: 0, rotateX: 0, duration: 0.7, ease: "power2.out" });
+      shine.style.background = "transparent";
+    };
+    card.addEventListener("mousemove", onMove);
+    card.addEventListener("mouseleave", onLeave);
+    return () => {
+      card.removeEventListener("mousemove", onMove);
+      card.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    gsap.from(cardRef.current, {
+      opacity: 0, y: 70, duration: 1, ease: "power3.out",
+      scrollTrigger: { trigger: cardRef.current, start: "top 87%", toggleActions: "play none none reverse" },
+    });
   }, []);
 
   return (
-    <section ref={ref} id="projects" className="relative py-28 px-8 z-10">
+    <div ref={cardRef} className="proj-card" style={{ perspective: "1200px" }}>
+      <div ref={innerRef} className="group relative border border-white/[0.07] hover:border-[#00d4ff]/40 overflow-hidden transition-colors duration-300"
+        style={{
+          background: "rgba(255,255,255,0.02)",
+          transformStyle: "preserve-3d",
+          boxShadow: "0 20px 60px -20px rgba(0,0,0,0.5)",
+        }}>
+        {/* Mouse-tracked shine layer */}
+        <div ref={shineRef} className="absolute inset-0 pointer-events-none transition-opacity duration-300" style={{ background: "transparent" }} />
+
+        <div className="h-44 flex items-center justify-center relative border-b border-white/[0.05] overflow-hidden">
+          <div className="font-['Bebas_Neue'] text-[5rem] text-white/[0.05] tracking-wide group-hover:text-[#00d4ff]/15 group-hover:scale-110 transition-all duration-500"
+               style={{ transform: "translateZ(30px)" }}>
+            {p.icon}
+          </div>
+          <span className="absolute top-4 left-5 font-mono text-[0.6rem] tracking-[0.2em] text-[#00d4ff]/50">{p.num}</span>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[rgba(3,3,10,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+        <div className="p-6" style={{ transform: "translateZ(20px)" }}>
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {p.tags.map((t) => (
+              <span key={t} className="px-2 py-0.5 text-[0.65rem] bg-[#00d4ff]/[0.08] border border-[#00d4ff]/20 text-[#00d4ff]">{t}</span>
+            ))}
+          </div>
+          <h3 className="font-['Bebas_Neue'] text-xl text-white mb-3 tracking-wide">{p.title}</h3>
+          <p className="text-[0.82rem] text-[#70708a] leading-relaxed">{p.desc}</p>
+          <a href={p.link} className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase text-[#00d4ff] hover:gap-3 transition-all duration-200">
+            {p.linkLabel}
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── PROJECTS ──────────────────────────────────────────────── */
+function ProjectsSection() {
+  return (
+    <section id="projects" className="relative py-28 px-8 z-10">
       <div className="max-w-6xl mx-auto">
         <p className="font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
           <span className="w-10 h-px bg-[#00d4ff]" />Selected Work
@@ -492,33 +562,7 @@ function ProjectsSection() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {PROJECTS.map((p) => (
-            <div key={p.num} className="proj-card group border border-white/[0.07] hover:border-[#00d4ff]/25 hover:-translate-y-2 transition-all duration-400 overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.02)" }}>
-              <div className="h-44 flex items-center justify-center relative border-b border-white/[0.05] overflow-hidden">
-                <div className="font-['Bebas_Neue'] text-[5rem] text-white/[0.05] tracking-wide group-hover:text-[#00d4ff]/10 group-hover:scale-105 transition-all duration-500">
-                  {p.icon}
-                </div>
-                <span className="absolute top-4 left-5 font-mono text-[0.6rem] tracking-[0.2em] text-[#00d4ff]/50">{p.num}</span>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[rgba(3,3,10,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <div className="p-6">
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {p.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 text-[0.65rem] bg-[#00d4ff]/[0.08] border border-[#00d4ff]/20 text-[#00d4ff]">{t}</span>
-                  ))}
-                </div>
-                <h3 className="font-['Bebas_Neue'] text-xl text-white mb-3 tracking-wide">{p.title}</h3>
-                <p className="text-[0.82rem] text-[#70708a] leading-relaxed">{p.desc}</p>
-                <a href={p.link} className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase text-[#00d4ff] hover:gap-3 transition-all duration-200">
-                  {p.linkLabel}
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                    <path d="M7 17L17 7M7 7h10v10" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          ))}
+          {PROJECTS.map((p) => <ProjectCard key={p.num} p={p} />)}
         </div>
       </div>
     </section>
@@ -941,6 +985,36 @@ function ContactSection() {
   );
 }
 
+/* ─── CURSOR GLOW (follows mouse with cyan halo) ───────────── */
+function CursorGlow() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) return;
+    let tx = 0, ty = 0, x = 0, y = 0;
+    const onMove = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; };
+    document.addEventListener("mousemove", onMove);
+    let raf: number;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      x += (tx - x) * 0.18;
+      y += (ty - y) * 0.18;
+      if (ref.current) ref.current.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+    };
+    tick();
+    return () => { document.removeEventListener("mousemove", onMove); cancelAnimationFrame(raf); };
+  }, []);
+  return (
+    <div ref={ref} className="cursor-glow fixed top-0 left-0 pointer-events-none z-[3] hidden md:block"
+      style={{
+        width: 400, height: 400,
+        background: "radial-gradient(circle, rgba(0,212,255,0.15) 0%, rgba(0,212,255,0.05) 30%, transparent 65%)",
+        filter: "blur(15px)",
+        mixBlendMode: "screen",
+      }}
+    />
+  );
+}
+
 /* ─── PARTICLES ─────────────────────────────────────────────── */
 function ParticleCanvas() {
   const cvs = useRef<HTMLCanvasElement>(null);
@@ -1002,6 +1076,7 @@ export default function Index() {
         style={{ background: "radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 70%)", filter: "blur(60px)", animation: "drift2 28s ease-in-out infinite" }} />
 
       <ProgressBar />
+      <CursorGlow />
       <Navigation />
 
       <main className="relative z-10">
