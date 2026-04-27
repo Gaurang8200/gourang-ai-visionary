@@ -43,8 +43,8 @@ const PROJECTS = [
     tags: ["Python", "OpenCV", "TensorFlow", "Jetson Orin"],
     title: "Vision-Based HMI Testing Framework",
     desc: "Two-phase automated testing framework for automotive infotainment and digital cluster systems. Phase 1 uses CNNs, OCR, and object detection on NVIDIA Jetson Orin Nano for open-loop UI validation. Phase 2 integrates a HIL simulator for closed-loop end-to-end testing.",
-    link: "https://saemobilus.sae.org/papers/vision-based-framework-automated-testing-automotive-hmi-systems-using-deep-learning-techniques-2026-26-0571",
-    linkLabel: "SAE Research Paper",
+    link: "#",
+    linkLabel: "Explore Project",
   },
   {
     num: "02",
@@ -66,24 +66,72 @@ const PROJECTS = [
   },
 ];
 
+/* ─── EXPERIENCE: REAL CV DATA ─────────────────────────────── */
 const EXPERIENCE = [
   {
-    date: "2023 — Present",
-    role: "AI/ML & Computer Vision Engineer",
-    company: "AVL Technical Centre Pvt. Ltd., Pune",
-    desc: "Leading development of vision-based automated testing frameworks for automotive HMI, infotainment, and ADAS systems. Designed and deployed deep learning pipelines on edge hardware (NVIDIA Jetson Orin). Published research at the SAE Symposium on International Automotive Technology (SIAT 2026), Pune.",
+    num: "01",
+    company: "BMW Group",
+    role: "AI Engineer",
+    type: "Working Student",
+    period: "Aug 2025 — Present",
+    location: "Munich, Germany",
+    accent: "#0066ff",
+    accent2: "#00d4ff",
+    status: "active",
+    description:
+      "Currently architecting Agentic AI workflows and full-stack LLM applications that automate engineering processes across BMW's enterprise environment.",
+    achievements: [
+      "Designed AI agent workflows using LangChain, LangGraph, ReAct reasoning, and multi-agent orchestration to automate engineering tasks",
+      "Developed pipeline for BMW's replacement tool using Claude Code and Codex, including model tuning, benchmarking, and performance evaluation",
+      "Built full-stack AI applications using FastAPI (backend APIs), Streamlit/React (frontend), with integrated data storage for end-to-end workflows",
+      "Containerized ML and LLM components using Docker and deployed them in Linux environments for reproducibility and testing",
+      "Developed forecasting and predictive analytics models in Python using Pandas and Scikit-Learn for data-driven planning and optimization",
+      "Built a full-stack RAG application on Google Vertex AI with API layer, Streamlit frontend, and backend data pipeline for enterprise Q&A",
+      "Designed LLM-based agent workflows using Llama and GPT-4.1 to extract KPIs, identify irregular patterns, and generate technical insights",
+      "Tuned LLM prompts and agent workflows to reduce hallucinations and enforce deterministic behavior in signal and context analysis",
+      "Worked cross-functionally with technical and non-technical teams, transforming business needs into AI assets and Agentic workflows",
+    ],
+    stack: ["LangChain", "LangGraph", "GPT-4.1", "Llama", "FastAPI", "Vertex AI", "Docker", "React", "Streamlit", "Claude Code", "Codex", "ReAct"],
   },
   {
-    date: "2021 — 2023",
-    role: "Machine Learning Engineer",
-    company: "Previous Organisation",
-    desc: "Developed and deployed computer vision models for industrial quality inspection. Built end-to-end ML pipelines from data collection and annotation through training, optimization, and edge deployment. Reduced defect escape rate by 35% through automated visual QA.",
+    num: "02",
+    company: "CREAT GmbH",
+    role: "Software Engineer",
+    type: "Working Student",
+    period: "Sep 2023 — Jul 2025",
+    location: "Ingolstadt, Germany",
+    accent: "#ff6b00",
+    accent2: "#ffaa44",
+    status: "past",
+    description:
+      "Architected LLM-powered automation systems and scalable microservices for AI-driven validation workflows in cloud TMS environments.",
+    achievements: [
+      "Developed LLM- and RAG-based automation systems with GPT-4, LangChain, and FastAPI for semantic test data analysis and AI-driven validation workflow",
+      "Implemented containerized microservices with Docker, FastAPI, and Kubernetes for scalable deployment of AI modules in DevOps environments",
+      "Built RAG pipelines and knowledge graph-based agents for intelligent document retrieval and contextual reasoning in cloud TMS environments",
+      "Implemented ReAct agents and modular microservices under Docker and RESTful APIs for dynamic knowledge processing in cloud TMS environments",
+      "Utilized TensorFlow, PyTorch, Docker, and Git for end-to-end AI pipeline development, CI/CD integration, model deployment, and test automation",
+      "Collaborated with cross-functional teams in implementing AI roadmaps and integrating AI into business processes following Agile/Scrum methodology",
+    ],
+    stack: ["GPT-4", "LangChain", "FastAPI", "Kubernetes", "Docker", "RAG", "PyTorch", "TensorFlow", "Knowledge Graphs", "ReAct", "REST APIs", "CI/CD"],
   },
   {
-    date: "2017 — 2021",
-    role: "B.Tech — Computer Science & Engineering",
-    company: "University",
-    desc: "Specialized in Artificial Intelligence and Computer Vision. Final-year project on deep learning-based object detection for embedded systems. Active participant in robotics and AI research clubs.",
+    num: "03",
+    company: "LAB — THI",
+    role: "AI Research Assistant",
+    type: "Working Student",
+    period: "Nov 2023 — Aug 2024",
+    location: "Ingolstadt, Germany",
+    accent: "#7b5ea7",
+    accent2: "#bf94ff",
+    status: "past",
+    description:
+      "Researched and prototyped agentic AI systems for autonomous decision-making and multi-agent behavior planning in robotic environments.",
+    achievements: [
+      "Researched and implemented agentic AI systems for autonomous decision logic, multi-agent coordination, and behavior planning in robotic environments",
+      "Integrated AI solutions into Agile DevOps and MLOps pipelines, collaborating with cross-functional teams from AI Labs for productive deployment",
+    ],
+    stack: ["Agentic AI", "Multi-Agent Systems", "Robotics", "MLOps", "DevOps", "Python", "Behavior Planning", "Research"],
   },
 ];
 
@@ -105,7 +153,6 @@ function ThreeBackground() {
 
     const group = new THREE.Group();
 
-    // Central icosahedron
     const coreGeo = new THREE.IcosahedronGeometry(1.3, 1);
     const coreMat = new THREE.MeshStandardMaterial({
       color: 0x00d4ff, metalness: 0.9, roughness: 0.1,
@@ -116,17 +163,14 @@ function ThreeBackground() {
     const wireMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, wireframe: true, transparent: true, opacity: 0.22 });
     const wire = new THREE.Mesh(coreGeo.clone(), wireMat);
 
-    // Outer shell
     const shellGeo = new THREE.IcosahedronGeometry(2.1, 1);
     const shellWire = new THREE.Mesh(shellGeo, new THREE.MeshBasicMaterial({ color: 0xff6b00, wireframe: true, transparent: true, opacity: 0.07 }));
 
-    // Rings
     const r1 = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.008, 8, 80), new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.35 }));
     r1.rotation.x = Math.PI / 4;
     const r2 = new THREE.Mesh(new THREE.TorusGeometry(2.8, 0.005, 8, 80), new THREE.MeshBasicMaterial({ color: 0xff6b00, transparent: true, opacity: 0.2 }));
     r2.rotation.x = -Math.PI / 3; r2.rotation.y = Math.PI / 5;
 
-    // Satellite nodes
     const nodeMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff });
     for (let i = 0; i < 10; i++) {
       const nd = new THREE.Mesh(new THREE.SphereGeometry(0.04, 6, 6), nodeMat);
@@ -174,7 +218,6 @@ function ThreeBackground() {
       frame++;
       const s = scrollPct;
 
-      // Section-based position
       if (s < 0.2) { group.position.x = gsap.utils.interpolate(0, 0, s / 0.2); targetZ = gsap.utils.interpolate(7, 6, s / 0.2); }
       else if (s < 0.45) { const t = (s - 0.2) / 0.25; group.position.x = gsap.utils.interpolate(0, -2.5, t); targetZ = gsap.utils.interpolate(6, 9, t); }
       else if (s < 0.65) { const t = (s - 0.45) / 0.2; group.position.x = gsap.utils.interpolate(-2.5, 2.5, t); targetZ = gsap.utils.interpolate(9, 8, t); }
@@ -205,12 +248,7 @@ function ThreeBackground() {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none z-0"
-    />
-  );
+  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none z-0" />;
 }
 
 /* ─── NAV ───────────────────────────────────────────────────── */
@@ -223,7 +261,7 @@ function Navigation() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 transition-all duration-500 ${scrolled ? "bg-[rgba(3,3,10,0.85)] backdrop-blur-xl border-b border-white/[0.06]" : ""}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-5 transition-all duration-500 ${scrolled ? "bg-[rgba(3,3,10,0.85)] backdrop-blur-xl border-b border-white/[0.06]" : ""}`}>
       <a href="#" className="font-mono text-sm tracking-[0.3em] text-[#00d4ff] uppercase hover:text-white transition-colors">GM</a>
       <ul className="hidden md:flex gap-10">
         {["About", "Skills", "Projects", "Experience", "Contact"].map((s) => (
@@ -311,7 +349,7 @@ function AboutSection() {
   }, []);
 
   const stats = [
-    { n: "3+", label: "Years in Automotive AI" },
+    { n: "3+", label: "Years in AI" },
     { n: "20+", label: "AI Projects Shipped" },
     { n: "2026", label: "SAE SIAT Published" },
     { n: "∞", label: "Problems to Solve" },
@@ -320,7 +358,6 @@ function AboutSection() {
   return (
     <section ref={ref} id="about" className="relative min-h-screen flex items-center py-28 px-8 z-10">
       <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-20 items-center">
-        {/* Text */}
         <div>
           <p className="about-reveal font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
             <span className="w-10 h-px bg-[#00d4ff] inline-block" /> About Me
@@ -328,26 +365,24 @@ function AboutSection() {
           <h2 className="about-reveal font-['Bebas_Neue'] text-[clamp(2.5rem,5vw,5rem)] leading-tight text-white mb-8">
             Building Intelligent<br /><span className="text-[#00d4ff]">Automotive</span> Systems
           </h2>
-          <p className="about-reveal text-[1.15rem] font-light text-white/80 leading-[1.9] mb-5"
-            style={{ background: "linear-gradient(to right, #e0e0f8, #9090a8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            I'm an AI/ML & Computer Vision Engineer at AVL Technical Centre, where I build intelligence into automotive testing pipelines.
+          <p className="about-reveal text-[1.15rem] font-light text-white/80 leading-[1.9] mb-5">
+            AI/ML Engineer building intelligence into testing pipelines and engineering automation.
           </p>
-          <p className="about-reveal text-sm text-[#7070889] leading-[1.9] mb-5 text-[#80809a]">
-            My work sits at the intersection of deep learning and automotive engineering — building systems that see, reason, and validate. From CNNs classifying infotainment screens to HIL simulators testing ADAS behavior end-to-end, I engineer AI that meets automotive safety standards.
+          <p className="about-reveal text-sm text-[#80809a] leading-[1.9] mb-5">
+            My work sits at the intersection of deep learning and engineering — building systems that see, reason, and validate. From CNNs classifying infotainment screens to LLM agents automating BMW workflows, I engineer AI that meets enterprise standards.
           </p>
           <p className="about-reveal text-sm text-[#80809a] leading-[1.9]">
-            I published research at the SAE Symposium on International Automotive Technology (SIAT 2026) in Pune, presenting a vision-based framework that automates HMI testing for digital clusters and infotainment systems. My mission: make automotive AI safer, faster, and smarter.
+            Currently pursuing a Master's in AI at Technische Hochschule Ingolstadt while working as an AI Engineer at BMW Group, Munich.
           </p>
           <div className="about-reveal grid grid-cols-2 gap-px mt-10 border border-white/[0.07]">
             {stats.map((s, i) => (
-              <div key={i} className="p-5 border-b border-r border-white/[0.07] last:border-r-0 odd:last:border-r-0">
+              <div key={i} className="p-5 border-b border-r border-white/[0.07]">
                 <div className="font-['Bebas_Neue'] text-4xl text-[#00d4ff] leading-none">{s.n}</div>
                 <div className="text-[0.7rem] tracking-widest uppercase text-[#5a5a75] mt-1.5">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
-        {/* Visual */}
         <div className="about-reveal hidden md:flex items-center justify-center relative">
           {[320, 260, 200].map((size, i) => (
             <div key={i} className="absolute rounded-full border border-white/5"
@@ -474,9 +509,8 @@ function ProjectsSection() {
                   ))}
                 </div>
                 <h3 className="font-['Bebas_Neue'] text-xl text-white mb-3 tracking-wide">{p.title}</h3>
-                <p className="text-[0.82rem] text-[#7070889] leading-relaxed text-[#70708a]">{p.desc}</p>
-                <a href={p.link} target={p.link !== "#" ? "_blank" : undefined} rel="noreferrer"
-                  className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase text-[#00d4ff] hover:gap-3 transition-all duration-200">
+                <p className="text-[0.82rem] text-[#70708a] leading-relaxed">{p.desc}</p>
+                <a href={p.link} className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase text-[#00d4ff] hover:gap-3 transition-all duration-200">
                   {p.linkLabel}
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                     <path d="M7 17L17 7M7 7h10v10" />
@@ -491,42 +525,365 @@ function ProjectsSection() {
   );
 }
 
-/* ─── EXPERIENCE ────────────────────────────────────────────── */
+/* ─── PREMIUM 3D EXPERIENCE CARD ────────────────────────────── */
+type ExpItem = typeof EXPERIENCE[0];
+
+function ExperienceCard({ exp }: { exp: ExpItem }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const glowRef  = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
+
+  // 3D mouse tilt
+  useEffect(() => {
+    const card  = cardRef.current;
+    const inner = innerRef.current;
+    const glow  = glowRef.current;
+    if (!card || !inner || !glow) return;
+    if (window.matchMedia("(max-width: 768px)").matches) return;
+
+    const handleMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const xPct = (e.clientX - rect.left) / rect.width  - 0.5;
+      const yPct = (e.clientY - rect.top)  / rect.height - 0.5;
+      gsap.to(inner, {
+        rotateY: xPct *  6,
+        rotateX: yPct * -5,
+        duration: 0.5, ease: "power2.out", transformPerspective: 1500,
+      });
+      gsap.to(glow, { x: xPct * 80, y: yPct * 80, duration: 0.6, ease: "power2.out" });
+    };
+    const handleLeave = () => {
+      gsap.to(inner, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "power2.out" });
+      gsap.to(glow,  { x: 0, y: 0, duration: 0.8, ease: "power2.out" });
+    };
+    card.addEventListener("mousemove", handleMove);
+    card.addEventListener("mouseleave", handleLeave);
+    return () => {
+      card.removeEventListener("mousemove", handleMove);
+      card.removeEventListener("mouseleave", handleLeave);
+    };
+  }, []);
+
+  // Scroll reveal
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.from(cardRef.current, {
+        opacity: 0, y: 100, rotateX: -10, scale: 0.94,
+        duration: 1.2, ease: "power3.out",
+        scrollTrigger: { trigger: cardRef.current, start: "top 82%", toggleActions: "play none none reverse" },
+      });
+      gsap.from(cardRef.current!.querySelectorAll(".ach-row"), {
+        opacity: 0, x: -30, duration: 0.5, stagger: 0.06, ease: "power2.out",
+        scrollTrigger: { trigger: cardRef.current, start: "top 70%", toggleActions: "play none none reverse" },
+      });
+      gsap.from(cardRef.current!.querySelectorAll(".tech-pill"), {
+        opacity: 0, scale: 0.7, y: 10, duration: 0.4, stagger: 0.03, ease: "back.out(1.4)",
+        scrollTrigger: { trigger: cardRef.current, start: "top 60%", toggleActions: "play none none reverse" },
+      });
+    }, cardRef);
+    return () => ctx.revert();
+  }, []);
+
+  const visibleAch = expanded ? exp.achievements : exp.achievements.slice(0, 3);
+  const hiddenCount = exp.achievements.length - 3;
+
+  return (
+    <div ref={cardRef} className="relative" style={{ perspective: "1500px" }}>
+      {/* Timeline dot */}
+      <div className="absolute -left-[34px] md:-left-[42px] top-12 z-20 hidden sm:block">
+        <div className="relative w-3 h-3 rounded-full"
+             style={{ background: exp.accent, boxShadow: `0 0 18px ${exp.accent}, 0 0 6px ${exp.accent2}` }}>
+          {exp.status === "active" && (
+            <div className="absolute inset-0 rounded-full animate-ping"
+                 style={{ background: exp.accent, opacity: 0.55 }} />
+          )}
+        </div>
+      </div>
+
+      <div ref={innerRef} className="relative" style={{ transformStyle: "preserve-3d" }}>
+        {/* Glow layer */}
+        <div ref={glowRef} className="absolute inset-0 rounded-2xl pointer-events-none"
+             style={{
+               background: `radial-gradient(ellipse at 30% 20%, ${exp.accent}22 0%, transparent 60%)`,
+               filter: "blur(40px)",
+               transform: "translateZ(-100px)",
+             }} />
+
+        {/* Card surface */}
+        <div className="relative rounded-2xl overflow-hidden border backdrop-blur-xl"
+             style={{
+               background: `linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 50%, ${exp.accent}06 100%)`,
+               borderColor: `${exp.accent}20`,
+               boxShadow: `0 30px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px ${exp.accent}08, inset 0 1px 0 rgba(255,255,255,0.05)`,
+             }}>
+          {/* Top accent line */}
+          <div className="absolute top-0 left-0 right-0 h-px"
+               style={{ background: `linear-gradient(to right, transparent, ${exp.accent}, transparent)` }} />
+
+          {/* Corner accents */}
+          {[
+            { pos: "top-3 left-3", brd: "border-t border-l" },
+            { pos: "top-3 right-3", brd: "border-t border-r" },
+            { pos: "bottom-3 left-3", brd: "border-b border-l" },
+            { pos: "bottom-3 right-3", brd: "border-b border-r" },
+          ].map((c, i) => (
+            <div key={i} className={`absolute ${c.pos} ${c.brd} w-3 h-3`} style={{ borderColor: `${exp.accent}50` }} />
+          ))}
+
+          <div className="p-7 md:p-10">
+            {/* Header */}
+            <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
+              <div className="flex items-center gap-4">
+                <div className="font-mono text-[0.7rem] tracking-[0.3em] uppercase font-bold"
+                     style={{ color: exp.accent }}>
+                  {exp.num}
+                </div>
+                <div className="w-8 h-px" style={{ background: exp.accent }} />
+                {exp.status === "active" && (
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-full"
+                       style={{ background: `${exp.accent}15`, border: `1px solid ${exp.accent}40` }}>
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                            style={{ background: exp.accent }} />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5"
+                            style={{ background: exp.accent }} />
+                    </span>
+                    <span className="text-[0.6rem] tracking-[0.2em] uppercase font-medium"
+                          style={{ color: exp.accent }}>Active</span>
+                  </div>
+                )}
+              </div>
+              <div className="font-mono text-[0.7rem] tracking-[0.2em] uppercase"
+                   style={{ color: exp.accent2 }}>
+                {exp.period}
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-12">
+              {/* LEFT */}
+              <div className="md:border-r md:pr-8" style={{ borderColor: `${exp.accent}15` }}>
+                <h3 className="font-['Bebas_Neue'] text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[0.9] tracking-wider mb-3"
+                    style={{
+                      background: `linear-gradient(135deg, #ffffff 0%, ${exp.accent2} 100%)`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}>
+                  {exp.company.split(" ").map((w, i) => (
+                    <span key={i} className="block">{w}</span>
+                  ))}
+                </h3>
+
+                <div className="space-y-1.5 mt-5">
+                  <div className="text-[0.95rem] text-white font-medium">{exp.role}</div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[0.7rem] px-2 py-0.5 rounded-sm font-mono uppercase tracking-wider"
+                          style={{ background: `${exp.accent}12`, color: exp.accent2 }}>
+                      {exp.type}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[0.78rem] text-[#80809a] pt-2">
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    {exp.location}
+                  </div>
+                </div>
+
+                {/* Decorative grid */}
+                <div className="hidden md:block mt-8 relative h-24">
+                  <div className="absolute inset-0 opacity-30"
+                       style={{
+                         backgroundImage: `linear-gradient(90deg, ${exp.accent}30 1px, transparent 1px), linear-gradient(${exp.accent}30 1px, transparent 1px)`,
+                         backgroundSize: "16px 16px",
+                         maskImage: "radial-gradient(ellipse 60% 60% at 30% 40%, black 30%, transparent 70%)",
+                         WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 30% 40%, black 30%, transparent 70%)",
+                       }} />
+                </div>
+              </div>
+
+              {/* RIGHT */}
+              <div>
+                <p className="text-[0.95rem] text-white/85 leading-[1.85] mb-6 font-light">
+                  {exp.description}
+                </p>
+
+                <div className="mb-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-6 h-px" style={{ background: exp.accent }} />
+                    <span className="font-mono text-[0.62rem] tracking-[0.3em] uppercase"
+                          style={{ color: exp.accent2 }}>
+                      Key Achievements
+                    </span>
+                  </div>
+                  <ul className="space-y-2.5">
+                    {visibleAch.map((a, i) => (
+                      <li key={i} className="ach-row flex gap-3 text-[0.83rem] leading-[1.7] text-[#b8b8c8]">
+                        <span className="mt-2 flex-shrink-0 w-1 h-1 rounded-full"
+                              style={{ background: exp.accent, boxShadow: `0 0 6px ${exp.accent}` }} />
+                        <span>{a}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {hiddenCount > 0 && (
+                    <button
+                      onClick={() => setExpanded(!expanded)}
+                      className="mt-4 inline-flex items-center gap-2 text-[0.72rem] tracking-[0.15em] uppercase font-medium hover:gap-3 transition-all duration-200"
+                      style={{ color: exp.accent2 }}>
+                      {expanded ? "Show Less" : `+ ${hiddenCount} More Achievements`}
+                      <svg className={`w-3 h-3 transition-transform ${expanded ? "rotate-180" : ""}`}
+                           viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-6 h-px" style={{ background: exp.accent }} />
+                    <span className="font-mono text-[0.62rem] tracking-[0.3em] uppercase"
+                          style={{ color: exp.accent2 }}>
+                      Tech Stack
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.stack.map((t) => (
+                      <span key={t}
+                            className="tech-pill px-2.5 py-1 text-[0.7rem] font-medium tracking-wide rounded-sm transition-all duration-200 hover:-translate-y-0.5 cursor-default"
+                            style={{
+                              background: `${exp.accent}10`,
+                              border: `1px solid ${exp.accent}25`,
+                              color: exp.accent2,
+                            }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── PREMIUM EXPERIENCE SECTION ────────────────────────────── */
 function ExperienceSection() {
   const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".exp-item").forEach((el, i) => {
-        gsap.from(el, {
-          opacity: 0, x: -40, duration: 0.9, delay: i * 0.15, ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
-        });
+      gsap.from(".exp-header", {
+        opacity: 0, y: 40, duration: 1, stagger: 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: ".exp-header", start: "top 85%", toggleActions: "play none none reverse" },
+      });
+      gsap.utils.toArray<HTMLElement>(".exp-stat-num").forEach((el) => {
+        const text = el.textContent || "";
+        const num = parseInt(text.replace(/\D/g, ""));
+        const suffix = text.replace(/[\d]/g, "");
+        if (!isNaN(num)) {
+          ScrollTrigger.create({
+            trigger: el, start: "top 90%",
+            onEnter: () => {
+              gsap.fromTo({ v: 0 }, { v: num }, {
+                duration: 1.5, ease: "power2.out",
+                onUpdate: function () { el.textContent = Math.round((this.targets()[0] as { v: number }).v) + suffix; },
+              });
+            },
+          });
+        }
+      });
+      gsap.from(".exp-timeline-line", {
+        scaleY: 0, transformOrigin: "top center", duration: 2, ease: "power2.out",
+        scrollTrigger: { trigger: ".exp-timeline-wrap", start: "top 70%", end: "bottom 80%", scrub: 1 },
       });
     }, ref);
     return () => ctx.revert();
   }, []);
 
-  return (
-    <section ref={ref} id="experience" className="relative py-28 px-8 z-10">
-      <div className="max-w-4xl mx-auto">
-        <p className="font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
-          <span className="w-10 h-px bg-[#00d4ff]" />Journey
-        </p>
-        <h2 className="font-['Bebas_Neue'] text-[clamp(2.5rem,5vw,5rem)] text-white mb-16 leading-tight">
-          My <span className="text-[#00d4ff]">Experience</span>
-        </h2>
+  const stats = [
+    { n: "3+",  label: "Years Experience" },
+    { n: "3",   label: "Companies" },
+    { n: "20+", label: "AI Projects" },
+    { n: "2",   label: "Countries" },
+  ];
 
-        <div className="relative pl-6 border-l border-white/[0.08]">
-          {EXPERIENCE.map((e, i) => (
-            <div key={i} className="exp-item relative pb-14 last:pb-0">
-              <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full border-2 border-[#00d4ff] bg-[#03030a]"
-                style={{ boxShadow: "0 0 10px rgba(0,212,255,0.6)" }} />
-              <div className="font-mono text-[0.65rem] tracking-[0.2em] text-[#00d4ff] mb-2">{e.date}</div>
-              <h3 className="font-['Bebas_Neue'] text-2xl text-white tracking-wide mb-0.5">{e.role}</h3>
-              <div className="text-sm text-[#5a5a75] mb-4 italic">{e.company}</div>
-              <p className="text-sm text-[#80809a] leading-[1.85] max-w-2xl">{e.desc}</p>
+  return (
+    <section ref={ref} id="experience" className="relative py-32 px-6 md:px-8 z-10 overflow-hidden">
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full pointer-events-none"
+           style={{
+             background: "radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)",
+             filter: "blur(80px)",
+           }} />
+
+      <div className="max-w-6xl mx-auto relative">
+        <div className="text-center mb-20">
+          <p className="exp-header font-mono text-xs tracking-[0.4em] text-[#00d4ff] uppercase mb-6 flex items-center justify-center gap-4">
+            <span className="w-12 h-px bg-[#00d4ff]" />Professional Journey<span className="w-12 h-px bg-[#00d4ff]" />
+          </p>
+          <h2 className="exp-header font-['Bebas_Neue'] text-[clamp(2.8rem,7vw,7rem)] leading-[0.95] tracking-wide mb-5"
+              style={{
+                background: "linear-gradient(135deg, #ffffff 0%, #c0c0d8 50%, #00d4ff 100%)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+              }}>
+            Building Across<br />The <span style={{ color: "#00d4ff" }}>AI Stack</span>
+          </h2>
+          <p className="exp-header text-[clamp(0.9rem,1.4vw,1.05rem)] text-[#9090a8] max-w-2xl mx-auto leading-[1.85] font-light">
+            Three years architecting Agentic AI systems, full-stack LLM applications, and production ML pipelines —
+            from BMW's enterprise environment to research labs at THI.
+          </p>
+        </div>
+
+        <div className="exp-header grid grid-cols-2 md:grid-cols-4 gap-px border border-white/[0.07] mb-24 backdrop-blur-md"
+             style={{ background: "rgba(255,255,255,0.015)" }}>
+          {stats.map((s, i) => (
+            <div key={i} className="px-6 py-7 border-b border-r border-white/[0.07] text-center md:text-left">
+              <div className="exp-stat-num font-['Bebas_Neue'] text-[2.8rem] leading-none mb-1.5 tracking-wider"
+                   style={{
+                     background: "linear-gradient(135deg, #00d4ff, #0066ff)",
+                     WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+                   }}>
+                {s.n}
+              </div>
+              <div className="font-mono text-[0.62rem] tracking-[0.25em] text-[#5a5a75] uppercase">
+                {s.label}
+              </div>
             </div>
           ))}
+        </div>
+
+        <div className="exp-timeline-wrap relative pl-0 sm:pl-10 md:pl-14">
+          <div className="exp-timeline-line absolute left-0 top-2 bottom-0 w-px hidden sm:block"
+               style={{
+                 background: "linear-gradient(to bottom, #00d4ff 0%, #ff6b00 50%, #7b5ea7 100%)",
+                 boxShadow: "0 0 20px rgba(0,212,255,0.3)",
+               }} />
+
+          <div className="space-y-10 md:space-y-14">
+            {EXPERIENCE.map((exp) => (
+              <ExperienceCard key={exp.num} exp={exp} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-20 text-center">
+          <p className="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-[#5a5a75] mb-4">
+            Currently Available · July 2026
+          </p>
+          <a href="#contact"
+             className="inline-flex items-center gap-3 px-8 py-3.5 text-xs tracking-[0.15em] uppercase font-medium border border-[#00d4ff]/40 text-[#00d4ff] hover:bg-[#00d4ff] hover:text-[#03030a] hover:shadow-[0_0_30px_rgba(0,212,255,0.4)] transition-all duration-300 backdrop-blur-sm"
+             style={{ clipPath: "polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))" }}>
+            Let's Build Together
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -558,23 +915,22 @@ function ContactSection() {
           Let's Build<br /><span className="text-[#00d4ff]">Something</span>
         </h2>
         <p className="contact-reveal text-sm text-[#80809a] leading-relaxed mb-10 max-w-md mx-auto">
-          Open to collaborations in automotive AI, computer vision research, and ML engineering roles. Let's talk.
+          Open to AI Engineering and Agentic AI roles in Germany. Available July 2026.
         </p>
 
-        {/* Email */}
-        <a href="mailto:gourangkumar@email.com"
+        <a href="mailto:monashragaurang6@gmail.com"
           className="contact-reveal inline-block font-['Bebas_Neue'] text-[clamp(1.2rem,3vw,2rem)] text-white/80 border-b border-white/10 pb-1 mb-10 hover:text-[#00d4ff] hover:border-[#00d4ff] transition-all duration-300 tracking-wide">
-          gourangkumar@email.com
+          monashragaurang6@gmail.com
         </a>
 
         <div className="contact-reveal flex gap-3 justify-center flex-wrap">
           {[
             { label: "GitHub", href: "https://github.com/Gaurang8200" },
-            { label: "LinkedIn", href: "#" },
-            { label: "SAE Research", href: "https://saemobilus.sae.org/papers/vision-based-framework-automated-testing-automotive-hmi-systems-using-deep-learning-techniques-2026-26-0571" },
+            { label: "LinkedIn", href: "https://linkedin.com/in/gourangkumar-n-m" },
+            { label: "Phone", href: "tel:+4917657713152" },
             { label: "Resume", href: "#" },
           ].map((l) => (
-            <a key={l.label} href={l.href} target={l.href !== "#" ? "_blank" : undefined} rel="noreferrer"
+            <a key={l.label} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
               className="px-5 py-2.5 text-[0.72rem] tracking-[0.1em] uppercase border border-white/[0.08] text-[#70708a] hover:border-[#00d4ff]/40 hover:text-[#00d4ff] transition-all duration-200 backdrop-blur-sm">
               {l.label}
             </a>
@@ -638,16 +994,13 @@ function ProgressBar() {
 export default function Index() {
   return (
     <div className="relative bg-[#03030a] text-white overflow-x-hidden">
-      {/* Backgrounds */}
       <ThreeBackground />
       <ParticleCanvas />
-      {/* Ambient light beams */}
       <div className="fixed -top-40 -left-20 w-[500px] h-[500px] rounded-full pointer-events-none z-[2]"
         style={{ background: "radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%)", filter: "blur(60px)", animation: "drift1 22s ease-in-out infinite" }} />
       <div className="fixed -bottom-20 -right-20 w-[450px] h-[450px] rounded-full pointer-events-none z-[2]"
         style={{ background: "radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 70%)", filter: "blur(60px)", animation: "drift2 28s ease-in-out infinite" }} />
 
-      {/* UI */}
       <ProgressBar />
       <Navigation />
 
@@ -667,7 +1020,7 @@ export default function Index() {
 
       <footer className="relative z-10 border-t border-white/[0.05] py-6 text-center">
         <p className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[#3a3a50]">
-          © 2026 Gourangkumar Monashara — AI, ML & Computer Vision Engineer
+          © 2026 Gourangkumar N Monashara — AI Engineer · Ingolstadt, Germany
         </p>
       </footer>
     </div>
