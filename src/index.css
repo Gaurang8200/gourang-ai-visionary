@@ -24,11 +24,10 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: none;
 }
 
-/* ── Custom Cursor ── */
-body * { cursor: none !important; }
+/* Interactive elements get pointer cursor */
+a, button, [role="button"] { cursor: pointer; }
 
 #gm-cursor {
   position: fixed;
@@ -131,7 +130,5 @@ body::after {
 
 /* ── Mobile fixes ── */
 @media (max-width: 768px) {
-  #gm-cursor, #gm-cursor-ring { display: none; }
-  body { cursor: auto; }
-  body * { cursor: auto !important; }
+  #gm-cursor, #gm-cursor-ring, .cursor-glow { display: none; }
 }
