@@ -10,48 +10,43 @@ const STATS = [
   { n: "C1", label: "German and English" },
 ];
 
-function ExperienceStackCard({ exp, index }: { exp: typeof EXPERIENCE[0]; index: number }) {
-  const [expanded, setExpanded] = useState(false);
-  const visibleAch = expanded ? exp.achievements : exp.achievements.slice(0, 3);
-  const hiddenCount = exp.achievements.length - 3;
-
+function ExperienceRow({ exp }: { exp: typeof EXPERIENCE[0] }) {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="sticky" style={{ top: `${88 + index * 32}px`, zIndex: index + 1 }}>
-      <div className="rounded-[32px] p-8 md:p-12 shadow-2xl" style={{ background: exp.accent, color: "#0b0b12" }}>
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
-          <span className="text-xs font-bold uppercase tracking-wide opacity-60">{exp.period}</span>
-          {exp.status === "active" && (
-            <span className="px-3 py-1 rounded-full bg-[#0b0b12] text-white text-xs font-bold uppercase">Current Role</span>
-          )}
-        </div>
-
-        <div className="grid md:grid-cols-[1fr_1.6fr] gap-8 md:gap-12">
-          <div>
-            <h3 className="font-extrabold text-[clamp(2rem,4vw,3rem)] leading-[0.95] mb-3">{exp.company}</h3>
-            <p className="font-semibold text-lg mb-1">{exp.role}</p>
-            <p className="text-sm font-medium opacity-70">{exp.type}</p>
-            <p className="text-sm font-medium opacity-70 mt-1">{exp.location}</p>
-          </div>
-
-          <div>
-            <p className="font-medium leading-relaxed mb-6">{exp.description}</p>
-            <div className="space-y-2.5 mb-4">
-              {visibleAch.map((a, i) => (
-                <div key={i} className="flex gap-3 text-sm leading-relaxed">
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#0b0b12] flex-shrink-0" />
-                  <span>{a}</span>
-                </div>
-              ))}
+    <div className="border-b border-[#111111]/10">
+      <button onClick={() => setOpen(!open)} className="w-full grid grid-cols-[auto_1fr_auto] md:grid-cols-[100px_1fr_1fr_auto] items-center gap-4 py-6 text-left group">
+        <span className="text-sm font-semibold text-[#8a8a86]">{exp.period.split(" to ")[0]}</span>
+        <span className="font-bold text-lg md:text-xl">{exp.company}</span>
+        <span className="hidden md:block text-sm text-[#8a8a86]">{exp.role}</span>
+        <svg className={`w-5 h-5 text-[#111111] transition-transform ${open ? "rotate-45" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </button>
+      <div className={`accordion-panel ${open ? "open" : ""}`}>
+        <div>
+          <div className="pb-8 grid md:grid-cols-[1fr_2fr] gap-6">
+            <div>
+              <p className="text-sm font-semibold text-[#8a8a86] mb-1">{exp.period}</p>
+              <p className="text-sm text-[#8a8a86]">{exp.location}</p>
+              {exp.status === "active" && (
+                <span className="inline-block mt-3 px-3 py-1 rounded-full bg-[#ff5b2e] text-white text-xs font-bold uppercase">Current Role</span>
+              )}
             </div>
-            {hiddenCount > 0 && (
-              <button onClick={() => setExpanded(!expanded)} className="text-sm font-bold underline mb-6">
-                {expanded ? "Show less" : `Show ${hiddenCount} more`}
-              </button>
-            )}
-            <div className="flex flex-wrap gap-2 mt-4">
-              {exp.stack.map((t) => (
-                <span key={t} className="px-3 py-1 rounded-full bg-[#0b0b12]/10 text-xs font-semibold">{t}</span>
-              ))}
+            <div>
+              <p className="leading-relaxed mb-4 text-[#111111]/80">{exp.description}</p>
+              <ul className="space-y-2 mb-4">
+                {exp.achievements.map((a, i) => (
+                  <li key={i} className="flex gap-3 text-sm leading-relaxed text-[#111111]/70">
+                    <span className="mt-2 w-1 h-1 rounded-full bg-[#ff5b2e] flex-shrink-0" />
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                {exp.stack.map((t) => (
+                  <span key={t} className="px-2.5 py-1 rounded-full bg-[#111111]/5 text-xs font-semibold">{t}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -62,51 +57,47 @@ function ExperienceStackCard({ exp, index }: { exp: typeof EXPERIENCE[0]; index:
 
 export default function Journey() {
   return (
-    <Block bg="#0b0b12" dark className="!px-4 md:!px-10">
-      <div className="px-2 md:px-6">
+    <>
+      <Block bg="#f5f5f3">
         <Eyebrow>Journey</Eyebrow>
         <H2>Where I have worked</H2>
-        <p className="text-lg font-medium opacity-70 max-w-2xl mb-14">
+        <p className="text-lg text-[#111111]/70 max-w-2xl mb-12">
           From safety critical ADAS validation at Accenture to sustainable cloud infrastructure at BMW Group.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 pt-8 border-t border-[#111111]/10">
           {STATS.map((s) => (
-            <div key={s.label} className="bg-white/5 rounded-2xl p-6">
+            <div key={s.label}>
               <div className="font-extrabold text-4xl mb-1">{s.n}</div>
-              <div className="text-xs font-medium opacity-60 uppercase tracking-wide">{s.label}</div>
+              <div className="text-xs font-medium text-[#8a8a86] uppercase tracking-wide">{s.label}</div>
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="relative space-y-10 pb-10">
-        {EXPERIENCE.map((exp, i) => (
-          <ExperienceStackCard key={exp.num} exp={exp} index={i} />
-        ))}
-      </div>
-
-      <div className="px-2 md:px-6 mt-16">
-        <div className="flex items-center gap-3 mb-8">
-          <span className="text-sm font-bold uppercase tracking-wide opacity-60">Education</span>
+        <div className="border-t border-[#111111]/10">
+          {EXPERIENCE.map((exp) => <ExperienceRow key={exp.num} exp={exp} />)}
         </div>
-        <div className="grid sm:grid-cols-2 gap-4 mb-16">
+      </Block>
+
+      <Block bg="#111111" dark>
+        <Eyebrow>Education</Eyebrow>
+        <H2 className="text-white">Where I studied</H2>
+        <div className="border-t border-white/10">
           {EDUCATION.map((edu) => (
-            <div key={edu.degree} className="bg-white/5 rounded-2xl p-6">
-              <div className="text-xs font-bold uppercase tracking-wide opacity-50 mb-2">{edu.period}</div>
-              <div className="font-semibold mb-1">{edu.degree}</div>
-              <div className="text-sm opacity-60">{edu.school}</div>
+            <div key={edu.degree} className="grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr_1fr] gap-4 py-6 border-b border-white/10">
+              <span className="text-sm font-semibold text-white/50">{edu.period}</span>
+              <span className="font-bold">{edu.degree}</span>
+              <span className="hidden md:block text-sm text-white/50">{edu.school}</span>
             </div>
           ))}
         </div>
-
-        <div className="text-center">
-          <p className="text-sm font-medium opacity-60 mb-4">Open to new opportunities from July 2026</p>
-          <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#0b0b12] font-semibold hover:-translate-y-0.5 transition-transform">
+        <div className="text-center mt-16">
+          <p className="text-sm font-medium text-white/50 mb-4">Open to new opportunities from July 2026</p>
+          <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-md bg-white text-[#111111] font-semibold hover:bg-[#ff5b2e] hover:text-white transition-colors">
             Let's Build Together
           </Link>
         </div>
-      </div>
-    </Block>
+      </Block>
+    </>
   );
 }

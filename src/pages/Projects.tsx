@@ -24,25 +24,27 @@ function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
   }, []);
 
   return (
-    <div ref={cardRef} className="bg-[#0b0b12] text-white rounded-2xl p-7" style={{ transformStyle: "preserve-3d" }}>
-      <div className="flex items-center justify-between mb-5">
-        <span className="font-extrabold text-3xl opacity-15">{p.icon}</span>
-        <span className="text-xs font-bold opacity-40">{p.num}</span>
+    <div ref={cardRef} className="bg-[#111111] text-white rounded-2xl overflow-hidden" style={{ transformStyle: "preserve-3d" }}>
+      <div className="h-40 flex items-center justify-between px-7 pt-7">
+        <span className="font-extrabold text-3xl text-white/10">{p.icon}</span>
+        <span className="text-xs font-bold text-[#ff5b2e]">{p.num}</span>
       </div>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {p.tags.map((t) => (
-          <span key={t} className="px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: `${p.accent}22`, color: p.accent }}>{t}</span>
-        ))}
+      <div className="p-7 pt-0">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {p.tags.map((t) => (
+            <span key={t} className="px-2.5 py-1 rounded-full border border-white/15 text-xs font-medium text-white/70">{t}</span>
+          ))}
+        </div>
+        <h3 className="font-bold text-xl mb-3">{p.title}</h3>
+        <p className="text-sm text-white/60 leading-relaxed mb-5">{p.desc}</p>
+        <a href={p.link} target={p.link.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#ff5b2e] hover:gap-3 transition-all">
+          {p.linkLabel}
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path d="M7 17L17 7M7 7h10v10" />
+          </svg>
+        </a>
       </div>
-      <h3 className="font-bold text-xl mb-3">{p.title}</h3>
-      <p className="text-sm opacity-70 leading-relaxed mb-5">{p.desc}</p>
-      <a href={p.link} target={p.link.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
-        className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all" style={{ color: p.accent }}>
-        {p.linkLabel}
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg>
-      </a>
     </div>
   );
 }
@@ -50,7 +52,7 @@ function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
 export default function Projects() {
   return (
     <>
-      <Block bg="#fdf6ec">
+      <Block bg="#f5f5f3">
         <Eyebrow>Selected Work</Eyebrow>
         <H2>Some things I have built</H2>
         <div className="grid md:grid-cols-2 gap-5">
