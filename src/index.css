@@ -128,6 +128,13 @@ body::after {
   will-change: transform;
 }
 
+/* ── Reveal animation (pure CSS, no JS dependency) ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.7s ease-out both; }
+
 /* ── Mobile fixes ── */
 @media (max-width: 768px) {
   #gm-cursor, #gm-cursor-ring, .cursor-glow { display: none; }

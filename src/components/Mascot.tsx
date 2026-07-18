@@ -16,10 +16,9 @@ export default function Mascot() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapRef.current,
-          start: "top top",
-          end: "+=120%",
+          start: "top bottom",
+          end: "bottom top",
           scrub: 0.6,
-          pin: true,
         },
       });
       tl.to(mouthRef.current, { scaleY: 1, duration: 0.4, ease: "power2.out" })
@@ -30,8 +29,8 @@ export default function Mascot() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 px-6">
+    <div ref={wrapRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="sticky top-1/3 flex flex-col md:flex-row items-center gap-8 md:gap-12 px-6">
         <svg width="220" height="220" viewBox="0 0 220 220" className="mascot-head flex-shrink-0">
           <circle cx="110" cy="110" r="100" fill="#5fd4ff" />
           <circle cx="75" cy="90" r="11" fill="#0b0b12" />

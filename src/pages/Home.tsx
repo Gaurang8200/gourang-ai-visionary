@@ -1,6 +1,4 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
 import { Block, Eyebrow } from "@/components/PortfolioBlocks";
 import Mascot from "@/components/Mascot";
 
@@ -13,44 +11,26 @@ const SECTIONS = [
 ];
 
 function HeroSection() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 });
-      tl.from(".hero-eyebrow", { opacity: 0, y: 30, duration: 0.7, ease: "power3.out" })
-        .from(".hero-title", { opacity: 0, y: 50, duration: 0.9, ease: "power3.out" }, "-=0.3")
-        .from(".hero-desc", { opacity: 0, y: 20, duration: 0.7, ease: "power3.out" }, "-=0.4")
-        .from(".hero-btns", { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" }, "-=0.3")
-        .from(".hero-badge", { opacity: 0, scale: 0.6, rotate: -20, duration: 0.8, ease: "back.out(1.6)" }, "-=0.6");
-    }, heroRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={heroRef}>
-      <Block bg="#5fd4ff" className="!py-20 md:!py-28">
-        <div className="hero-eyebrow inline-block px-4 py-1.5 rounded-full bg-[#0b0b12] text-white text-xs font-bold uppercase tracking-wide mb-8">
-          AI Developer
-        </div>
-        <h1 className="hero-title font-extrabold leading-[0.95] tracking-tight text-[clamp(3rem,10vw,7.5rem)] mb-8">
-          Gourangkumar<br />Monashara
-        </h1>
-        <p className="hero-desc text-[clamp(1.1rem,2vw,1.5rem)] font-medium max-w-2xl mb-10">
-          I build cloud systems that hold up under real traffic, and I am spending more of every week teaching agents to help me do it.
-        </p>
-        <div className="hero-btns flex flex-wrap gap-4">
-          <Link to="/projects" className="px-7 py-4 rounded-full bg-[#0b0b12] text-white font-semibold hover:-translate-y-0.5 transition-transform">
-            See My Work
-          </Link>
-          <Link to="/contact" className="px-7 py-4 rounded-full bg-white text-[#0b0b12] font-semibold hover:-translate-y-0.5 transition-transform">
-            Say Hello
-          </Link>
-        </div>
-        <div className="hero-badge hidden md:flex absolute right-16 top-24 w-32 h-32 rounded-full bg-[#0b0b12] items-center justify-center rotate-6">
-          <span className="text-white font-extrabold text-lg leading-tight text-center">BMW<br />Group</span>
-        </div>
-      </Block>
-    </div>
+    <Block bg="#5fd4ff" className="!py-20 md:!py-28">
+      <div className="animate-fade-up inline-block px-4 py-1.5 rounded-full bg-[#0b0b12] text-white text-xs font-bold uppercase tracking-wide mb-8">
+        AI Developer
+      </div>
+      <h1 className="animate-fade-up font-extrabold leading-[0.95] tracking-tight text-[clamp(3rem,10vw,7.5rem)] mb-8" style={{ animationDelay: "0.08s" }}>
+        Gourangkumar<br />Monashara
+      </h1>
+      <p className="animate-fade-up text-[clamp(1.1rem,2vw,1.5rem)] font-medium max-w-2xl mb-10" style={{ animationDelay: "0.16s" }}>
+        I build cloud systems that hold up under real traffic, and I am spending more of every week teaching agents to help me do it.
+      </p>
+      <div className="animate-fade-up flex flex-wrap gap-4" style={{ animationDelay: "0.24s" }}>
+        <Link to="/projects" className="px-7 py-4 rounded-full bg-[#0b0b12] text-white font-semibold hover:-translate-y-0.5 transition-transform">
+          See My Work
+        </Link>
+        <Link to="/contact" className="px-7 py-4 rounded-full bg-white text-[#0b0b12] font-semibold hover:-translate-y-0.5 transition-transform">
+          Say Hello
+        </Link>
+      </div>
+    </Block>
   );
 }
 

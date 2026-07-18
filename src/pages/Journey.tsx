@@ -64,8 +64,8 @@ export default function Journey() {
   return (
     <Block bg="#0b0b12" dark className="!px-4 md:!px-10">
       <div className="px-2 md:px-6">
-        <Eyebrow>Where I Have Worked</Eyebrow>
-        <H2>Three years,<br />three companies</H2>
+        <Eyebrow>Journey</Eyebrow>
+        <H2>Where I have worked</H2>
         <p className="text-lg font-medium opacity-70 max-w-2xl mb-14">
           From safety critical ADAS validation at Accenture to sustainable cloud infrastructure at BMW Group.
         </p>
