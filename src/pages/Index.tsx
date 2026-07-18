@@ -8,61 +8,107 @@ gsap.registerPlugin(ScrollTrigger);
 /* ─── DATA ─────────────────────────────────────────────────── */
 const SKILLS = [
   {
-    category: "AI / Machine Learning",
-    items: ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "Hugging Face", "YOLO", "OpenCV"],
+    category: "Programming",
+    items: ["Python", "Go", "TypeScript", "Java", "JavaScript / React", "C", "C++", "SQL", "R", "Bash", "Kotlin"],
     bars: [
-      { label: "Deep Learning", pct: 95 },
-      { label: "Computer Vision", pct: 93 },
-      { label: "Model Deployment", pct: 85 },
+      { label: "Python / Go", pct: 95 },
+      { label: "TypeScript / React", pct: 85 },
+      { label: "C / C++", pct: 75 },
     ],
+    accent: "#00d4ff",
   },
   {
-    category: "Automotive AI",
-    items: ["ADAS Systems", "HIL Testing", "CAN Bus", "NVIDIA Jetson Orin", "HMI Validation", "OCR Pipelines"],
+    category: "Agentic AI & LLMs",
+    items: ["LangChain", "LangGraph", "RAG", "Claude Code", "GitHub Copilot", "OpenCode"],
     bars: [
-      { label: "Automotive Testing", pct: 92 },
-      { label: "HIL / SIL Integration", pct: 88 },
-      { label: "ADAS Validation", pct: 85 },
+      { label: "Agentic Workflows", pct: 93 },
+      { label: "RAG / LLM Integration", pct: 90 },
+      { label: "Prompt Engineering", pct: 88 },
     ],
+    accent: "#a855f7",
   },
   {
-    category: "Programming & Tools",
-    items: ["Python", "C++", "TypeScript", "Docker", "Git", "AWS", "Jupyter", "Linux"],
+    category: "Cloud & Infrastructure",
+    items: ["AWS S3", "SageMaker", "Docker", "Kubernetes", "Linux", "Virtual Machines"],
     bars: [
-      { label: "Python / C++", pct: 96 },
-      { label: "MLOps / DevOps", pct: 80 },
-      { label: "Cloud Platforms", pct: 75 },
+      { label: "Containerization", pct: 90 },
+      { label: "Kubernetes", pct: 82 },
+      { label: "Cloud Deployment", pct: 85 },
     ],
+    accent: "#ff6b00",
+  },
+  {
+    category: "DevOps & Observability",
+    items: ["CI/CD", "Git / GitLab", "Kafka", "OpenTelemetry", "Prometheus", "Datadog", "Splunk"],
+    bars: [
+      { label: "CI/CD Pipelines", pct: 90 },
+      { label: "Monitoring & Tracing", pct: 84 },
+      { label: "Reliability Engineering", pct: 86 },
+    ],
+    accent: "#10b981",
+  },
+  {
+    category: "Backend & APIs",
+    items: ["FastAPI", "REST APIs", "Microservices", "WebSockets", "Distributed Systems"],
+    bars: [
+      { label: "API Design", pct: 92 },
+      { label: "Microservices", pct: 88 },
+      { label: "Distributed Systems", pct: 82 },
+    ],
+    accent: "#00d4ff",
+  },
+  {
+    category: "Data & ML",
+    items: ["Pandas", "NumPy", "Scikit-Learn", "Spark", "MySQL", "ETL Pipelines", "Data Warehouses"],
+    bars: [
+      { label: "Data Pipelines", pct: 90 },
+      { label: "ML / Analytics", pct: 85 },
+      { label: "Big Data (Spark)", pct: 78 },
+    ],
+    accent: "#a855f7",
   },
 ];
 
 const PROJECTS = [
   {
     num: "01",
-    icon: "CV",
-    tags: ["Python", "OpenCV", "TensorFlow", "Jetson Orin"],
-    title: "Vision-Based HMI Testing Framework",
-    desc: "Two-phase automated testing framework for automotive infotainment and digital cluster systems. Phase 1 uses CNNs, OCR, and object detection on NVIDIA Jetson Orin Nano for open-loop UI validation. Phase 2 integrates a HIL simulator for closed-loop end-to-end testing.",
+    icon: "RAG",
+    tags: ["Google Vertex AI", "FastAPI", "Streamlit", "LangChain"],
+    title: "Enterprise RAG Assistant on Vertex AI",
+    desc: "Full-stack RAG application built for BMW Group — Vertex AI retrieval layer, FastAPI backend, and a Streamlit/React front end wired together for enterprise Q&A over internal engineering data. Includes prompt tuning to cut hallucinations and enforce deterministic answers.",
     link: "#",
-    linkLabel: "Explore Project",
+    linkLabel: "Case Study",
+    accent: "#00d4ff",
   },
   {
     num: "02",
-    icon: "HIL",
-    tags: ["Python", "CAN Bus", "Ethernet", "HIL Simulator"],
-    title: "ADAS HIL Closed-Loop Automation",
-    desc: "Closed-loop automotive testing environment that integrates HIL simulators with vision-based verification systems. Simulates vehicle CAN/Ethernet network traffic while the AI vision layer validates HMI responsiveness, screen transitions, and safety-critical alerts.",
+    icon: "KG",
+    tags: ["GPT-4", "LangChain", "Knowledge Graphs", "Kubernetes"],
+    title: "Knowledge-Graph RAG for Cloud TMS",
+    desc: "ReAct-agent and knowledge-graph-backed retrieval system for a cloud transport-management platform at CREAT GmbH — containerized on Docker/Kubernetes for scalable, contextual document reasoning across a large operational dataset.",
     link: "#",
-    linkLabel: "Explore Project",
+    linkLabel: "Case Study",
+    accent: "#a855f7",
   },
   {
     num: "03",
-    icon: "AI",
-    tags: ["PyTorch", "YOLO", "OpenCV", "Real-Time"],
-    title: "Real-Time Anomaly Detection Pipeline",
-    desc: "Production-grade visual inspection pipeline for automotive display systems. Detects UI anomalies, render glitches, and layout violations in real-time across infotainment and digital cluster displays — reducing manual QA effort by over 70%.",
+    icon: "DL",
+    tags: ["PyTorch", "SqueezeNet", "Docker", "Vertex AI"],
+    title: "MLOps Image-Classification Pipeline",
+    desc: "End-to-end MLOps pipeline that trains and serves a SqueezeNet image classifier on Google Vertex AI — Dockerized training/inference services with a reproducible deployment flow from notebook to production endpoint.",
+    link: "https://github.com/Gaurang8200/MLOps_Project_DL",
+    linkLabel: "View Repository",
+    accent: "#ff6b00",
+  },
+  {
+    num: "04",
+    icon: "OPS",
+    tags: ["OpenTelemetry", "Kafka", "Prometheus", "Grafana"],
+    title: "Sustainable Cloud Diagnostics Toolkit",
+    desc: "Python-based diagnostic tooling for fast production triage at BMW, paired with OpenTelemetry-driven observability across Kafka, Prometheus, and Grafana — improved web-app stability by ~17% and cut manual deployment intervention by ~36%.",
     link: "#",
-    linkLabel: "Explore Project",
+    linkLabel: "Case Study",
+    accent: "#10b981",
   },
 ];
 
@@ -71,67 +117,81 @@ const EXPERIENCE = [
   {
     num: "01",
     company: "BMW Group",
-    role: "AI Engineer",
-    type: "Working Student",
-    period: "Aug 2025 — Present",
+    role: "Software Developer",
+    type: "Full-Time",
+    period: "Aug 2024 — Present",
     location: "Munich, Germany",
     accent: "#0066ff",
     accent2: "#00d4ff",
     status: "active",
     description:
-      "Currently architecting Agentic AI workflows and full-stack LLM applications that automate engineering processes across BMW's enterprise environment.",
+      "Full-stack development on sustainability-focused cloud systems — shipping microservices, validation environments, and the observability that keeps them honest.",
     achievements: [
-      "Designed AI agent workflows using LangChain, LangGraph, ReAct reasoning, and multi-agent orchestration to automate engineering tasks",
-      "Developed pipeline for BMW's replacement tool using Claude Code and Codex, including model tuning, benchmarking, and performance evaluation",
-      "Built full-stack AI applications using FastAPI (backend APIs), Streamlit/React (frontend), with integrated data storage for end-to-end workflows",
-      "Containerized ML and LLM components using Docker and deployed them in Linux environments for reproducibility and testing",
-      "Developed forecasting and predictive analytics models in Python using Pandas and Scikit-Learn for data-driven planning and optimization",
-      "Built a full-stack RAG application on Google Vertex AI with API layer, Streamlit frontend, and backend data pipeline for enterprise Q&A",
-      "Designed LLM-based agent workflows using Llama and GPT-4.1 to extract KPIs, identify irregular patterns, and generate technical insights",
-      "Tuned LLM prompts and agent workflows to reduce hallucinations and enforce deterministic behavior in signal and context analysis",
-      "Worked cross-functionally with technical and non-technical teams, transforming business needs into AI assets and Agentic workflows",
+      "Built and deployed Docker-based microservices, resolving system-wide issues spanning data inconsistency, latency, and service communication",
+      "Stood up cloud-based validation environments with REST APIs and internal data pipelines for large-scale testing under real sustainability conditions",
+      "Built Python diagnostic tooling for rapid triage of production issues — lifted web-app stability by roughly 17%",
+      "Automated build, test, and deployment with Git-based CI/CD workflows, cutting manual release intervention by around 36%",
+      "Instrumented systems with OpenTelemetry across Prometheus, OpenSearch, Kafka, and Grafana for deeper transparency and faster fault diagnosis",
+      "Analyzed compute inefficiency across cloud services — measured used vs. requested capacity to surface resource-optimization opportunities",
+      "Contributed to agile delivery with regular code reviews via GitHub and Jira, shaping architecture decisions and surfacing technical trade-offs",
     ],
-    stack: ["LangChain", "LangGraph", "GPT-4.1", "Llama", "FastAPI", "Vertex AI", "Docker", "React", "Streamlit", "Claude Code", "Codex", "ReAct"],
+    stack: ["Python", "Go", "TypeScript", "Angular", "Docker", "REST APIs", "OpenTelemetry", "Prometheus", "Kafka", "Grafana", "CI/CD", "GitHub"],
   },
   {
     num: "02",
     company: "CREAT GmbH",
     role: "Software Engineer",
-    type: "Working Student",
-    period: "Sep 2023 — Jul 2025",
+    type: "Full-Time",
+    period: "Sep 2023 — Jul 2024",
     location: "Ingolstadt, Germany",
     accent: "#ff6b00",
     accent2: "#ffaa44",
     status: "past",
     description:
-      "Architected LLM-powered automation systems and scalable microservices for AI-driven validation workflows in cloud TMS environments.",
+      "Data-driven backend systems and ML-backed services, built and operated on Kubernetes for scalable, production-adjacent workloads.",
     achievements: [
-      "Developed LLM- and RAG-based automation systems with GPT-4, LangChain, and FastAPI for semantic test data analysis and AI-driven validation workflow",
-      "Implemented containerized microservices with Docker, FastAPI, and Kubernetes for scalable deployment of AI modules in DevOps environments",
-      "Built RAG pipelines and knowledge graph-based agents for intelligent document retrieval and contextual reasoning in cloud TMS environments",
-      "Implemented ReAct agents and modular microservices under Docker and RESTful APIs for dynamic knowledge processing in cloud TMS environments",
-      "Utilized TensorFlow, PyTorch, Docker, and Git for end-to-end AI pipeline development, CI/CD integration, model deployment, and test automation",
-      "Collaborated with cross-functional teams in implementing AI roadmaps and integrating AI into business processes following Agile/Scrum methodology",
+      "Built data-driven backend systems and ML-backed services in Python and Go, integrating structured datasets into scalable applications",
+      "Built and operated containerized microservices with Docker and Kubernetes for distributed data processing and scalable workflows",
+      "Designed data pipelines and complex ETL processes for structured data ingestion and transformation",
+      "Developed and operated platform-adjacent services on Kubernetes, focused on stability and reliable operation of production-facing systems",
+      "Implemented CI/CD with Git and GitLab, reducing manual intervention and recurring deployment failures during quality assurance",
     ],
-    stack: ["GPT-4", "LangChain", "FastAPI", "Kubernetes", "Docker", "RAG", "PyTorch", "TensorFlow", "Knowledge Graphs", "ReAct", "REST APIs", "CI/CD"],
+    stack: ["Python", "Go", "Docker", "Kubernetes", "ETL Pipelines", "GitLab CI/CD", "REST APIs", "Microservices"],
   },
   {
     num: "03",
-    company: "LAB — THI",
-    role: "AI Research Assistant",
-    type: "Working Student",
-    period: "Nov 2023 — Aug 2024",
+    company: "Accenture",
+    role: "Software Developer",
+    type: "Full-Time",
+    period: "Sep 2022 — Aug 2023",
     location: "Ingolstadt, Germany",
     accent: "#7b5ea7",
     accent2: "#bf94ff",
     status: "past",
     description:
-      "Researched and prototyped agentic AI systems for autonomous decision-making and multi-agent behavior planning in robotic environments.",
+      "Safety-critical ADAS validation for the automotive industry — building the test systems that prove autonomous features work under pressure.",
     achievements: [
-      "Researched and implemented agentic AI systems for autonomous decision logic, multi-agent coordination, and behavior planning in robotic environments",
-      "Integrated AI solutions into Agile DevOps and MLOps pipelines, collaborating with cross-functional teams from AI Labs for productive deployment",
+      "Developed and validated ADAS functionality, including Emergency-Assist systems, with focus on safety-critical scenarios under ISO 26262",
+      "Built a real-world test system to evaluate system behavior against safety-critical automotive requirements",
+      "Designed scenario-based test and validation workflows to evaluate system response in edge cases and fault conditions",
+      "Integrated solutions into DevOps/MLOps pipelines on Linux infrastructure, collaborating with cross-functional teams on test, deployment, and monitoring",
     ],
-    stack: ["Agentic AI", "Multi-Agent Systems", "Robotics", "MLOps", "DevOps", "Python", "Behavior Planning", "Research"],
+    stack: ["ADAS", "ISO 26262", "Python", "Linux", "DevOps", "MLOps", "Test Automation"],
+  },
+];
+
+const EDUCATION = [
+  {
+    degree: "M.Eng. Artificial Intelligence",
+    school: "Technische Hochschule Ingolstadt",
+    period: "2024 — 2026",
+    accent: "#00d4ff",
+  },
+  {
+    degree: "B.Eng. Automotive Engineering",
+    school: "Technische Hochschule Ingolstadt",
+    period: "2020 — 2024",
+    accent: "#a855f7",
   },
 ];
 
@@ -298,7 +358,7 @@ function HeroSection() {
   return (
     <section ref={heroRef} id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-8 z-10">
       <div className="hero-eyebrow font-mono text-xs tracking-[0.4em] text-[#00d4ff] uppercase mb-8">
-        AI Engineer · Computer Vision · Automotive AI
+        Full-Stack Engineer · Cloud Systems · Agentic AI
       </div>
 
       <h1 ref={nameRef} className="font-['Bebas_Neue'] text-[clamp(4.5rem,13vw,12rem)] leading-[0.88] tracking-[0.03em] mb-6"
@@ -307,11 +367,11 @@ function HeroSection() {
       </h1>
 
       <div className="hero-sub text-[clamp(0.85rem,2vw,1.1rem)] tracking-[0.2em] uppercase text-[#5a5a75] mt-4 mb-6">
-        AI, ML &amp; Computer Vision Engineer
+        Software Developer @ BMW Group
       </div>
 
       <p className="hero-desc text-[clamp(0.9rem,1.4vw,1.1rem)] font-light text-[#9090a8] max-w-xl leading-[1.9] mb-10">
-        Driving the future of automotive intelligence through deep learning, vision-based testing systems, and AI-powered ADAS validation.
+        Building resilient, resource-aware cloud systems — full-stack from Python and Go services to TypeScript front ends, wired together with CI/CD, observability, and increasingly, agentic AI workflows.
       </p>
 
       <div className="hero-btns flex gap-5 flex-wrap justify-center">
@@ -349,35 +409,35 @@ function AboutSection() {
   }, []);
 
   const stats = [
-    { n: "3+", label: "Years in AI" },
-    { n: "20+", label: "AI Projects Shipped" },
-    { n: "2026", label: "SAE SIAT Published" },
-    { n: "∞", label: "Problems to Solve" },
+    { n: "3+", label: "Years Professional Exp." },
+    { n: "3", label: "Companies · BMW, CREAT, Accenture" },
+    { n: "2", label: "Engineering Degrees" },
+    { n: "C1", label: "German & English" },
   ];
 
   return (
     <section ref={ref} id="about" className="relative min-h-screen flex items-center py-28 px-8 z-10">
       <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-20 items-center">
         <div>
-          <p className="about-reveal font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
-            <span className="w-10 h-px bg-[#00d4ff] inline-block" /> About Me
+          <p className="about-reveal font-mono text-xs tracking-[0.35em] text-[#a855f7] uppercase mb-4 flex items-center gap-4">
+            <span className="w-10 h-px bg-[#a855f7] inline-block" /> About Me
           </p>
           <h2 className="about-reveal font-['Bebas_Neue'] text-[clamp(2.5rem,5vw,5rem)] leading-tight text-white mb-8">
-            Building Intelligent<br /><span className="text-[#00d4ff]">Automotive</span> Systems
+            Engineering Cloud Systems<br /><span className="text-[#a855f7]">Built to Last</span>
           </h2>
           <p className="about-reveal text-[1.15rem] font-light text-white/80 leading-[1.9] mb-5">
-            AI/ML Engineer building intelligence into testing pipelines and engineering automation.
+            Full-stack developer with 3+ years turning cloud infrastructure into something stable, automated, and resource-aware.
           </p>
           <p className="about-reveal text-sm text-[#80809a] leading-[1.9] mb-5">
-            My work sits at the intersection of deep learning and engineering — building systems that see, reason, and validate. From CNNs classifying infotainment screens to LLM agents automating BMW workflows, I engineer AI that meets enterprise standards.
+            My work spans the whole stack — TypeScript, Angular, and Streamlit on the front end; Python and Go on the back — wired into microservice architectures with REST APIs, relational databases, and distributed cloud systems. I care as much about what keeps a system running at 3am as what ships the feature.
           </p>
           <p className="about-reveal text-sm text-[#80809a] leading-[1.9]">
-            Currently pursuing a Master's in AI at Technische Hochschule Ingolstadt while working as an AI Engineer at BMW Group, Munich.
+            Currently a Software Developer at BMW Group in Munich, building diagnostic tooling, CI/CD automation, and observability into sustainable cloud infrastructure — while completing a Master's in Artificial Intelligence at Technische Hochschule Ingolstadt.
           </p>
           <div className="about-reveal grid grid-cols-2 gap-px mt-10 border border-white/[0.07]">
             {stats.map((s, i) => (
               <div key={i} className="p-5 border-b border-r border-white/[0.07]">
-                <div className="font-['Bebas_Neue'] text-4xl text-[#00d4ff] leading-none">{s.n}</div>
+                <div className="font-['Bebas_Neue'] text-4xl text-[#a855f7] leading-none">{s.n}</div>
                 <div className="text-[0.7rem] tracking-widest uppercase text-[#5a5a75] mt-1.5">{s.label}</div>
               </div>
             ))}
@@ -389,8 +449,8 @@ function AboutSection() {
               style={{ width: size, height: size, animation: `spin ${14 + i * 4}s linear infinite ${i % 2 ? "reverse" : ""}` }} />
           ))}
           <div className="w-[170px] h-[170px] rounded-full flex items-center justify-center z-10 backdrop-blur-md border border-white/10"
-            style={{ background: "radial-gradient(circle, rgba(0,212,255,0.08) 0%, rgba(3,3,10,0.6) 100%)" }}>
-            <div className="font-['Bebas_Neue'] text-6xl text-[#00d4ff] tracking-wider">GM</div>
+            style={{ background: "radial-gradient(circle, rgba(168,85,247,0.1) 0%, rgba(3,3,10,0.6) 100%)" }}>
+            <div className="font-['Bebas_Neue'] text-6xl text-[#a855f7] tracking-wider">GM</div>
           </div>
         </div>
       </div>
@@ -424,22 +484,28 @@ function SkillsSection() {
   return (
     <section ref={ref} id="skills" className="relative py-28 px-8 z-10">
       <div className="max-w-6xl mx-auto">
-        <p className="skills-reveal font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
-          <span className="w-10 h-px bg-[#00d4ff]" />Technical Arsenal
+        <p className="skills-reveal font-mono text-xs tracking-[0.35em] text-[#ff6b00] uppercase mb-4 flex items-center gap-4">
+          <span className="w-10 h-px bg-[#ff6b00]" />Technical Arsenal
         </p>
         <h2 className="skills-reveal font-['Bebas_Neue'] text-[clamp(2.5rem,5vw,5rem)] text-white mb-16 leading-tight">
-          My <span className="text-[#00d4ff]">Stack</span>
+          My <span className="text-[#ff6b00]">Stack</span>
         </h2>
 
         <div className="grid md:grid-cols-3 gap-5">
           {SKILLS.map((s, si) => (
-            <div key={si} className="skills-reveal group p-7 border border-white/[0.07] hover:border-[#00d4ff]/25 transition-all duration-300 relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.025)" }}>
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="font-mono text-[0.65rem] tracking-[0.25em] text-[#00d4ff] uppercase mb-5">{s.category}</div>
+            <div key={si} className="skills-reveal group p-7 border border-white/[0.07] transition-all duration-300 relative overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.025)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${s.accent}40`)}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}>
+              <div className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(to right, transparent, ${s.accent}, transparent)` }} />
+              <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase mb-5" style={{ color: s.accent }}>{s.category}</div>
               <div className="flex flex-wrap gap-1.5 mb-6">
                 {s.items.map((item) => (
-                  <span key={item} className="px-2.5 py-1 text-[0.7rem] border border-white/[0.07] text-white/60 hover:border-[#00d4ff]/30 hover:text-[#00d4ff] transition-all duration-200">
+                  <span key={item} className="px-2.5 py-1 text-[0.7rem] border border-white/[0.07] text-white/60 transition-all duration-200"
+                    style={{ ["--hover" as string]: s.accent }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${s.accent}50`; e.currentTarget.style.color = s.accent; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}>
                     {item}
                   </span>
                 ))}
@@ -451,9 +517,9 @@ function SkillsSection() {
                       <span>{b.label}</span><span>{b.pct}%</span>
                     </div>
                     <div className="h-[2px] bg-white/[0.06]">
-                      <div className="bar-fill h-full bg-gradient-to-r from-[#00d4ff] to-[#0066ff] origin-left scale-x-0"
+                      <div className="bar-fill h-full origin-left scale-x-0"
                         data-w={b.pct / 100}
-                        style={{ boxShadow: "0 0 8px rgba(0,212,255,0.7)" }} />
+                        style={{ background: `linear-gradient(to right, ${s.accent}, #0066ff)`, boxShadow: `0 0 8px ${s.accent}b3` }} />
                     </div>
                   </div>
                 ))}
@@ -488,7 +554,7 @@ function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
         duration: 0.4, ease: "power2.out", transformPerspective: 1200,
       });
       shine.style.background =
-        `radial-gradient(circle at ${(xPct + 0.5) * 100}% ${(yPct + 0.5) * 100}%, rgba(0,212,255,0.18), transparent 50%)`;
+        `radial-gradient(circle at ${(xPct + 0.5) * 100}% ${(yPct + 0.5) * 100}%, ${p.accent}30, transparent 50%)`;
     };
     const onLeave = () => {
       gsap.to(inner, { rotateY: 0, rotateX: 0, duration: 0.7, ease: "power2.out" });
@@ -512,32 +578,37 @@ function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
 
   return (
     <div ref={cardRef} className="proj-card" style={{ perspective: "1200px" }}>
-      <div ref={innerRef} className="group relative border border-white/[0.07] hover:border-[#00d4ff]/40 overflow-hidden transition-colors duration-300"
+      <div ref={innerRef} className="group relative border border-white/[0.07] overflow-hidden transition-colors duration-300"
         style={{
           background: "rgba(255,255,255,0.02)",
           transformStyle: "preserve-3d",
           boxShadow: "0 20px 60px -20px rgba(0,0,0,0.5)",
-        }}>
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${p.accent}66`)}
+        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
+      >
         {/* Mouse-tracked shine layer */}
         <div ref={shineRef} className="absolute inset-0 pointer-events-none transition-opacity duration-300" style={{ background: "transparent" }} />
 
         <div className="h-44 flex items-center justify-center relative border-b border-white/[0.05] overflow-hidden">
-          <div className="font-['Bebas_Neue'] text-[5rem] text-white/[0.05] tracking-wide group-hover:text-[#00d4ff]/15 group-hover:scale-110 transition-all duration-500"
-               style={{ transform: "translateZ(30px)" }}>
+          <div className="font-['Bebas_Neue'] text-[5rem] text-white/[0.05] tracking-wide group-hover:scale-110 transition-all duration-500"
+               style={{ transform: "translateZ(30px)", color: "rgba(255,255,255,0.05)" }}
+               onMouseEnter={(e) => (e.currentTarget.style.color = `${p.accent}26`)}>
             {p.icon}
           </div>
-          <span className="absolute top-4 left-5 font-mono text-[0.6rem] tracking-[0.2em] text-[#00d4ff]/50">{p.num}</span>
+          <span className="absolute top-4 left-5 font-mono text-[0.6rem] tracking-[0.2em]" style={{ color: `${p.accent}80` }}>{p.num}</span>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[rgba(3,3,10,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         <div className="p-6" style={{ transform: "translateZ(20px)" }}>
           <div className="flex flex-wrap gap-1.5 mb-4">
             {p.tags.map((t) => (
-              <span key={t} className="px-2 py-0.5 text-[0.65rem] bg-[#00d4ff]/[0.08] border border-[#00d4ff]/20 text-[#00d4ff]">{t}</span>
+              <span key={t} className="px-2 py-0.5 text-[0.65rem]" style={{ background: `${p.accent}14`, border: `1px solid ${p.accent}33`, color: p.accent }}>{t}</span>
             ))}
           </div>
           <h3 className="font-['Bebas_Neue'] text-xl text-white mb-3 tracking-wide">{p.title}</h3>
           <p className="text-[0.82rem] text-[#70708a] leading-relaxed">{p.desc}</p>
-          <a href={p.link} className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase text-[#00d4ff] hover:gap-3 transition-all duration-200">
+          <a href={p.link} target={p.link.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
+            className="inline-flex items-center gap-2 mt-5 text-[0.72rem] tracking-[0.1em] uppercase hover:gap-3 transition-all duration-200" style={{ color: p.accent }}>
             {p.linkLabel}
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path d="M7 17L17 7M7 7h10v10" />
@@ -554,14 +625,14 @@ function ProjectsSection() {
   return (
     <section id="projects" className="relative py-28 px-8 z-10">
       <div className="max-w-6xl mx-auto">
-        <p className="font-mono text-xs tracking-[0.35em] text-[#00d4ff] uppercase mb-4 flex items-center gap-4">
-          <span className="w-10 h-px bg-[#00d4ff]" />Selected Work
+        <p className="font-mono text-xs tracking-[0.35em] text-[#10b981] uppercase mb-4 flex items-center gap-4">
+          <span className="w-10 h-px bg-[#10b981]" />Selected Work
         </p>
         <h2 className="font-['Bebas_Neue'] text-[clamp(2.5rem,5vw,5rem)] text-white mb-16 leading-tight">
-          Featured <span className="text-[#00d4ff]">Projects</span>
+          Featured <span className="text-[#10b981]">Projects</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((p) => <ProjectCard key={p.num} p={p} />)}
         </div>
       </div>
@@ -852,10 +923,10 @@ function ExperienceSection() {
   }, []);
 
   const stats = [
-    { n: "3+",  label: "Years Experience" },
-    { n: "3",   label: "Companies" },
-    { n: "20+", label: "AI Projects" },
-    { n: "2",   label: "Countries" },
+    { n: "3+", label: "Years Experience" },
+    { n: "3",  label: "Companies" },
+    { n: "2",  label: "Degrees" },
+    { n: "C1", label: "German & English" },
   ];
 
   return (
@@ -876,11 +947,11 @@ function ExperienceSection() {
                 background: "linear-gradient(135deg, #ffffff 0%, #c0c0d8 50%, #00d4ff 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
               }}>
-            Building Across<br />The <span style={{ color: "#00d4ff" }}>AI Stack</span>
+            Building Across<br />The <span style={{ color: "#00d4ff" }}>Cloud Stack</span>
           </h2>
           <p className="exp-header text-[clamp(0.9rem,1.4vw,1.05rem)] text-[#9090a8] max-w-2xl mx-auto leading-[1.85] font-light">
-            Three years architecting Agentic AI systems, full-stack LLM applications, and production ML pipelines —
-            from BMW's enterprise environment to research labs at THI.
+            Three years shipping full-stack cloud systems and automation pipelines — from safety-critical
+            ADAS validation at Accenture to sustainable cloud infrastructure at BMW Group.
           </p>
         </div>
 
@@ -912,6 +983,26 @@ function ExperienceSection() {
           <div className="space-y-10 md:space-y-14">
             {EXPERIENCE.map((exp) => (
               <ExperienceCard key={exp.num} exp={exp} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-20">
+          <div className="flex items-center gap-3 mb-8 justify-center">
+            <div className="w-6 h-px bg-[#a855f7]" />
+            <span className="font-mono text-[0.65rem] tracking-[0.3em] uppercase text-[#a855f7]">Education</span>
+            <div className="w-6 h-px bg-[#a855f7]" />
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+            {EDUCATION.map((edu) => (
+              <div key={edu.degree} className="p-6 border border-white/[0.07] backdrop-blur-md transition-colors duration-300"
+                style={{ background: "rgba(255,255,255,0.02)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${edu.accent}40`)}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}>
+                <div className="font-mono text-[0.65rem] tracking-[0.2em] uppercase mb-2" style={{ color: edu.accent }}>{edu.period}</div>
+                <div className="text-white font-medium text-[0.95rem] mb-1">{edu.degree}</div>
+                <div className="text-[#70708a] text-sm">{edu.school}</div>
+              </div>
             ))}
           </div>
         </div>
@@ -959,7 +1050,7 @@ function ContactSection() {
           Let's Build<br /><span className="text-[#00d4ff]">Something</span>
         </h2>
         <p className="contact-reveal text-sm text-[#80809a] leading-relaxed mb-10 max-w-md mx-auto">
-          Open to AI Engineering and Agentic AI roles in Germany. Available July 2026.
+          Open to Full-Stack and Cloud Engineering roles in Germany — and open to relocating for the right one.
         </p>
 
         <a href="mailto:monashragaurang6@gmail.com"
@@ -972,7 +1063,6 @@ function ContactSection() {
             { label: "GitHub", href: "https://github.com/Gaurang8200" },
             { label: "LinkedIn", href: "https://linkedin.com/in/gourangkumar-n-m" },
             { label: "Phone", href: "tel:+4917657713152" },
-            { label: "Resume", href: "#" },
           ].map((l) => (
             <a key={l.label} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
               className="px-5 py-2.5 text-[0.72rem] tracking-[0.1em] uppercase border border-white/[0.08] text-[#70708a] hover:border-[#00d4ff]/40 hover:text-[#00d4ff] transition-all duration-200 backdrop-blur-sm">
@@ -1095,7 +1185,7 @@ export default function Index() {
 
       <footer className="relative z-10 border-t border-white/[0.05] py-6 text-center">
         <p className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[#3a3a50]">
-          © 2026 Gourangkumar N Monashara — AI Engineer · Ingolstadt, Germany
+          © 2026 Gourangkumar N Monashara — Full-Stack & Cloud Systems Engineer · Berlin, Germany
         </p>
       </footer>
     </div>
