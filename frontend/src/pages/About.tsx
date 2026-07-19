@@ -10,20 +10,25 @@ const STATS = [
 const LINES = [
   "Three plus years as an AI developer",
   "Started my journey in 2020, learning German",
+  "From automotive engineering to artificial intelligence",
   "Completed my Bachelor and Master in Artificial Intelligence",
   "Currently working as a Developer at BMW Group",
+  "Building agents and cloud systems at enterprise scale",
   "I love playing cricket",
   "Kicker champion at the office",
   "Quick learner, that's what my teammates call me",
   "Looking forward to joining your team",
 ];
 
-/* Scroll-scrubbed video story: tall wrapper, sticky fullscreen video whose
-   currentTime follows scroll progress (lerped in rAF for smoothness), with
-   one story line per scroll band fading in and out. Fully reversible. */
+/* Scroll-scrubbed video story. One persistent rAF loop drives the playhead:
+   it lerps toward the scroll target and never issues a new seek while the
+   previous one is still in flight, which is what keeps scrubbing fluid
+   instead of photo-stepping. Cream-to-video gradients dissolve the section
+   edges into the page so entering and leaving feels continuous. */
 function ScrollyVideo() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressRef = useRef(0);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -35,7 +40,9 @@ function ScrollyVideo() {
         if (!wrap) return;
         const r = wrap.getBoundingClientRect();
         const total = r.height - window.innerHeight;
-        setProgress(Math.min(1, Math.max(0, -r.top / (total || 1))));
+        const p = Math.min(1, Math.max(0, -r.top / (total || 1)));
+        progressRef.current = p;
+        setProgress(p);
       });
     };
     onScroll();
@@ -48,7 +55,7 @@ function ScrollyVideo() {
     };
   }, []);
 
-  // scrub the video toward the scroll target so frames glide, not jump
+  // single persistent scrub loop; wait out in-flight seeks before the next one
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
@@ -58,19 +65,25 @@ function ScrollyVideo() {
     const tick = () => {
       if (dead) return;
       raf = requestAnimationFrame(tick);
-      if (!v.duration) return;
-      const target = progress * Math.max(0, v.duration - 0.05);
-      const delta = target - v.currentTime;
-      if (Math.abs(delta) > 0.02) v.currentTime += delta * 0.25;
+      if (!v.duration || v.seeking) return;
+      const target = progressRef.current * Math.max(0, v.duration - 0.05);
+      const cur = v.currentTime;
+      const delta = target - cur;
+      if (Math.abs(delta) < 0.004) return;
+      // gentle glide toward the target, capped so fast scrolls stay cinematic
+      const step = Math.max(-0.28, Math.min(0.28, delta * 0.14));
+      v.currentTime = cur + step;
     };
     tick();
     return () => { dead = true; cancelAnimationFrame(raf); };
-  }, [progress]);
+  }, []);
 
   const n = LINES.length;
+  const topFade = Math.max(0, 1 - progress * 8);
+  const bottomFade = Math.max(0, (progress - 0.88) / 0.12);
 
   return (
-    <div ref={wrapRef} className="relative bg-[#111111]" style={{ height: `${n * 60 + 100}vh` }}>
+    <div ref={wrapRef} className="relative" style={{ height: `${n * 60 + 100}vh`, background: "#f5f5f3" }}>
       <div className="sticky top-0 h-screen overflow-hidden">
         <video
           ref={videoRef}
@@ -80,7 +93,11 @@ function ScrollyVideo() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/30 pointer-events-none" />
+
+        {/* section edges dissolve into the page background */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "#f5f5f3", opacity: topFade }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "#f5f5f3", opacity: bottomFade }} />
 
         {LINES.map((line, i) => {
           // each line owns one band of progress; fade + rise around its center.
@@ -104,7 +121,7 @@ function ScrollyVideo() {
           );
         })}
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48" style={{ opacity: 1 - Math.max(topFade, bottomFade) }}>
           <div className="h-[2px] bg-white/20">
             <div className="h-full bg-[#ff5b2e]" style={{ width: `${progress * 100}%` }} />
           </div>
@@ -117,10 +134,16 @@ function ScrollyVideo() {
 export default function About() {
   return (
     <>
-      <Block bg="#f5f5f3" className="!py-16">
-        <Eyebrow>About Me</Eyebrow>
-        <H2 className="!mb-2">I like systems<br />that just work</H2>
-        <p className="text-sm text-[#8a8a86]">Scroll to play my story</p>
+      <Block bg="#f5f5f3" className="!py-16 !pb-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <Eyebrow>About Me</Eyebrow>
+            <H2 className="!mb-0 lg:whitespace-nowrap">I like systems that just work</H2>
+          </div>
+          <p className="text-lg text-[#8a8a86] max-w-sm md:text-right md:pb-2">
+            Where curiosity meets code and ideas become intelligent systems.
+          </p>
+        </div>
       </Block>
 
       <ScrollyVideo />
