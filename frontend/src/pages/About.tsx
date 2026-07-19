@@ -23,7 +23,7 @@ export default function About() {
           </Tilt3D>
           <div>
             <p className="text-lg leading-relaxed mb-6 text-[#111111]/80">
-              Three plus years as a full stack developer, building cloud infrastructure that stays stable even when nobody is watching. My stack covers the whole picture, TypeScript and Angular on the front end, Python and Go on the back, microservices and REST APIs tying it all together.
+              Three plus years as an AI developer, building agents and cloud infrastructure that stay stable even when nobody is watching. My stack covers the whole picture, TypeScript and Angular on the front end, Python and Go on the back, microservices and REST APIs tying it all together.
             </p>
             <p className="text-lg leading-relaxed mb-10 text-[#111111]/80">
               Right now I am a Software Developer at BMW Group in Munich, building diagnostic tools, CI/CD automation and observability for sustainable cloud infrastructure, while finishing a Master's in Artificial Intelligence at Technische Hochschule Ingolstadt.

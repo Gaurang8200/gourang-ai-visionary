@@ -43,7 +43,7 @@ export default function Contact() {
             Get In<br />Touch
           </h2>
           <p className="text-lg text-white/70 max-w-md">
-            Open to Full Stack and Cloud Engineering roles in Germany. Happy to relocate for the right one.
+            Open to AI and Cloud Engineering roles in Germany. Happy to relocate for the right one.
           </p>
         </div>
       </div>

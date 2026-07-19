@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Block, Eyebrow } from "@/components/PortfolioBlocks";
 import Tilt3D from "@/components/Tilt3D";
+import WaterHero from "@/components/WaterHero";
 import hero from "@/assets/photos/hero.jpg";
 
 const SECTIONS = [
@@ -14,20 +15,17 @@ const SECTIONS = [
 function HeroSection() {
   return (
     <div className="relative h-[92vh] min-h-[640px] overflow-hidden">
-      <img src={hero} alt="Gourangkumar Monashara" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "60% 30%" }} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40" />
+      <WaterHero src={hero} imgStyle={{ objectPosition: "60% 30%" }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
-      <div className="animate-fade-up absolute top-28 md:top-32 left-6 md:left-10 max-w-xs text-white text-sm font-medium leading-relaxed">
-        Building Cloud Systems<br />that Speak the Language<br />of Real Traffic
+      <div className="animate-fade-up absolute top-28 md:top-32 left-6 md:left-10 max-w-sm text-white text-sm font-medium leading-relaxed pointer-events-none">
+        AI Systems Developer building agents,<br />cloud services and the automation<br />that keeps them honest
       </div>
 
-      <div className="absolute top-28 md:top-32 right-6 md:right-10 w-14 h-14 rounded-full border border-white/60 flex items-center justify-center text-white text-xs">
-        &reg;
-      </div>
-
-      <div className="animate-fade-up absolute bottom-0 left-0 right-0 px-4 md:px-8 pb-2 md:pb-4" style={{ animationDelay: "0.15s" }}>
+      <div className="animate-fade-up absolute bottom-0 left-0 right-0 px-4 md:px-8 pb-2 md:pb-4 pointer-events-none" style={{ animationDelay: "0.15s" }}>
+        <p className="text-white/80 font-semibold text-lg md:text-2xl mb-1 md:mb-2">Hello, I am</p>
         <h1 className="font-extrabold text-white leading-[0.8] tracking-tight text-[clamp(3.5rem,15vw,11rem)] whitespace-nowrap">
-          gourang
+          Gourang
         </h1>
       </div>
     </div>

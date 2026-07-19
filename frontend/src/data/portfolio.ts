@@ -1,7 +1,7 @@
 export const SKILLS = [
   {
     num: "01",
-    title: "Full-Stack Development",
+    title: "Software Development",
     blurb: "Python and Go on the backend, TypeScript and React up front, wired together with REST APIs and microservices that hold up under real traffic.",
     tags: ["Python", "Go", "TypeScript", "React", "FastAPI", "REST APIs", "Microservices"],
   },
@@ -31,7 +31,7 @@ export const PROJECTS = [
     icon: "RAG",
     tags: ["Google Vertex AI", "FastAPI", "Streamlit", "LangChain"],
     title: "Enterprise RAG Assistant on Vertex AI",
-    desc: "A full stack RAG app I built for BMW Group. Vertex AI handles retrieval, FastAPI runs the backend, and Streamlit and React share the front end. I spent real time tuning prompts so answers stay accurate instead of confidently wrong.",
+    desc: "An end to end RAG app I built for BMW Group. Vertex AI handles retrieval, FastAPI runs the backend, and Streamlit and React share the front end. I spent real time tuning prompts so answers stay accurate instead of confidently wrong.",
     link: "#",
     linkLabel: "Case Study",
     accent: "#7c8cf0",
@@ -79,7 +79,7 @@ export const EXPERIENCE = [
     accent: "#7c8cf0",
     status: "active",
     description:
-      "Full stack work on sustainability focused cloud systems. I ship microservices, build validation environments and keep an eye on the observability that tells us when something is actually wrong.",
+      "AI and cloud work on sustainability focused systems. I ship microservices, build validation environments and keep an eye on the observability that tells us when something is actually wrong.",
     achievements: [
       "Built and deployed Docker based microservices, fixing system wide issues around data consistency, latency and service communication.",
       "Set up cloud based validation environments with REST APIs and internal data pipelines for large scale sustainability testing.",
@@ -101,7 +101,7 @@ export const EXPERIENCE = [
     accent: "#f2b544",
     status: "past",
     description:
-      "Backend systems and ML backed services, built and run on Kubernetes for workloads that needed to behave like production even when they were not quite there yet.",
+      "AI agent and cloud software development in Python and Go. Built backend services and agent based automation on Kubernetes for data heavy workloads that needed to behave like production.",
     achievements: [
       "Built data driven backend systems and ML backed services in Python and Go, wiring structured datasets into scalable apps.",
       "Built and ran containerized microservices with Docker and Kubernetes for distributed data processing.",
@@ -121,14 +121,14 @@ export const EXPERIENCE = [
     accent: "#8b93f0",
     status: "past",
     description:
-      "Safety critical ADAS validation work. Building the test systems that prove autonomous features actually hold up under pressure.",
+      "Safety critical software validation. Building the test systems that prove complex features actually hold up under pressure.",
     achievements: [
-      "Developed and validated ADAS functionality including Emergency Assist systems, focused on safety critical scenarios under ISO 26262.",
-      "Built a real world test system to check behavior against safety critical automotive requirements.",
+      "Developed and validated safety critical software functions, focused on high risk scenarios and strict quality standards.",
+      "Built a real world test system to check behavior against safety critical requirements.",
       "Designed scenario based test and validation workflows for edge cases and fault conditions.",
       "Integrated solutions into DevOps and MLOps pipelines on Linux infrastructure, working across test, deployment and monitoring.",
     ],
-    stack: ["ADAS", "ISO 26262", "Python", "Linux", "DevOps", "MLOps", "Test Automation"],
+    stack: ["Python", "Linux", "DevOps", "MLOps", "Test Automation", "CI/CD"],
   },
 ];
 
