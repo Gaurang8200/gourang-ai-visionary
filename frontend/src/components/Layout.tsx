@@ -9,7 +9,7 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <div className="relative bg-[#0b0b12] text-white overflow-x-hidden">
+    <div className="relative bg-[#f5f5f3] text-[#111111]">
       <ProgressBar />
       <Navigation />
       <main>

@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vite
+deployment/DEPLOY_RUN_ME.py

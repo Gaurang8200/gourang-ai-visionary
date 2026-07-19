@@ -1,4 +1,5 @@
 import { Block, Eyebrow } from "@/components/PortfolioBlocks";
+import Tilt3D from "@/components/Tilt3D";
 import bg from "@/assets/photos/raw3.jpg";
 
 const LINKS = [
@@ -15,8 +16,9 @@ export default function Contact() {
         <img src={bg} alt="" className="photo-treated w-full h-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/90 to-[#111111]/40" />
       </div>
-      <div className="relative grid md:grid-cols-2 gap-12">
-        <div className="bg-white text-[#111111] rounded-2xl p-8 md:p-10">
+      <div className="relative grid md:grid-cols-2 gap-12" style={{ perspective: "1200px" }}>
+        <Tilt3D max={5}>
+        <div className="bg-white text-[#111111] rounded-2xl p-8 md:p-10 h-full">
           <p className="text-sm font-semibold uppercase tracking-widest text-[#ff5b2e] mb-3">Say Hello</p>
           <p className="text-2xl font-bold mb-8">Have a project in mind?</p>
           <div className="space-y-5">
@@ -34,6 +36,7 @@ export default function Contact() {
             ))}
           </div>
         </div>
+        </Tilt3D>
         <div className="flex flex-col justify-center">
           <Eyebrow>Contact</Eyebrow>
           <h2 className="font-extrabold leading-[1.02] tracking-tight text-[clamp(2.5rem,6vw,5rem)] mb-6 text-white">

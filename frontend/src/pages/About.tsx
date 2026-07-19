@@ -1,4 +1,5 @@
 import { Block, H2, Eyebrow, PageNextLink } from "@/components/PortfolioBlocks";
+import Tilt3D from "@/components/Tilt3D";
 import portrait from "@/assets/photos/raw1.jpg";
 
 const STATS = [
@@ -14,10 +15,12 @@ export default function About() {
       <Block bg="#f5f5f3">
         <Eyebrow>About Me</Eyebrow>
         <H2>I like systems<br />that just work</H2>
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="rounded-2xl overflow-hidden aspect-[4/5]">
-            <img src={portrait} alt="Gourangkumar Monashara" className="photo-treated w-full h-full object-cover" style={{ objectPosition: "50% 25%" }} />
-          </div>
+        <div className="grid md:grid-cols-2 gap-12 items-start" style={{ perspective: "1200px" }}>
+          <Tilt3D max={5}>
+            <div className="rounded-2xl overflow-hidden aspect-[4/5]">
+              <img src={portrait} alt="Gourangkumar Monashara" className="photo-treated w-full h-full object-cover" style={{ objectPosition: "50% 25%" }} />
+            </div>
+          </Tilt3D>
           <div>
             <p className="text-lg leading-relaxed mb-6 text-[#111111]/80">
               Three plus years as a full stack developer, building cloud infrastructure that stays stable even when nobody is watching. My stack covers the whole picture, TypeScript and Angular on the front end, Python and Go on the back, microservices and REST APIs tying it all together.
