@@ -30,9 +30,9 @@ void main() {
   float ht = texture2D(uHeight, vUv - vec2(0.0, uTexel.y)).r;
   float hb = texture2D(uHeight, vUv + vec2(0.0, uTexel.y)).r;
   vec2 grad = vec2(hr - hl, hb - ht);
-  vec2 uv = (vUv + grad * 0.6) * uCoverScale + uCoverOffset;
+  vec2 uv = (vUv + grad * 0.25) * uCoverScale + uCoverOffset;
   vec3 col = texture2D(uImage, uv).rgb;
-  col += (grad.x + grad.y) * 2.2;
+  col += (grad.x + grad.y) * 1.1;
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -139,12 +139,12 @@ export default function WaterHero({ src, className = "", imgStyle }: { src: stri
     const splash = (nx: number, ny: number, strength: number) => {
       const cx = Math.round(nx * SIM_W);
       const cy = Math.round((1 - ny) * simH);
-      for (let dy = -2; dy <= 2; dy++) {
-        for (let dx = -2; dx <= 2; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
           const x = cx + dx, y = cy + dy;
           if (x < 1 || x >= SIM_W - 1 || y < 1 || y >= simH - 1) continue;
           const d = Math.hypot(dx, dy);
-          if (d <= 2.4) curr[y * SIM_W + x] += strength * (1 - d / 2.6);
+          if (d <= 1.5) curr[y * SIM_W + x] += strength * (1 - d / 1.8);
         }
       }
     };
@@ -157,12 +157,12 @@ export default function WaterHero({ src, className = "", imgStyle }: { src: stri
       if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
       // interpolate along fast mouse moves so the trail is continuous
       if (lastX >= 0) {
-        const steps = Math.max(1, Math.ceil(Math.hypot(nx - lastX, ny - lastY) * 40));
+        const steps = Math.max(1, Math.ceil(Math.hypot(nx - lastX, ny - lastY) * 60));
         for (let i = 1; i <= steps; i++) {
-          splash(lastX + ((nx - lastX) * i) / steps, lastY + ((ny - lastY) * i) / steps, 0.9);
+          splash(lastX + ((nx - lastX) * i) / steps, lastY + ((ny - lastY) * i) / steps, 0.45);
         }
       } else {
-        splash(nx, ny, 1.4);
+        splash(nx, ny, 0.6);
       }
       lastX = nx; lastY = ny;
     };
@@ -170,22 +170,23 @@ export default function WaterHero({ src, className = "", imgStyle }: { src: stri
     wrap.addEventListener("mousemove", onMove);
     wrap.addEventListener("mouseleave", onLeave);
 
-    let frame = 0;
-    const tick = () => {
-      if (dead) return;
-      raf = requestAnimationFrame(tick);
-      frame++;
-      // occasional ambient raindrop keeps the surface alive
-      if (frame % 160 === 0) splash(Math.random(), Math.random(), 1.2);
-
+    const step = () => {
       for (let y = 1; y < simH - 1; y++) {
         const row = y * SIM_W;
         for (let x = 1; x < SIM_W - 1; x++) {
           const i = row + x;
-          prev[i] = ((curr[i - 1] + curr[i + 1] + curr[i - SIM_W] + curr[i + SIM_W]) / 2 - prev[i]) * 0.985;
+          prev[i] = ((curr[i - 1] + curr[i + 1] + curr[i - SIM_W] + curr[i + SIM_W]) / 2 - prev[i]) * 0.94;
         }
       }
       const tmp = prev; prev = curr; curr = tmp;
+    };
+
+    const tick = () => {
+      if (dead) return;
+      raf = requestAnimationFrame(tick);
+      // two sim steps per frame: waves spread instantly and die out fast
+      step();
+      step();
 
       for (let i = 0; i < curr.length; i++) {
         let v = curr[i] * 0.5 + 0.5;

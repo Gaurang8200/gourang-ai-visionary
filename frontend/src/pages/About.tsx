@@ -1,6 +1,5 @@
 import { Block, H2, Eyebrow, PageNextLink } from "@/components/PortfolioBlocks";
 import Tilt3D from "@/components/Tilt3D";
-import portrait from "@/assets/photos/raw1.jpg";
 
 const STATS = [
   { n: "3+", label: "Years Experience" },
@@ -18,7 +17,30 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-12 items-start" style={{ perspective: "1200px" }}>
           <Tilt3D max={5}>
             <div className="rounded-2xl overflow-hidden aspect-[4/5]">
-              <img src={portrait} alt="Gourangkumar Monashara" className="photo-treated w-full h-full object-cover" style={{ objectPosition: "50% 25%" }} />
+              <video
+                src="/intro-video.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                ref={(v) => {
+                  // React omits the muted attribute, which blocks autoplay
+                  if (v) {
+                    v.muted = true;
+                    v.play().catch(() => {});
+                  }
+                }}
+                onCanPlay={(e) => {
+                  const v = e.currentTarget;
+                  if (v.paused) v.play().catch(() => {});
+                }}
+                onPause={(e) => {
+                  // no controls are shown, so any pause is external throttling
+                  const v = e.currentTarget;
+                  if (!v.ended) v.play().catch(() => {});
+                }}
+              />
             </div>
           </Tilt3D>
           <div>
