@@ -79,8 +79,6 @@ function ScrollyVideo() {
   }, []);
 
   const n = LINES.length;
-  const topFade = Math.max(0, 1 - progress * 8);
-  const bottomFade = Math.max(0, (progress - 0.88) / 0.12);
 
   return (
     <div ref={wrapRef} className="relative" style={{ height: `${n * 60 + 100}vh`, background: "#f5f5f3" }}>
@@ -95,9 +93,17 @@ function ScrollyVideo() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/30 pointer-events-none" />
 
-        {/* section edges dissolve into the page background */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "#f5f5f3", opacity: topFade }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "#f5f5f3", opacity: bottomFade }} />
+        {/* Only the edges feather into the page, so the frame is never washed
+           out. Cream bleeds a short distance in from top and bottom, which
+           dissolves the seam without ever hiding the video or the text. */}
+        <div
+          className="absolute inset-x-0 top-0 h-[22vh] pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, #f5f5f3 0%, rgba(245,245,243,0.75) 35%, rgba(245,245,243,0) 100%)" }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-[22vh] pointer-events-none"
+          style={{ background: "linear-gradient(to top, #f5f5f3 0%, rgba(245,245,243,0.75) 35%, rgba(245,245,243,0) 100%)" }}
+        />
 
         {LINES.map((line, i) => {
           // each line owns one band of progress; fade + rise around its center.
@@ -107,8 +113,11 @@ function ScrollyVideo() {
           if (i === 0 && progress < center) eff = center;
           if (i === n - 1 && progress > center) eff = center;
           const dist = Math.abs(eff - center) * n;
-          const opacity = Math.max(0, 1 - dist * 1.6);
-          const y = (eff - center) * n * -40;
+          // gentler falloff plus longer travel: the outgoing line clears the
+          // frame as the next rises in, so the handoff reads as motion rather
+          // than two dim lines overlapping in place
+          const opacity = Math.max(0, 1 - dist * 1.25);
+          const y = (eff - center) * n * -110;
           return (
             <div key={i} className="absolute inset-0 flex items-center justify-center px-6 pointer-events-none">
               <p
@@ -121,8 +130,9 @@ function ScrollyVideo() {
           );
         })}
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48" style={{ opacity: 1 - Math.max(topFade, bottomFade) }}>
-          <div className="h-[2px] bg-white/20">
+        {/* sits above the bottom feather so it stays crisp */}
+        <div className="absolute bottom-[25vh] left-1/2 -translate-x-1/2 w-48">
+          <div className="h-[2px] bg-white/25">
             <div className="h-full bg-[#ff5b2e]" style={{ width: `${progress * 100}%` }} />
           </div>
         </div>
@@ -135,15 +145,8 @@ export default function About() {
   return (
     <>
       <Block bg="#f5f5f3" className="!py-16 !pb-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <Eyebrow>About Me</Eyebrow>
-            <H2 className="!mb-0 lg:whitespace-nowrap">I like systems that just work</H2>
-          </div>
-          <p className="text-lg text-[#8a8a86] max-w-sm md:text-right md:pb-2">
-            Where curiosity meets code and ideas become intelligent systems.
-          </p>
-        </div>
+        <Eyebrow>About Me</Eyebrow>
+        <H2 className="!mb-0 max-w-5xl">Where curiosity meets code and ideas become intelligent systems.</H2>
       </Block>
 
       <ScrollyVideo />
