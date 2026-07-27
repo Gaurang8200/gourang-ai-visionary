@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 .vite
 deployment/DEPLOY_RUN_ME.py
+
+# Local env (tunnel URL etc.)
+.env
+.env.local
+frontend/.env
+frontend/.env.local
+!.env.example
+!frontend/.env.example
