@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { label: "Works", to: "/projects" },
   { label: "Journey", to: "/journey" },
   { label: "Skills", to: "/skills" },
+  { label: "Agent", to: "/agent" },
   { label: "Contact", to: "/contact" },
 ];
 
