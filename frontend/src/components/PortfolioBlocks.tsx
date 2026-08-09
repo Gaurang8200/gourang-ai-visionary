@@ -27,7 +27,7 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 bg-[#f5f5f3]">
       <div className="flex items-center justify-between px-6 md:px-10 py-5">
         <Link to="/" className="font-extrabold text-xl tracking-tight text-[#111111]">
-          gourang<sup className="text-xs">&reg;</sup>
+          Gourang<sup className="text-xs">&reg;</sup>
         </Link>
         <ul className="hidden md:flex gap-10">
           {NAV_LINKS.map((l) => (
@@ -66,7 +66,7 @@ export function Footer() {
     <footer className="bg-[#111111] text-white pt-16 pb-8 px-6 md:px-10">
       <div className="flex flex-col md:flex-row justify-between gap-10 mb-16">
         <div className="font-extrabold text-5xl md:text-7xl tracking-tight">
-          gourang<sup className="text-xl">&reg;</sup>
+          Gourang<sup className="text-xl">&reg;</sup>
         </div>
         <div className="flex gap-16">
           <div className="space-y-2">
