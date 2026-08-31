@@ -1,6 +1,6 @@
 import { Block, H2, Eyebrow, PageNextLink } from "@/components/PortfolioBlocks";
 import Tilt3D from "@/components/Tilt3D";
-import { PROJECTS } from "@/data/portfolio";
+import { PROJECTS, CERTIFICATIONS, LANGUAGES } from "@/data/portfolio";
 
 function ProjectCard({ p }: { p: typeof PROJECTS[0] }) {
   return (
@@ -35,13 +35,39 @@ export default function Projects() {
   return (
     <>
       <Block bg="#f5f5f3">
-        <Eyebrow>Selected Work</Eyebrow>
+        <Eyebrow>Projects &amp; Certification</Eyebrow>
         <H2>Some things I have built</H2>
         <div className="grid md:grid-cols-2 gap-5" style={{ perspective: "1200px" }}>
           {PROJECTS.map((p) => <ProjectCard key={p.num} p={p} />)}
         </div>
       </Block>
-      <PageNextLink to="/journey" label="See My Journey" />
+
+      <Block bg="#f5f5f3" className="!pt-0">
+        <Eyebrow>Certifications &amp; Languages</Eyebrow>
+        <H2>Certified and spoken</H2>
+        <div className="grid md:grid-cols-2 gap-5" style={{ perspective: "1200px" }}>
+          {CERTIFICATIONS.map((c, i) => (
+            <Tilt3D key={c.title} max={6}>
+              <div className="bg-[#111111] text-white rounded-2xl p-7 h-full flex items-start justify-between gap-4">
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-wide text-[#ff5b2e] mb-2">{c.issuer} · {c.year}</div>
+                  <div className="font-bold text-lg leading-snug">{c.title}</div>
+                </div>
+                <span className="font-extrabold text-3xl text-white/10">0{i + 1}</span>
+              </div>
+            </Tilt3D>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-3 mt-8">
+          {LANGUAGES.map((l) => (
+            <span key={l.name} className="px-4 py-2 rounded-full bg-[#111111]/5 text-sm font-semibold text-[#111111]">
+              {l.name} <span className="text-[#8a8a86]">· {l.level}</span>
+            </span>
+          ))}
+        </div>
+      </Block>
+
+      <PageNextLink to="/journey" label="See My Experience" />
     </>
   );
 }

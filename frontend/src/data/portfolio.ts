@@ -66,6 +66,48 @@ export const PROJECTS = [
     linkLabel: "Case Study",
     accent: "#2f9e6b",
   },
+  {
+    num: "05",
+    icon: "ADV",
+    tags: ["LangGraph", "ReAct", "Reflexion", "TDD"],
+    title: "Builder vs. Breaker: Adversarial Agentic Pipeline",
+    desc: "A LangGraph style workflow where Builder, Breaker, Referee and supervisor agents argue it out. ReAct and Reflexion drive the reasoning, critique loops and test driven iteration keep the output honest.",
+    link: "#",
+    linkLabel: "Case Study",
+    accent: "#7c8cf0",
+  },
+  {
+    num: "06",
+    icon: "OPS",
+    tags: ["Multi-Agent", "OpenTelemetry", "SQLite", "Docker", "Helm"],
+    title: "AgentOps: Observable Multi-Agent Research Pipeline",
+    desc: "A production minded agent workflow with a deterministic mock mode for testing, hash chained SQLite audit logs, OpenTelemetry spans and CI smoke tests wired into Docker and Helm deployments.",
+    link: "#",
+    linkLabel: "Case Study",
+    accent: "#8b93f0",
+  },
+  {
+    num: "07",
+    icon: "CV",
+    tags: ["Vertex AI", "PyTorch", "TorchServe", "Streamlit"],
+    title: "Cloud MLOps: Intel Image Classification Pipeline",
+    desc: "A full 6 class AI lifecycle on Vertex AI: GCS ingestion, human annotation, PyTorch training, TorchServe packaging, endpoint deployment and a Streamlit app for live inference.",
+    link: "#",
+    linkLabel: "Case Study",
+    accent: "#f2b544",
+  },
+];
+
+export const CERTIFICATIONS = [
+  { title: "Generative AI Hub in SAP AI Core", issuer: "SAP", year: "2026" },
+  { title: "IBM RAG and Agentic AI Professional Certificate", issuer: "IBM", year: "2025" },
+  { title: "Generative AI with Large Language Models", issuer: "DeepLearning.AI", year: "2024" },
+  { title: "Machine Learning Specialisation", issuer: "DeepLearning.AI", year: "2024" },
+];
+
+export const LANGUAGES = [
+  { name: "English", level: "C1" },
+  { name: "German", level: "C1" },
 ];
 
 export const EXPERIENCE = [
@@ -79,17 +121,17 @@ export const EXPERIENCE = [
     accent: "#7c8cf0",
     status: "active",
     description:
-      "AI and cloud work on sustainability focused systems. I ship microservices, build validation environments and keep an eye on the observability that tells us when something is actually wrong.",
+      "AI and backend work inside vehicle testing. I turned a decades-old manual reporting process into a central data platform, then put an agent on top so engineers ask it questions instead of writing SQL.",
     achievements: [
-      "Built and deployed Docker based microservices, fixing system wide issues around data consistency, latency and service communication.",
-      "Set up cloud based validation environments with REST APIs and internal data pipelines for large scale sustainability testing.",
-      "Built Python diagnostic tools for fast triage of production issues. Lifted web app stability by roughly 17 percent.",
-      "Automated build, test and deployment with Git based CI/CD workflows, cutting manual release work by around 36 percent.",
-      "Instrumented systems with OpenTelemetry across Prometheus, OpenSearch, Kafka and Grafana for faster fault diagnosis.",
-      "Analyzed compute inefficiency across cloud services, comparing used versus requested capacity to find optimization opportunities.",
-      "Took part in agile delivery with regular code reviews on GitHub and Jira, helping shape architecture decisions.",
+      "Built a RAG agent with LangChain and LangGraph over PostgreSQL data, reaching 96 percent answer accuracy so engineers query technical vehicle data without hand-written SQL.",
+      "Built the backend and database layer for roughly 10 million MF4 measurement files in Python, SQL and PostgreSQL, exposing structured vehicle data to web applications.",
+      "Digitized a 40 year old Excel and PowerPoint reporting process into a TBS server application, making vehicle test data centrally available to test engineers for the first time.",
+      "Developed REST interfaces between the web app, backend and PostgreSQL, cutting the manual steps needed to reach technical vehicle data.",
+      "Automated development, test and deployment with Docker, GitHub, GitLab, GitHub Copilot and CI/CD workflows driven by Claude agents, keeping releases reproducible.",
+      "Improved the stability of an internal BMW application by about 17 percent through Python based analysis and fixes across data flows and backend processes.",
+      "Translated business requirements into technical features, aligning data models, interfaces and software changes across several BMW teams with regular GitHub and Jira code reviews.",
     ],
-    stack: ["Python", "Go", "TypeScript", "Angular", "Docker", "REST APIs", "OpenTelemetry", "Prometheus", "Kafka", "Grafana", "CI/CD", "GitHub"],
+    stack: ["Python", "SQL", "PostgreSQL", "LangChain", "LangGraph", "RAG", "Docker", "GitHub", "GitLab", "CI/CD", "REST APIs", "Claude Agents"],
   },
   {
     num: "02",
@@ -101,15 +143,13 @@ export const EXPERIENCE = [
     accent: "#f2b544",
     status: "past",
     description:
-      "AI agent and cloud software development in Python and Go. Built backend services and agent based automation on Kubernetes for data heavy workloads that needed to behave like production.",
+      "Backend and data engineering in Python and Go. I built the services and pipelines that moved data heavy workloads onto Kubernetes and kept them running at scale.",
     achievements: [
-      "Built data driven backend systems and ML backed services in Python and Go, wiring structured datasets into scalable apps.",
-      "Built and ran containerized microservices with Docker and Kubernetes for distributed data processing.",
-      "Designed data pipelines and ETL processes for structured data ingestion and transformation.",
-      "Operated platform adjacent services on Kubernetes, focused on stability and reliable operation.",
-      "Set up CI/CD with Git and GitLab, cutting manual intervention and recurring deployment failures.",
+      "Built backend services in Python and Go, wiring REST APIs, SQL databases and ETL pipelines into data intensive applications.",
+      "Built and operated containerized microservices with Docker and Kubernetes for distributed processing and scalable workflows.",
+      "Designed data pipelines and complex ETL processes, moving up to 20 million records through automation and cutting manual data preparation by 67 percent.",
     ],
-    stack: ["Python", "Go", "Docker", "Kubernetes", "ETL Pipelines", "GitLab CI/CD", "REST APIs", "Microservices"],
+    stack: ["Python", "Go", "REST APIs", "SQL", "Docker", "Kubernetes", "ETL Pipelines", "Microservices"],
   },
   {
     num: "03",

@@ -53,7 +53,7 @@ function ExperienceScroller() {
     <div ref={wrapRef} className="relative bg-[#111111]" style={{ height: `${EXPERIENCE.length * 120 + 100}vh` }}>
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
         <div className="px-6 md:px-10 mb-10">
-          <Eyebrow>Journey</Eyebrow>
+          <Eyebrow>Professional Experience</Eyebrow>
           <H2 className="text-white !mb-2">Where I have worked</H2>
           <p className="text-white/50 text-sm">Scroll to travel through the timeline</p>
         </div>

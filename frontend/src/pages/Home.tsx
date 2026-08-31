@@ -7,8 +7,8 @@ import hero from "@/assets/photos/hero.jpg";
 const SECTIONS = [
   { to: "/about", title: "About", desc: "Who I am and how I work." },
   { to: "/skills", title: "Skills", desc: "The tools I reach for." },
-  { to: "/projects", title: "Works", desc: "Things I have built." },
-  { to: "/journey", title: "Journey", desc: "Where I have worked." },
+  { to: "/projects", title: "Projects & Certification", desc: "Things I have built and earned." },
+  { to: "/journey", title: "Professional Experience", desc: "Where I have worked." },
   { to: "/contact", title: "Contact", desc: "Let's talk." },
 ];
 

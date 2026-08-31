@@ -40,7 +40,7 @@ export default function Skills() {
           {SKILLS.map((s) => <SkillRow key={s.num} s={s} />)}
         </div>
       </Block>
-      <PageNextLink to="/projects" label="See My Works" />
+      <PageNextLink to="/projects" label="See My Projects" />
     </>
   );
 }

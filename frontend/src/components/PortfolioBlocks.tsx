@@ -15,8 +15,8 @@ export function ProgressBar() {
 
 const NAV_LINKS = [
   { label: "About", to: "/about" },
-  { label: "Works", to: "/projects" },
-  { label: "Journey", to: "/journey" },
+  { label: "Projects & Certification", to: "/projects" },
+  { label: "Professional Experience", to: "/journey" },
   { label: "Skills", to: "/skills" },
   { label: "Contact", to: "/contact" },
 ];
