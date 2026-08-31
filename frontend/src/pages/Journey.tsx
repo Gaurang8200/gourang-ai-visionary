@@ -51,48 +51,52 @@ function ExperienceScroller() {
 
   return (
     <div ref={wrapRef} className="relative bg-[#111111]" style={{ height: `${EXPERIENCE.length * 120 + 100}vh` }}>
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="px-6 md:px-10 mb-10">
+      <div className="sticky top-0 h-screen flex flex-col overflow-hidden pt-24 md:pt-28 pb-8">
+        <div className="px-6 md:px-10 mb-8 flex-shrink-0">
           <Eyebrow>Professional Experience</Eyebrow>
           <H2 className="text-white !mb-2">Where I have worked</H2>
           <p className="text-white/50 text-sm">Scroll to travel through the timeline</p>
         </div>
 
-        <div ref={trackRef} className="flex gap-6 px-6 md:px-10 w-max" style={{ willChange: "transform" }}>
-          {EXPERIENCE.map((exp, i) => (
-            <Tilt3D key={exp.num} max={6} className="w-[85vw] md:w-[640px] flex-shrink-0">
-              <div className="bg-[#f5f5f3] text-[#111111] rounded-2xl p-8 md:p-10 h-full">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="font-extrabold text-5xl text-[#111111]/10">0{i + 1}</span>
-                  {exp.status === "active" ? (
-                    <span className="px-3 py-1 rounded-full bg-[#ff5b2e] text-white text-xs font-bold uppercase">Current Role</span>
-                  ) : (
-                    <span className="text-xs font-semibold text-[#8a8a86] uppercase">{exp.period}</span>
-                  )}
+        {/* cards take the leftover height and stay vertically centered there,
+           so the heading above is never pushed off-screen at higher zoom */}
+        <div className="flex-1 min-h-0 flex items-center overflow-hidden">
+          <div ref={trackRef} className="flex gap-6 px-6 md:px-10 w-max" style={{ willChange: "transform" }}>
+            {EXPERIENCE.map((exp, i) => (
+              <Tilt3D key={exp.num} max={6} className="w-[85vw] md:w-[640px] flex-shrink-0">
+                <div className="bg-[#f5f5f3] text-[#111111] rounded-2xl p-8 md:p-10 h-full">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-extrabold text-5xl text-[#111111]/10">0{i + 1}</span>
+                    {exp.status === "active" ? (
+                      <span className="px-3 py-1 rounded-full bg-[#ff5b2e] text-white text-xs font-bold uppercase">Current Role</span>
+                    ) : (
+                      <span className="text-xs font-semibold text-[#8a8a86] uppercase">{exp.period}</span>
+                    )}
+                  </div>
+                  <h3 className="font-extrabold text-3xl md:text-4xl tracking-tight mb-1">{exp.company}</h3>
+                  <p className="font-semibold text-[#ff5b2e] mb-1">{exp.role}</p>
+                  <p className="text-sm text-[#8a8a86] mb-5">{exp.period} · {exp.location}</p>
+                  <p className="text-sm leading-relaxed text-[#111111]/80 mb-5">{exp.description}</p>
+                  <ul className="space-y-1.5 mb-6">
+                    {exp.achievements.slice(0, 3).map((a, j) => (
+                      <li key={j} className="flex gap-2.5 text-xs leading-relaxed text-[#111111]/70">
+                        <span className="mt-1.5 w-1 h-1 rounded-full bg-[#ff5b2e] flex-shrink-0" />
+                        <span>{a}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.stack.slice(0, 8).map((t) => (
+                      <span key={t} className="px-2.5 py-1 rounded-full bg-[#111111]/5 text-xs font-semibold">{t}</span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="font-extrabold text-3xl md:text-4xl tracking-tight mb-1">{exp.company}</h3>
-                <p className="font-semibold text-[#ff5b2e] mb-1">{exp.role}</p>
-                <p className="text-sm text-[#8a8a86] mb-5">{exp.period} · {exp.location}</p>
-                <p className="text-sm leading-relaxed text-[#111111]/80 mb-5">{exp.description}</p>
-                <ul className="space-y-1.5 mb-6">
-                  {exp.achievements.slice(0, 3).map((a, j) => (
-                    <li key={j} className="flex gap-2.5 text-xs leading-relaxed text-[#111111]/70">
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-[#ff5b2e] flex-shrink-0" />
-                      <span>{a}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-1.5">
-                  {exp.stack.slice(0, 8).map((t) => (
-                    <span key={t} className="px-2.5 py-1 rounded-full bg-[#111111]/5 text-xs font-semibold">{t}</span>
-                  ))}
-                </div>
-              </div>
-            </Tilt3D>
-          ))}
+              </Tilt3D>
+            ))}
+          </div>
         </div>
 
-        <div className="px-6 md:px-10 mt-10">
+        <div className="px-6 md:px-10 mt-6 flex-shrink-0">
           <div className="h-[2px] bg-white/10 max-w-md">
             <div className="h-full bg-[#ff5b2e]" style={{ width: `${progress * 100}%` }} />
           </div>

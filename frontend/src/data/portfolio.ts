@@ -2,14 +2,14 @@ export const SKILLS = [
   {
     num: "01",
     title: "Software Development",
-    blurb: "Python and Go on the backend, TypeScript and React up front, wired together with REST APIs and microservices that hold up under real traffic.",
-    tags: ["Python", "Go", "TypeScript", "React", "FastAPI", "REST APIs", "Microservices"],
+    blurb: "Python and Go on the backend, TypeScript and React up front, wired together with REST APIs, WebSockets and microservices that hold up under real traffic.",
+    tags: ["Python", "Go", "Java", "JavaScript", "TypeScript", "R", "Kotlin", "Bash", "CSS", "HTML", "React", "Vue.js", "Next.js", "Node.js", "FastAPI", "REST APIs", "WebSockets", "Microservices", "Distributed Systems"],
   },
   {
     num: "02",
     title: "Cloud & DevOps",
-    blurb: "Docker and Kubernetes for deployment, Git based CI/CD that ships without drama, and observability that catches problems before users do.",
-    tags: ["Docker", "Kubernetes", "AWS", "CI/CD", "OpenTelemetry", "Prometheus", "Grafana"],
+    blurb: "Docker and Kubernetes for deployment, AWS and Azure underneath, Git based CI/CD that ships without drama, and observability that catches problems before users do.",
+    tags: ["AWS (S3, SageMaker)", "Azure", "Linux", "Docker", "Kubernetes", "GitLab", "CI/CD", "MLOps", "Jira", "OpenTelemetry", "Prometheus", "Grafana"],
   },
   {
     num: "03",
@@ -20,8 +20,20 @@ export const SKILLS = [
   {
     num: "04",
     title: "Data & Machine Learning",
-    blurb: "Pandas and Scikit-Learn for analysis, Spark for the bigger jobs, ETL pipelines that keep the data warehouse honest.",
-    tags: ["Pandas", "NumPy", "Scikit-Learn", "Spark", "MySQL", "ETL Pipelines"],
+    blurb: "Pandas and Scikit-Learn for analysis, Spark for the bigger jobs, ETL pipelines that keep the data warehouse honest across PostgreSQL and MySQL.",
+    tags: ["Pandas", "NumPy", "Scikit-Learn", "Apache Spark", "PostgreSQL", "MySQL", "Schema Tables", "ETL Pipelines", "Data Warehouses", "Excel"],
+  },
+  {
+    num: "05",
+    title: "Business & SAP",
+    blurb: "Enterprise financial systems from the accounting side: SAP S/4HANA and BTP, HANA Cloud, and EU Taxonomy sustainability reporting.",
+    tags: ["SAP S/4HANA FI/GL", "SAP BTP", "SAP HANA Cloud", "EU Taxonomy", "Financial Accounting"],
+  },
+  {
+    num: "06",
+    title: "Process Engineering",
+    blurb: "Manufacturing discipline from my engineering roots: OEE and root cause analysis, Six Sigma and Lean methods for finding and clearing bottlenecks.",
+    tags: ["OEE", "Root Cause Analysis", "Six Sigma", "Lean", "Kaizen", "TQM", "Bottleneck Analysis", "Process Capability"],
   },
 ];
 
@@ -106,8 +118,16 @@ export const CERTIFICATIONS = [
 ];
 
 export const LANGUAGES = [
-  { name: "English", level: "C1" },
-  { name: "German", level: "C1" },
+  {
+    name: "English",
+    level: "Native level",
+    note: "Effectively a mother tongue. Educated in English from kindergarten all the way through Abitur.",
+  },
+  {
+    name: "German",
+    level: "C1",
+    note: "German language school in Berlin, Feb 2019 to Jul 2020. C1 certificate and TestDaF C1. Bachelor studied in German.",
+  },
 ];
 
 export const EXPERIENCE = [

@@ -114,6 +114,13 @@ export default function WaterHero({ src, className = "", imgStyle }: { src: stri
 
     const resize = () => {
       const r = wrap.getBoundingClientRect();
+      // before first layout the wrapper can measure 0; bail (and retry next
+      // frame) so we never divide by zero and hand Float32Array an Infinite
+      // length, which throws and takes the whole app down on first paint
+      if (r.width < 1 || r.height < 1) {
+        if (!dead) requestAnimationFrame(resize);
+        return;
+      }
       canvas.width = Math.round(r.width);
       canvas.height = Math.round(r.height);
       gl.viewport(0, 0, canvas.width, canvas.height);
@@ -137,8 +144,10 @@ export default function WaterHero({ src, className = "", imgStyle }: { src: stri
     window.addEventListener("resize", resize);
 
     const splash = (nx: number, ny: number, strength: number) => {
+      // height texture is uploaded un-flipped while the image uses FLIP_Y,
+      // so the ripple row must follow ny directly to sit under the cursor
       const cx = Math.round(nx * SIM_W);
-      const cy = Math.round((1 - ny) * simH);
+      const cy = Math.round(ny * simH);
       for (let dy = -1; dy <= 1; dy++) {
         for (let dx = -1; dx <= 1; dx++) {
           const x = cx + dx, y = cy + dy;

@@ -43,8 +43,8 @@ export default function Projects() {
       </Block>
 
       <Block bg="#f5f5f3" className="!pt-0">
-        <Eyebrow>Certifications &amp; Languages</Eyebrow>
-        <H2>Certified and spoken</H2>
+        <Eyebrow>Certifications</Eyebrow>
+        <H2>What I have certified</H2>
         <div className="grid md:grid-cols-2 gap-5" style={{ perspective: "1200px" }}>
           {CERTIFICATIONS.map((c, i) => (
             <Tilt3D key={c.title} max={6}>
@@ -58,11 +58,22 @@ export default function Projects() {
             </Tilt3D>
           ))}
         </div>
-        <div className="flex flex-wrap gap-3 mt-8">
+      </Block>
+
+      <Block bg="#f5f5f3" className="!pt-0">
+        <Eyebrow>Languages</Eyebrow>
+        <H2>Languages I speak</H2>
+        <div className="grid md:grid-cols-2 gap-5" style={{ perspective: "1200px" }}>
           {LANGUAGES.map((l) => (
-            <span key={l.name} className="px-4 py-2 rounded-full bg-[#111111]/5 text-sm font-semibold text-[#111111]">
-              {l.name} <span className="text-[#8a8a86]">· {l.level}</span>
-            </span>
+            <Tilt3D key={l.name} max={6}>
+              <div className="bg-[#111111] text-white rounded-2xl p-8 h-full">
+                <div className="flex items-baseline justify-between mb-3">
+                  <h3 className="font-extrabold text-2xl tracking-tight">{l.name}</h3>
+                  <span className="px-3 py-1 rounded-full bg-[#ff5b2e] text-white text-xs font-bold uppercase">{l.level}</span>
+                </div>
+                <p className="text-sm text-white/60 leading-relaxed">{l.note}</p>
+              </div>
+            </Tilt3D>
           ))}
         </div>
       </Block>
