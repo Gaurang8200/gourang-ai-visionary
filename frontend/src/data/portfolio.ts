@@ -121,7 +121,7 @@ export const LANGUAGES = [
   {
     name: "English",
     level: "Native level",
-    note: "Effectively a mother tongue. Educated in English from kindergarten all the way through Abitur.",
+    note: "Full professional proficiency, developed through an English-medium education from primary school through secondary school.",
   },
   {
     name: "German",

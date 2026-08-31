@@ -14,7 +14,7 @@ const LINES = [
   "Completed my Bachelor and Master in Artificial Intelligence",
   "Currently working as a Developer at BMW Group",
   "Building agents and cloud systems at enterprise scale",
-  "I love playing cricket",
+  "Competitive cricket taught me teamwork under pressure",
   "Kicker champion at the office",
   "Quick learner, that's what my teammates call me",
   "Looking forward to joining your team",
